@@ -326,7 +326,8 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="lgLSWOgnHRkzvPji_7HK-71" edge="1" parent="1" source="lgLSWOgnHRkzvPji_7HK-34" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;" target="lgLSWOgnHRkzvPji_7HK-53" value="1 - N">
-          <mxGeometry height="100" relative="1" width="100" as="geometry">
+          <mxGeometry height="100" relative="1" width="100" x="0.1429" as="geometry">
+            <mxPoint as="offset" />
             <mxPoint x="680" y="590" as="sourcePoint" />
             <mxPoint x="780" y="490" as="targetPoint" />
           </mxGeometry>

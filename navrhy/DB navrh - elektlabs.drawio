@@ -218,7 +218,7 @@
             <mxRectangle height="30" width="50" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="lgLSWOgnHRkzvPji_7HK-43" parent="lgLSWOgnHRkzvPji_7HK-41" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" value="SeconaName" vertex="1">
+        <mxCell id="lgLSWOgnHRkzvPji_7HK-43" parent="lgLSWOgnHRkzvPji_7HK-41" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" value="SecondName" vertex="1">
           <mxGeometry height="30" width="130" x="50" as="geometry">
             <mxRectangle height="30" width="130" as="alternateBounds" />
           </mxGeometry>
@@ -334,11 +334,11 @@
             <mxPoint x="780" y="490" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="lgLSWOgnHRkzvPji_7HK-93" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=2" value="References Authors" vertex="1">
-          <mxGeometry height="30" width="110" x="509" y="670" as="geometry" />
+        <mxCell id="lgLSWOgnHRkzvPji_7HK-93" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=2" value="&amp;nbsp;References Authors" vertex="1">
+          <mxGeometry height="30" width="121" x="509" y="670" as="geometry" />
         </mxCell>
         <mxCell id="lgLSWOgnHRkzvPji_7HK-94" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=2" value="References Books" vertex="1">
-          <mxGeometry height="30" width="110" x="509" y="700" as="geometry" />
+          <mxGeometry height="30" width="121" x="509" y="700" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

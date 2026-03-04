@@ -12,11 +12,11 @@ namespace Knihovna.Services
             }
             if (book.Name.Length > 255)
             {
-                return "Název knihy je příliš dlouhý (maximum je 255 znaků).";
+                return "Název knihy je příliš dlouhý, maximální delka je 255 znaků.";
             }
             if (!string.IsNullOrWhiteSpace(book.ISBN) && book.ISBN.Length > 13)
             {
-                return "ISBN nesmí být delší než 13 znaků. Zadávejte jej prosím bez pomlček a mezer.";
+                return "ISBN nesmí být delší než 13 znaků.";
             }
             if (book.Authors == null || book.Authors.Count == 0)
             {
@@ -42,7 +42,7 @@ namespace Knihovna.Services
             }
             if (author.LastName.Length > 100)
             {
-                return "Křestní jméno autora ma maximalni delku 100 znaku.";
+                return "Křestní jméno autora ma maximální delku 100 znaků.";
             }
             if (string.IsNullOrWhiteSpace(author.LastName))
             {
@@ -50,11 +50,11 @@ namespace Knihovna.Services
             }
             if (author.LastName.Length > 100)
             {
-                return "Příjmení autora ma maximalni delku 100 znaku.";
+                return "Příjmení autora ma maximální delku 100 znaků.";
             }
             if (author.Nationality == null)
             {
-                return "Narodnost je povinna";
+                return "Národnost je povinná";
             }
 
             return string.Empty;

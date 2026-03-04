@@ -16,15 +16,13 @@ if exist "%DB_PATH%" (
 )
 
 echo ===START DB===
-echo CREATING DB USING create_db.sql...
+echo CREATING DB 
 
 %ISQL_PATH% -user %DB_USER% -password %DB_PASS% -i "%~dp0create_db.sql"
 
-echo DB CREATED
 
-echo ADDING TABLES AND DATA
 %ISQL_PATH% "%DB_PATH%" -user %DB_USER% -password %DB_PASS% -i "%~dp0create_tables.sql"
 %ISQL_PATH% "%DB_PATH%" -user %DB_USER% -password %DB_PASS% -i "%~dp0insert_test_data.sql"
 
-echo QUERIES COMPLETED
+echo DB CREATED WITH DATA
 pause

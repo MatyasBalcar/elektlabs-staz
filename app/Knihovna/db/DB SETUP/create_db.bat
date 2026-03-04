@@ -2,7 +2,7 @@
 set DB_NAME=KnihovnaDB.fdb
 set DB_USER=SYSDBA
 set DB_PASS=masterkey
-set ISQL_PATH="C:\fb\Firebird_5_0\isql.exe"
+set ISQL_PATH="C:\fb\isql.exe"
 
 pushd "%~dp0.."
 set "PFolder=%CD%"

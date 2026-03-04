@@ -15,13 +15,6 @@ namespace Knihovna.Converters
                     return rating >= starLevel ? Brushes.Gold : Brushes.LightGray;
                 }
             }
-            else if (value is int intRating)
-            {
-                if (int.TryParse(parameter?.ToString(), out int starLevel))
-                {
-                    return intRating >= starLevel ? Brushes.Gold : Brushes.LightGray;
-                }
-            }
 
             return Brushes.LightGray;
         }

@@ -164,10 +164,16 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="90" Header="Hodnocení">
+                                <DataGridTemplateColumn Width="110" Header="Hodnocení">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Style="{StaticResource RatingTextBlockStyle}" Text="{Binding Rating, Converter={StaticResource RatingToStarsConverter}}" />
+                                            <ItemsControl ItemTemplate="{StaticResource StarIconTemplate}" ItemsSource="{Binding Rating, Converter={StaticResource RatingToStarsConverter}}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

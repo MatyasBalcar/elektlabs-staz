@@ -436,4 +436,17 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
-</ResourceDictionary>
+
+    <!--  This is a star shape coppied from the internet  -->
+    <DataTemplate x:Key="StarIconTemplate">
+        <Path
+            Width="16"
+            Height="16"
+            Margin="1"
+            Data="M 10,0 L 13,7 L 20,7 L 14,12 L 16,19 L 10,15 L 4,19 L 6,12 L 0,7 L 7,7 Z"
+            Fill="Gold"
+            Stretch="Uniform"
+            Stroke="Black"
+            StrokeThickness="1" />
+    </DataTemplate>
+</ResourceDictionary>   

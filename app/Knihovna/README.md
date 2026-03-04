@@ -7,8 +7,7 @@ This is a readme for my library project, it also acts as a startup guide.
 
  - .NET 8 or newer
  - Firebird 5 or newer
- - isql (commes with firebird) to create db, you need isql.exe in the `DB SETUP` folder
-
+ - isql (commes with firebird) to create db, expected dir is c:\fb
 
 ## Setup
 

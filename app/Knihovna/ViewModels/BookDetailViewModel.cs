@@ -16,11 +16,11 @@ namespace Knihovna.ViewModels
         }
 
         [RelayCommand]
-        public void Close(Window window)
+        public static void Close(Window window)
         {
             window?.Close();
         }
-
-        // TODO: Edit Delete
+        
+        // Todo, edit a delete
     }
 }

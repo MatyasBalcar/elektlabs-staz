@@ -12,7 +12,7 @@ This is a readme for my library project, it also acts as a startup guide.
 
 ## Setup
 
- 1. Run `create_db.bat`. This creates the db and fills table with some test data. *(Knihovna.fbd)*
+ 1. Run `create_db.bat`. This creates the db and fills table with some test data. *(KnihovnaDB.fbd)*
  2. Run the app.
 
 

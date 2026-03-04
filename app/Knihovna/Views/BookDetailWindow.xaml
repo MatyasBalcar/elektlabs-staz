@@ -96,19 +96,14 @@
                             Padding="0"
                             Content="Hodnocení:"
                             FontWeight="SemiBold" />
-                        <TextBlock
-                            FontSize="28"
-                            FontWeight="Bold"
-                            Foreground="Gold"
-                            Text="{Binding CurrentBook.Rating, Converter={StaticResource RatingToStarsConverter}}">
-                            <TextBlock.Effect>
-                                <DropShadowEffect
-                                    BlurRadius="5"
-                                    Opacity="0.5"
-                                    ShadowDepth="1"
-                                    Color="Black" />
-                            </TextBlock.Effect>
-                        </TextBlock>
+
+                        <ItemsControl ItemTemplate="{StaticResource StarIconTemplate}" ItemsSource="{Binding CurrentBook.Rating, Converter={StaticResource RatingToStarsConverter}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </StackPanel>
                 </Grid>
 

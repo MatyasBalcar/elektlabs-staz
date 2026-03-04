@@ -7,33 +7,6 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <Style x:Key="StarButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="24"
-                                Foreground="{TemplateBinding Foreground}"
-                                Text="★">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect
-                                        BlurRadius="2"
-                                        Opacity="0.3"
-                                        ShadowDepth="1"
-                                        Color="Black" />
-                                </TextBlock.Effect>
-                            </TextBlock>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Window.Resources>
 
     <DockPanel Margin="10">

@@ -94,4 +94,35 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="StarButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <Path
+                            Width="24"
+                            Height="24"
+                            Data="M 10,0 L 13,7 L 20,7 L 14,12 L 16,19 L 10,15 L 4,19 L 6,12 L 0,7 L 7,7 Z"
+                            Fill="{TemplateBinding Foreground}"
+                            Stretch="Uniform"
+                            Stroke="Black"
+                            StrokeThickness="1">
+                            <Path.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="2"
+                                    Opacity="0.3"
+                                    ShadowDepth="1"
+                                    Color="Black" />
+                            </Path.Effect>
+                        </Path>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

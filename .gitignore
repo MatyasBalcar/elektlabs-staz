@@ -4,4 +4,4 @@ app/Knihovna/db/KNIHOVNADB.FDB
 app/Knihovna/bin/
 app/Knihovna/obj/
 *.user
-app/Knihovna/.vs
+app/Knihovna/.vs/

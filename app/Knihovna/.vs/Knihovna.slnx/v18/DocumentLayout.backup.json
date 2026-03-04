@@ -1,0 +1,131 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\styles\\appstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:styles\\appstyles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\views\\authordetailwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:views\\authordetailwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\views\\bookdetailwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:views\\bookdetailwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\db\\db setup\\insert_test_data.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:db\\db setup\\insert_test_data.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|c:\\users\\balcarm\\desktop\\staz\\app\\knihovna\\db\\db setup\\insert_test_data.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{94B237EB-4169-B6BA-E004-04CF7C5BD56D}|Knihovna.csproj|solutionrelative:db\\db setup\\insert_test_data.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 287,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookDetailWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Views\\BookDetailWindow.xaml",
+              "RelativeDocumentMoniker": "Views\\BookDetailWindow.xaml",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Views\\BookDetailWindow.xaml",
+              "RelativeToolTip": "Views\\BookDetailWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-04T12:01:32.924Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthorDetailWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Views\\AuthorDetailWindow.xaml",
+              "RelativeDocumentMoniker": "Views\\AuthorDetailWindow.xaml",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Views\\AuthorDetailWindow.xaml",
+              "RelativeToolTip": "Views\\AuthorDetailWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-04T12:02:24.207Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppStyles.xaml",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Styles\\AppStyles.xaml",
+              "RelativeDocumentMoniker": "Styles\\AppStyles.xaml",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Styles\\AppStyles.xaml",
+              "RelativeToolTip": "Styles\\AppStyles.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-04T12:01:40.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "insert_test_data.sql ",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\db\\DB SETUP\\insert_test_data.sql",
+              "RelativeDocumentMoniker": "db\\DB SETUP\\insert_test_data.sql",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\db\\DB SETUP\\insert_test_data.sql",
+              "RelativeToolTip": "db\\DB SETUP\\insert_test_data.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-03-04T11:56:08.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Models\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "Models\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T11:36:19.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-03-04T11:31:43.212Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+navrhy/UI/
+app/.vs/
+app/Knihovna/db/KNIHOVNADB.FDB
+app/Knihovna/bin/
+app/Knihovna/obj/
+*.user

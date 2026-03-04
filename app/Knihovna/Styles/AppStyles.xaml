@@ -1,0 +1,65 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+
+    <Style
+        x:Key="MainWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="Window">
+        <Setter Property="Height" Value="600" />
+        <Setter Property="Width" Value="1000" />
+        <Setter Property="Title" Value="Knihovna Elektlabs" />
+    </Style>
+
+    <Style
+        x:Key="BookWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="Window">
+        <Setter Property="Height" Value="750" />
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Title" Value="Detail Knihy" />
+    </Style>
+
+    <Style
+        x:Key="BookDetailWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="Window">
+        <Setter Property="Height" Value="500" />
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Title" Value="Detail Knihy" />
+    </Style>
+
+    <Style
+        x:Key="AuthorWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="Window">
+        <Setter Property="Height" Value="500" />
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Title" Value="Detail Autora" />
+    </Style>
+
+    <Style
+        x:Key="AuthorDetailWindow"
+        BasedOn="{StaticResource {x:Type Window}}"
+        TargetType="Window">
+        <Setter Property="Height" Value="400" />
+        <Setter Property="Width" Value="400" />
+        <Setter Property="Title" Value="Detail Autora" />
+    </Style>
+
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="BorderBrush" Value="DarkGray" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+
+
+    </Style>
+
+</ResourceDictionary>

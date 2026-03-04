@@ -1,0 +1,303 @@
+﻿<Window
+    x:Class="Knihovna.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Knihovna.ViewModels"
+    Style="{StaticResource MainWindow}"
+    mc:Ignorable="d">
+
+    <Grid Margin="10">
+        <ContentControl Content="{Binding CurrentView}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type vm:BooksListViewModel}">
+                    <DockPanel>
+
+                        <Grid Margin="0,0,0,10" DockPanel.Dock="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource HeaderTextBlockStyle}"
+                                Text="Knihy" />
+
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+                                <TextBox
+                                    Width="500"
+                                    Tag="Zadej jméno knihy..."
+                                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Width="100"
+                                Height="25"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                Command="{Binding DataContext.ShowAuthorsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="Seznam autorů"
+                                Style="{StaticResource SecondaryButtonStyle}" />
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Width="100"
+                                Height="25"
+                                VerticalAlignment="Center"
+                                Command="{Binding OpenFormCommand}"
+                                Content="Nová kniha"
+                                Style="{StaticResource SuccessButtonStyle}" />
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="4"
+                                Margin="0,15,0,5"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+
+                                <StackPanel Margin="0,0,10,0">
+                                    <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
+                                    <ComboBox
+                                        Width="150"
+                                        DisplayMemberPath="FullName"
+                                        ItemsSource="{Binding AllAuthors}"
+                                        SelectedItem="{Binding SelectedAuthor}" />
+                                </StackPanel>
+
+                                <StackPanel Margin="0,0,10,0">
+                                    <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
+                                    <ComboBox
+                                        Width="120"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding AllLanguages}"
+                                        SelectedItem="{Binding SelectedLanguage}" />
+                                </StackPanel>
+
+                                <StackPanel Margin="0,0,10,0">
+                                    <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
+                                    <ComboBox
+                                        Width="150"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding AllPublishers}"
+                                        SelectedItem="{Binding SelectedPublisher}" />
+                                </StackPanel>
+
+                                <Button
+                                    Width="75"
+                                    Height="30"
+                                    Margin="0,5,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding ClearFiltersCommand}"
+                                    Content="Zrušit filtry"
+                                    Style="{StaticResource DangerButtonStyle}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Separator DockPanel.Dock="Top" Style="{StaticResource ThickSeparatorStyle}" />
+
+                        <DataGrid ItemsSource="{Binding Books}">
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Width="200" Header="Název">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
+                                                Content="{Binding Name}"
+                                                Style="{StaticResource LinkButtonStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="*" Header="Autoři">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ItemsControl FontWeight="SemiBold" ItemsSource="{Binding Authors}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Margin="10">
+                                                            <Run Text="{Binding FirstName}" />
+                                                            <Run Text="{Binding LastName}" />
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="80" Header="Přečteno">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                Margin="5,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                IsChecked="{Binding HaveRead}"
+                                                Style="{StaticResource IsReadCheckBox}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="90" Header="Hodnocení">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Style="{StaticResource RatingTextBlockStyle}" Text="{Binding Rating, Converter={StaticResource RatingToStarsConverter}}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn
+                                    Width="175"
+                                    CellTemplate="{StaticResource ActionColumnTemplate}"
+                                    Header="Akce" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </DockPanel>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vm:AuthorsListViewModel}">
+                    <DockPanel>
+                        <Grid Margin="0,0,0,10" DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{StaticResource HeaderTextBlockStyle}"
+                                Text="Autoři" />
+
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+                                <TextBox
+                                    Width="500"
+                                    Tag="Zadej jméno autora..."
+                                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Width="100"
+                                Height="25"
+                                Margin="5"
+                                VerticalAlignment="Center"
+                                Command="{Binding DataContext.ShowBooksCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                Content="Seznam knih"
+                                Style="{StaticResource SecondaryButtonStyle}" />
+
+                            <Button
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Width="100"
+                                Height="25"
+                                VerticalAlignment="Center"
+                                Command="{Binding OpenFormCommand}"
+                                Content="Nový autor"
+                                Style="{StaticResource SuccessButtonStyle}" />
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="4"
+                                Margin="0,15,0,5"
+                                HorizontalAlignment="Left"
+                                Orientation="Horizontal">
+
+                                <StackPanel Margin="0,0,10,0">
+                                    <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Národnost:" />
+                                    <ComboBox
+                                        Width="150"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding AllNationalities}"
+                                        SelectedItem="{Binding SelectedNationality}" />
+                                </StackPanel>
+
+                                <Button
+                                    Width="75"
+                                    Height="30"
+                                    Margin="0,5,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding ClearFiltersCommand}"
+                                    Content="Zrušit filtry"
+                                    Style="{StaticResource DangerButtonStyle}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Separator DockPanel.Dock="Top" Style="{StaticResource ThickSeparatorStyle}" />
+
+                        <DataGrid ItemsSource="{Binding Authors}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Width="150" Header="Jméno">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}"
+                                                Content="{Binding FullName}"
+                                                Style="{StaticResource LinkButtonStyle}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Width="*" Header="Národnost">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="10"
+                                                FontWeight="SemiBold"
+                                                Text="{Binding Nationality.Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn
+                                    Width="175"
+                                    CellTemplate="{StaticResource ActionColumnTemplate}"
+                                    Header="Akce" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</Window>

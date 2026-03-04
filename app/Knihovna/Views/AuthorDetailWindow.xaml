@@ -1,0 +1,77 @@
+<Window
+    x:Class="Knihovna.Views.AuthorDetailWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Detail Autora"
+    Style="{StaticResource AuthorDetailWindow}"
+    WindowStartupLocation="CenterOwner">
+
+    <DockPanel Margin="20">
+        <StackPanel
+            HorizontalAlignment="Right"
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="30"
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                Content="Zavřít"
+                IsCancel="True"
+                Style="{StaticResource DangerButtonStyle}" />
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,0">
+                <TextBlock
+                    Margin="0,0,0,15"
+                    FontSize="26"
+                    FontWeight="Bold"
+                    Text="{Binding CurrentAuthor.FullName}" />
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <Label
+                            Padding="0"
+                            Content="Datum narození:"
+                            FontWeight="SemiBold" />
+                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentAuthor.DateOfBirth, StringFormat=d}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Label
+                            Padding="0"
+                            Content="Národnost:"
+                            FontWeight="SemiBold" />
+                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentAuthor.Nationality.Name}" />
+                    </StackPanel>
+                </Grid>
+
+                <Separator Margin="0,10" Background="LightGray" />
+
+                <Label
+                    Padding="0,0,0,5"
+                    Content="Napsané knihy:"
+                    FontWeight="SemiBold" />
+                <ItemsControl ItemsSource="{Binding CurrentAuthor.Books}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,2,0,5" Orientation="Horizontal">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    Foreground="#555555"
+                                    Text="• " />
+                                <TextBlock FontSize="16" Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

@@ -10,18 +10,14 @@ namespace Knihovna.Converters
             if (value == null || value == DBNull.Value)
                 return "—";
 
-            try
-            {
-                int rating = System.Convert.ToInt32(value);
 
-                if (rating <= 0) return "—";
+            int rating = System.Convert.ToInt32(value);
 
-                return new string('*', Math.Clamp(rating, 0, 5));
-            }
-            catch
-            {
-                return "—";
-            }
+            if (rating <= 0) return "—";
+
+            return new string('*', Math.Clamp(rating, 0, 5));
+            
+
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

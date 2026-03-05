@@ -57,7 +57,7 @@ namespace Knihovna.ViewModels
 
             var result = System.Windows.MessageBox.Show(
                 $"Opravdu chcete smazat autora '{author.FullName}'? \n\n" +
-                "VAROVÁNÍ: Tato akce odstraní a jeho knihy!",
+                "VAROVÁNÍ: Tato akce odstraní autora a jeho knihy!",
                 "Potvrzení smazání",
                 System.Windows.MessageBoxButton.YesNo,
                 System.Windows.MessageBoxImage.Warning);

@@ -132,7 +132,7 @@
                                 <DataGridTemplateColumn Width="*" Header="Autoři">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ItemsControl FontWeight="SemiBold" ItemsSource="{Binding Authors}">
+                                            <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel />
@@ -290,7 +290,7 @@
                                         <DataTemplate>
                                             <TextBlock
                                                 Margin="10"
-                                                FontWeight="SemiBold"
+                                                FontWeight="Bold"
                                                 Text="{Binding Nationality.Name}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

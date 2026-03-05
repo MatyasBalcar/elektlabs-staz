@@ -21,7 +21,7 @@ namespace Knihovna.Models
 
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    query = query.Where(b => b.Name.Contains(name));
+                    query = query.Where(b => b.Name.ToLower().Contains(name.ToLower()));
                 }
 
                 if (!string.IsNullOrWhiteSpace(author))
@@ -67,9 +67,8 @@ namespace Knihovna.Models
                        .AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(searchTerm))
-                {
-
-                    query = query.Where(a => (a.FirstName + " " + a.LastName).Contains(searchTerm));
+                { 
+                    query = query.Where(a => (a.FirstName + " " + a.LastName).ToLower().Contains(searchTerm.ToLower()));
                 }
                 if (!string.IsNullOrWhiteSpace(nationality))
                 {

@@ -12,7 +12,7 @@ namespace Knihovna.ViewModels
     {
         private readonly DatabaseManager _dbManager;
 
-        private const int shownResultsCount = 3;
+        private const int ShownResultsCount = 3;
         
         [ObservableProperty]
         private Book _editingBook;
@@ -55,11 +55,11 @@ namespace Knihovna.ViewModels
 
             AllAuthors = new ObservableCollection<Author>(_dbManager.GetAuthors());
 
-            var langs = _dbManager.GetAllLanguages();
-            var pubs = _dbManager.GetAllPublishers();
+            var languages = _dbManager.GetAllLanguages();
+            var publishers = _dbManager.GetAllPublishers();
 
-            AllPublishers = new ObservableCollection<Publisher>(pubs);
-            AllLanguages = new ObservableCollection<Language>(langs);
+            AllPublishers = new ObservableCollection<Publisher>(publishers);
+            AllLanguages = new ObservableCollection<Language>(languages);
 
             if (book == null)
             {
@@ -138,7 +138,7 @@ namespace Knihovna.ViewModels
 
             var filtered = AllLanguages 
                 .Where(l => l.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(l => l.Name).Take(shownResultsCount).ToList();
+                .OrderBy(l => l.Name).Take(ShownResultsCount).ToList();
 
             SuggestedLanguages = new ObservableCollection<Language>(filtered);
             IsLangSuggestionsVisible = SuggestedLanguages.Any();
@@ -154,7 +154,7 @@ namespace Knihovna.ViewModels
 
             var filtered = AllPublishers
                 .Where(p => p.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(p => p.Name).Take(shownResultsCount).ToList();
+                .OrderBy(p => p.Name).Take(ShownResultsCount).ToList();
 
             SuggestedPublishers = new ObservableCollection<Publisher>(filtered);
             IsPubSuggestionsVisible = SuggestedPublishers.Any();
@@ -189,8 +189,8 @@ namespace Knihovna.ViewModels
                 formVM.Save();
 
 
-                var noviAutori = _dbManager.GetAuthors();
-                AllAuthors = new ObservableCollection<Author>(noviAutori);
+                var newAuthors = _dbManager.GetAuthors();
+                AllAuthors = new ObservableCollection<Author>(newAuthors);
 
                 SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorID == formVM.CurrentAuthor.AuthorID);
             }

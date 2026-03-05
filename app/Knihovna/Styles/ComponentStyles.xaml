@@ -163,7 +163,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    <!--  <DatePicker button (the calendar one)  -->
     <ControlTemplate x:Key="DatePickerButtonTemplate" TargetType="Button">
         <Grid Background="Transparent">
             <Border
@@ -194,6 +194,8 @@
             </VisualStateManager.VisualStateGroups>
         </Grid>
     </ControlTemplate>
+
+    <!--  This is for the calendar itself  -->
     <Style x:Key="RoundedDatePickerStyle" TargetType="DatePicker">
         <Setter Property="CalendarStyle" Value="{StaticResource RoundedCalendarStyle}" />
         <Setter Property="Padding" Value="0,0" />
@@ -331,6 +333,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!--  Header text  -->
 
     <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -338,11 +341,13 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
+    <!--  Label above the filters  -->
     <Style x:Key="FilterLabelTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="2,0,0,2" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
+
     <Style x:Key="ThickSeparatorStyle" TargetType="Separator">
         <Setter Property="Height" Value="2" />
         <Setter Property="Margin" Value="0,0,0,10" />
@@ -366,6 +371,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!--  Datagrid  -->
     <Style TargetType="DataGrid">
         <Setter Property="RowHeight" Value="40" />

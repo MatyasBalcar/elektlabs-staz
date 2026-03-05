@@ -5,3 +5,4 @@ app/Knihovna/bin/
 app/Knihovna/obj/
 *.user
 app/Knihovna/.vs/
+app/Knihovna/Properties

@@ -52,6 +52,7 @@ namespace Knihovna.Models
         //            .ToList();
         //    }
         //}
+
         public List<Author> GetAuthors(string searchTerm = "", string nationality = "")
         {
             using (var context = new AppDbContext())
@@ -180,12 +181,10 @@ namespace Knihovna.Models
         public bool CanDeleteAuthor(int authorId)
         {
             //obsolete
-            using (var context = new AppDbContext())
-            {
-                //returns true if author doesnt have books, false otherwise
-                return !context.Authors
-                    .Any(a => a.AuthorID == authorId && a.Books.Any());
-            }
+            using var context = new AppDbContext();
+            //returns true if author doesnt have books, false otherwise
+            return !context.Authors
+                .Any(a => a.AuthorID == authorId && a.Books.Any());
         }
 
         public void DeleteAuthor(int authorId)
@@ -273,6 +272,6 @@ namespace Knihovna.Models
                 return context.Languages.OrderBy(l => l.Name).ToList();
             }
         }
-
+        
     }
 }

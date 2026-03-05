@@ -453,7 +453,7 @@
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,4,0,0" />
-        <!--  This disables ckicking on the header because i dont want the sizes of columns to be user changes, and also the order of nthem not to be user changable  -->
+        <!--  This disables clicking on the header because i dont want the sizes of columns to be user changes, and also the order of them not to be user changeable  -->
         <Setter Property="IsHitTestVisible" Value="False" />
 
     </Style>

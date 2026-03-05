@@ -40,7 +40,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                                 <TextBox
-                                    Width="500"
+                                    Width="475"
                                     Tag="Zadej jméno knihy..."
                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
@@ -215,7 +215,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                                 <TextBox
-                                    Width="500"
+                                    Width="475"
                                     Tag="Zadej jméno autora..."
                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>

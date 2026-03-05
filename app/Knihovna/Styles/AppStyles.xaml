@@ -50,4 +50,54 @@
         <Setter Property="Width" Value="400" />
         <Setter Property="Title" Value="Detail Autora" />
     </Style>
+
+    <!--  Style for tabs  -->
+    <Style TargetType="TabItem">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border
+                        x:Name="TabBorder"
+                        Margin="0,0,4,0"
+                        Padding="15,8"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        CornerRadius="8,8,0,0">
+                        <ContentPresenter
+                            x:Name="ContentSite"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            ContentSource="Header" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="TabBorder" Property="Background" Value="#F5F5F5" />
+                            <Setter Property="Foreground" Value="#555555" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TabBorder" Property="Background" Value="White" />
+                            <Setter TargetName="TabBorder" Property="BorderThickness" Value="1,1,1,0" />
+                            <Setter TargetName="TabBorder" Property="Margin" Value="0,0,4,-1" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="TabBorder" Property="Background" Value="#E0E0E0" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

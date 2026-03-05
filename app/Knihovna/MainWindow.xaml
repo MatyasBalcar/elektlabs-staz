@@ -86,7 +86,7 @@
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
                                     <ComboBox
-                                        Width="120"
+                                        Width="150"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}" />

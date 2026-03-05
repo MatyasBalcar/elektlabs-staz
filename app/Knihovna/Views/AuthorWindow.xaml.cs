@@ -1,5 +1,4 @@
 ﻿using Knihovna.Models;
-using Knihovna.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 

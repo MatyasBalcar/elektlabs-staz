@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Knihovna.Models
+﻿namespace Knihovna.Models
 {
     public class Publisher
     {

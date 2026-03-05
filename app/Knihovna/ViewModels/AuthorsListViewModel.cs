@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace Knihovna.ViewModels
 {

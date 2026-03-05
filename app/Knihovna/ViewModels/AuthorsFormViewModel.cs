@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
-using Knihovna.Services;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 
 public partial class AuthorFormViewModel : ObservableObject
 {

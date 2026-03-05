@@ -437,6 +437,30 @@
         <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
 
+
+    <!--  Changes data grid rows selected colors  -->
+    <Style TargetType="{x:Type DataGridCell}">
+        <Style.Triggers>
+            <Trigger Property="DataGridCell.IsSelected" Value="True">
+                <!-- Remove color assignment, border removed with 0 thickness
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="Transparent" />
+                    </Setter.Value>
+                </Setter>
+                -->
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightGray" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <!--  This is a star shape coppied from the internet  -->
     <DataTemplate x:Key="StarIconTemplate">
         <Path

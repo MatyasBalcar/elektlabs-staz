@@ -13,6 +13,7 @@
         <Setter Property="Title" Value="Knihovna Elektlabs" />
     </Style>
 
+    <!--  Form window for books  -->
     <Style
         x:Key="BookWindow"
         BasedOn="{StaticResource {x:Type Window}}"
@@ -31,6 +32,7 @@
         <Setter Property="Title" Value="Detail Knihy" />
     </Style>
 
+    <!--  Form window for authors  -->
     <Style
         x:Key="AuthorWindow"
         BasedOn="{StaticResource {x:Type Window}}"

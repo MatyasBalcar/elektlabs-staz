@@ -11,6 +11,7 @@ namespace Knihovna.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null || value == DBNull.Value)
+                //should be null but a check to be sure
                 return Enumerable.Empty<int>();
 
             try
@@ -21,9 +22,11 @@ namespace Knihovna.Converters
                     return Enumerable.Empty<int>();
 
                 return Enumerable.Range(1, Math.Clamp(rating, 0, 5)).ToList();
+                //list of length of stars
             }
             catch
             {
+                //catch all returns empty list
                 return Enumerable.Empty<int>();
             }
         }

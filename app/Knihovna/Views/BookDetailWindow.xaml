@@ -18,7 +18,7 @@
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Content="Zavřít"
                 IsCancel="True"
-                Style="{StaticResource DangerButtonStyle}" />
+                Style="{StaticResource DangerButtonOutlineStyle}" />
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">

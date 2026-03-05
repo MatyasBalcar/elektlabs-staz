@@ -34,7 +34,7 @@
                     Height="30"
                     Content="Zrušit"
                     IsCancel="True"
-                    Style="{StaticResource DangerButtonStyle}" />
+                    Style="{StaticResource DangerButtonOutlineStyle}" />
             </Grid>
         </StackPanel>
 

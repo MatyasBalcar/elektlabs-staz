@@ -6,17 +6,22 @@ namespace Knihovna.Converters
 {
     public class RatingToColorConverter : IValueConverter
     {
+        private readonly SolidColorBrush selectedColor = Brushes.Gold;
+        private readonly SolidColorBrush notSelectedColor = Brushes.LightGray;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is short rating)
             {
                 if (int.TryParse(parameter?.ToString(), out int starLevel))
                 {
-                    return rating >= starLevel ? Brushes.Gold : Brushes.LightGray;
+                  /*
+                     This returns correct color, based on if the star should be selected
+                    */
+                    return rating >= starLevel ? selectedColor : notSelectedColor;
                 }
             }
 
-            return Brushes.LightGray;
+            return notSelectedColor;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

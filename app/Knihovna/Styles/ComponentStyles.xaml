@@ -263,7 +263,6 @@
                     <Grid>
                         <ToggleButton
                             x:Name="ToggleButton"
-                            Grid.Column="2"
                             ClickMode="Press"
                             Focusable="false"
                             IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">

@@ -7,8 +7,7 @@ namespace Knihovna.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DBNull.Value)
-                //should be null but a check to be sure
+            if (value == DBNull.Value)
                 return Enumerable.Empty<int>();
 
             try

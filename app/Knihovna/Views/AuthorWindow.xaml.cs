@@ -23,7 +23,7 @@ namespace Knihovna.Views
             }
         }
 
-        //naseptavani
+        //Auto complete logic
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0 && e.AddedItems[0] is Nationality selected)

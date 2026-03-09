@@ -64,7 +64,6 @@ namespace Knihovna.ViewModels
                 EditingBook = new Book { PublishDate = DateTime.Now, HaveRead = false, Rating = 1 };
             }
             else
-            //tady to je straight up divne, melo by fungovat book.language?melo, funguje?ne.
             {
                 EditingBook = book;
 

@@ -91,49 +91,46 @@ namespace Knihovna.Models
         {
             using (var context = new AppDbContext())
             {
-                if (book.Language != null)
+
+                var existingLang = context.Languages
+                    .FirstOrDefault(l => l.Name.ToLower() == book.Language.Name.ToLower());
+
+                if (existingLang != null)
                 {
-                    var existingLang = context.Languages
-                        .FirstOrDefault(l => l.Name.ToLower() == book.Language.Name.ToLower());
-
-                    if (existingLang != null)
-                    {
-                        book.Language = existingLang;
-                        book.LanguageID = existingLang.LanguageID;
-                        context.Entry(existingLang).State = EntityState.Unchanged;
-                    }
-                    else
-                    {
-                        book.Language.LanguageID = 0; 
-                    }
+                    book.Language = existingLang;
+                    book.LanguageID = existingLang.LanguageID;
+                    context.Entry(existingLang).State = EntityState.Unchanged;
                 }
-
-                if (book.Publisher != null)
+                else
                 {
-                    var existingPub = context.Publishers
-                        .FirstOrDefault(p => p.Name.ToLower() == book.Publisher.Name.ToLower());
-
-                    if (existingPub != null)
-                    {
-                        book.Publisher = existingPub;
-                        book.PublisherID = existingPub.PublisherID;
-                        context.Entry(existingPub).State = EntityState.Unchanged;
-                    }
-                    else
-                    {
-                        book.Publisher.PublisherID = 0; 
-                    }
+                    book.Language.LanguageID = 0; 
                 }
+                
+
+
+                var existingPub = context.Publishers
+                    .FirstOrDefault(p => p.Name.ToLower() == book.Publisher.Name.ToLower());
+
+                if (existingPub != null)
+                {
+                    book.Publisher = existingPub;
+                    book.PublisherID = existingPub.PublisherID;
+                    context.Entry(existingPub).State = EntityState.Unchanged;
+                }
+                else
+                {
+                    book.Publisher.PublisherID = 0; 
+                }
+                
 
                 if (book.BookID == 0)
                 {
-                    if (book.Authors != null)
+
+                    foreach (var author in book.Authors)
                     {
-                        foreach (var author in book.Authors)
-                        {
-                            context.Entry(author).State = EntityState.Unchanged;
-                        }
+                        context.Entry(author).State = EntityState.Unchanged;
                     }
+
                     context.Books.Add(book);
                 }
                 else
@@ -207,25 +204,24 @@ namespace Knihovna.Models
         {
             using (var context = new AppDbContext())
             {
-                if (author.Nationality != null)
+
+
+                var existingNationality = context.Nationalities
+                    .FirstOrDefault(n => n.Name.ToLower() == author.Nationality.Name.ToLower());
+
+                if (existingNationality != null)
+                {
+                    author.Nationality = existingNationality;
+                    author.NationalityID = existingNationality.NationalityID;
+
+                    context.Entry(existingNationality).State = EntityState.Unchanged;
+                }
+                else
                 {
 
-                    var existingNationality = context.Nationalities
-                        .FirstOrDefault(n => n.Name.ToLower() == author.Nationality.Name.ToLower());
-
-                    if (existingNationality != null)
-                    {
-                        author.Nationality = existingNationality;
-                        author.NationalityID = existingNationality.NationalityID;
-
-                        context.Entry(existingNationality).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
-                    }
-                    else
-                    {
-
-                        author.Nationality.NationalityID = 0;
-                    }
+                    author.Nationality.NationalityID = 0;
                 }
+                
 
                 if (author.AuthorID == 0)
                 {

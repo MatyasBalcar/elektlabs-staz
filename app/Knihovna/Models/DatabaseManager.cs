@@ -22,17 +22,17 @@ namespace Knihovna.Models
                 if (!string.IsNullOrWhiteSpace(author))
                 {
                     query = query.Where(b => b.Authors.Any(a =>
-                        (a.FirstName + " " + a.LastName).Contains(author)));
+                        a.FullName.Contains(author)));
                 }
 
                 if (!string.IsNullOrWhiteSpace(language))
                 {
-                    query = query.Where(b => b.Language != null && b.Language.Name.Contains(language));
+                    query = query.Where(b => b.Language.Name.Contains(language));
                 }
 
                 if (!string.IsNullOrWhiteSpace(publisher))
                 {
-                    query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
+                    query = query.Where(b => b.Publisher.Name.Contains(publisher));
                 }
 
                 return query.OrderBy(b => b.Name).ToList();
@@ -68,7 +68,7 @@ namespace Knihovna.Models
                 }
                 if (!string.IsNullOrWhiteSpace(nationality))
                 {
-                    query = query.Where(a => a.Nationality != null && a.Nationality.Name.Contains(nationality));
+                    query = query.Where(a => a.Nationality.Name.Contains(nationality));
 
                 }
 
@@ -178,14 +178,13 @@ namespace Knihovna.Models
             }
         }
 
-        public bool CanDeleteAuthor(int authorId)
-        {
-            //obsolete
-            using var context = new AppDbContext();
-            //returns true if author doesnt have books, false otherwise
-            return !context.Authors
-                .Any(a => a.AuthorID == authorId && a.Books.Any());
-        }
+        //No longer used, but kept for future usage
+        //public bool CanDeleteAuthor(int authorId)
+        //{
+        //    using var context = new AppDbContext();
+        //    return !context.Authors
+        //        .Any(a => a.AuthorID == authorId && a.Books.Any());
+        //}
 
         public void DeleteAuthor(int authorId)
         {

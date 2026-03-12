@@ -105,37 +105,44 @@
                         Style="{StaticResource Switch}" />
 
                 </StackPanel>
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Hodnocení:"
-                    FontWeight="SemiBold" />
-                <StackPanel Orientation="Horizontal">
-                    <Button
-                        Command="{Binding SetRatingCommand}"
-                        CommandParameter="1"
-                        Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=1}"
-                        Style="{StaticResource StarButtonStyle}" />
-                    <Button
-                        Command="{Binding SetRatingCommand}"
-                        CommandParameter="2"
-                        Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=2}"
-                        Style="{StaticResource StarButtonStyle}" />
-                    <Button
-                        Command="{Binding SetRatingCommand}"
-                        CommandParameter="3"
-                        Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource StarButtonStyle}" />
-                    <Button
-                        Command="{Binding SetRatingCommand}"
-                        CommandParameter="4"
-                        Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=4}"
-                        Style="{StaticResource StarButtonStyle}" />
-                    <Button
-                        Command="{Binding SetRatingCommand}"
-                        CommandParameter="5"
-                        Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}"
-                        Style="{StaticResource StarButtonStyle}" />
+
+                <StackPanel
+                    Margin="0,15,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,10,0,0"
+                        Content="Hodnocení:"
+                        FontWeight="SemiBold" />
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <Button
+                            Command="{Binding SetRatingCommand}"
+                            CommandParameter="1"
+                            Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=1}"
+                            Style="{StaticResource StarButtonStyle}" />
+                        <Button
+                            Command="{Binding SetRatingCommand}"
+                            CommandParameter="2"
+                            Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=2}"
+                            Style="{StaticResource StarButtonStyle}" />
+                        <Button
+                            Command="{Binding SetRatingCommand}"
+                            CommandParameter="3"
+                            Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=3}"
+                            Style="{StaticResource StarButtonStyle}" />
+                        <Button
+                            Command="{Binding SetRatingCommand}"
+                            CommandParameter="4"
+                            Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=4}"
+                            Style="{StaticResource StarButtonStyle}" />
+                        <Button
+                            Command="{Binding SetRatingCommand}"
+                            CommandParameter="5"
+                            Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}"
+                            Style="{StaticResource StarButtonStyle}" />
+                    </StackPanel>
                 </StackPanel>
+
 
 
             </StackPanel>

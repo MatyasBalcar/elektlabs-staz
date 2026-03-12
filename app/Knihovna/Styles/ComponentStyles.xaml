@@ -147,7 +147,7 @@
     </Style>
 
 
-    <!--  For inner calendar tetxbox, so it doesnt highlight  -->
+    <!--  For inner calendar tetxbox, so it doesn't highlight  -->
     <Style x:Key="NoHighlightTextBoxStyle" TargetType="DatePickerTextBox">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -418,11 +418,12 @@
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#555555" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="GridLinesVisibility" Value="All" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0" />
+        <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
 
-        <Setter Property="GridLinesVisibility" Value="All" />
-        <Setter Property="HorizontalGridLinesBrush" Value="LightGray" />
-        <Setter Property="VerticalGridLinesBrush" Value="LightGray" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGrid">
@@ -508,6 +509,7 @@
                 </Setter>
                 -->
                 <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="White" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
                 <Setter Property="Background">
                     <Setter.Value>
@@ -625,6 +627,7 @@
                                 </Ellipse.RenderTransform>
                             </Ellipse>
                         </Grid>
+
 
                         <ContentPresenter
                             x:Name="contentPresenter"

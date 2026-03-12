@@ -22,8 +22,9 @@ namespace Knihovna.Models
 
             if (!string.IsNullOrWhiteSpace(author))
             {
+                var searchAuthor = author.ToLower();
                 query = query.Where(b => b.Authors.Any(a =>
-                    a.FullName.Contains(author)));
+                    (a.FirstName + " " + a.LastName).ToLower().Contains(searchAuthor)));
             }
 
             if (!string.IsNullOrWhiteSpace(language))

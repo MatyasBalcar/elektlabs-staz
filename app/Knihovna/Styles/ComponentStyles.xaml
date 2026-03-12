@@ -146,6 +146,25 @@
         </Setter>
     </Style>
 
+
+    <!--  For inner calendar tetxbox, so it doesnt highlight  -->
+    <Style x:Key="NoHighlightTextBoxStyle" TargetType="DatePickerTextBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0,9" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePickerTextBox">
+                    <ScrollViewer
+                        x:Name="PART_ContentHost"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Focusable="False" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--  Rounded datepicker styles  -->
     <Style x:Key="RoundedCalendarStyle" TargetType="Calendar">
         <Setter Property="Background" Value="White" />
@@ -227,16 +246,11 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-
                             <DatePickerTextBox
                                 x:Name="PART_TextBox"
                                 Grid.Column="0"
-                                Padding="0"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="Center"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Focusable="True" />
+                                Padding="2,0"
+                                Style="{StaticResource NoHighlightTextBoxStyle}" />
 
                             <Button
                                 x:Name="PART_Button"
@@ -256,7 +270,12 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="Black" />
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#007ACC" />
+                        </Trigger>
+
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#007ACC" />
+                            <Setter TargetName="MainBorder" Property="BorderThickness" Value="2" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

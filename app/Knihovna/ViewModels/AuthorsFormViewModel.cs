@@ -48,10 +48,21 @@ public partial class AuthorFormViewModel : ObservableObject
 
     public bool Save()
     {
-
         if (!string.IsNullOrWhiteSpace(NationalityText))
         {
-            CurrentAuthor.Nationality = new Nationality { Name = NationalityText.Trim() };
+            string natName = NationalityText.Trim();
+            var existingNat = AllNationalities.FirstOrDefault(n => n.Name.Equals(natName, StringComparison.OrdinalIgnoreCase));
+
+            if (existingNat != null)
+            {
+                CurrentAuthor.Nationality = existingNat;
+                CurrentAuthor.NationalityID = existingNat.NationalityID;
+            }
+            else
+            {
+                CurrentAuthor.Nationality = new Nationality { Name = natName };
+                CurrentAuthor.NationalityID = null;
+            }
         }
         else
         {
@@ -62,21 +73,35 @@ public partial class AuthorFormViewModel : ObservableObject
         string validationError = CurrentAuthor.Validate();
         if (!string.IsNullOrEmpty(validationError))
         {
-            System.Windows.MessageBox.Show(
-                validationError,
-                "Chyba při ukládání",
-                System.Windows.MessageBoxButton.OK,
-                System.Windows.MessageBoxImage.Warning);
-
+            System.Windows.MessageBox.Show(validationError, "Chyba při ukládání",
+                System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
             return false;
         }
 
-        _dbManager.SaveAuthor(CurrentAuthor);
-
-        return true;
-
+        try
+        {
+            _dbManager.SaveAuthor(CurrentAuthor);
+            return true;
+        }
+        catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+        {
+            System.Windows.MessageBox.Show(
+                "Autora se nepodařilo uložit do databáze",
+                "Chyba databáze",
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Error);
+            return false;
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show(
+                $"Došlo k neočekávané chybě:\n{ex.Message}",
+                "Kritická chyba",
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Error);
+            return false;
+        }
     }
-
 
     partial void OnNationalityTextChanged(string value)
     {

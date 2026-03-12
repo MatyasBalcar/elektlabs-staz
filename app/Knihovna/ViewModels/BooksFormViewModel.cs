@@ -151,8 +151,29 @@ namespace Knihovna.ViewModels
                 return false;
             }
 
-            _dbManager.SaveBook(EditingBook);
-            return true;
+            try
+            {
+                _dbManager.SaveBook(EditingBook);
+                return true;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                System.Windows.MessageBox.Show(
+                    "Knihu se nepodařilo uložit.",
+                    "Chyba databáze",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(
+                    $"Došlo k neočekávané chybě aplikace:\n{ex.Message}",
+                    "Kritická chyba",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+                return false;
+            }
         }
         partial void OnLanguageTextChanged(string value)
         {

@@ -89,12 +89,23 @@ namespace Knihovna.ViewModels
             if (book == null) return;
 
             var result = System.Windows.MessageBox.Show($"Smazat '{book.Name}'?", "Potvrzení",
-                         System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Warning);
+                System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Warning);
 
             if (result == System.Windows.MessageBoxResult.Yes)
             {
-                _dbManager.DeleteBook(book.BookID);
-                RefreshData();
+                try
+                {
+                    _dbManager.DeleteBook(book.BookID);
+                    RefreshData();
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(
+                        $"Knihu se nepodařilo smazat.\nDetail: {ex.Message}",
+                        "Chyba při mazání",
+                        System.Windows.MessageBoxButton.OK,
+                        System.Windows.MessageBoxImage.Error);
+                }
             }
         }
 

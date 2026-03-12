@@ -56,15 +56,26 @@ namespace Knihovna.ViewModels
 
             var result = System.Windows.MessageBox.Show(
                 $"Opravdu chcete smazat autora '{author.FullName}'? \n\n" +
-                "VAROVÁNÍ: Tato akce odstraní autora a jeho knihy!",
+                "VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!",
                 "Potvrzení smazání",
                 System.Windows.MessageBoxButton.YesNo,
                 System.Windows.MessageBoxImage.Warning);
 
             if (result == System.Windows.MessageBoxResult.Yes)
             {
-                _dbManager.DeleteAuthor(author.AuthorId);
-                RefreshData();
+                try
+                {
+                    _dbManager.DeleteAuthor(author.AuthorId);
+                    RefreshData();
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(
+                        $"Autora a jeho knihy se nepodařilo smazat.\nDetail: {ex.Message}",
+                        "Chyba při mazání",
+                        System.Windows.MessageBoxButton.OK,
+                        System.Windows.MessageBoxImage.Error);
+                }
             }
         }
 

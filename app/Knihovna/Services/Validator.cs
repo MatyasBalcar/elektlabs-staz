@@ -14,9 +14,16 @@ namespace Knihovna.Services
             {
                 return "Název knihy je příliš dlouhý, maximální delka je 255 znaků.";
             }
-            if (!string.IsNullOrWhiteSpace(book.ISBN) && book.ISBN.Length > 13)
+            if (!string.IsNullOrWhiteSpace(book.ISBN))
             {
-                return "ISBN nesmí být delší než 13 znaků.";
+                string cleanIsbn = book.ISBN.Replace("-", "").Replace(" ", "").Trim();
+
+                if (cleanIsbn.Length > 13 || !cleanIsbn.All(char.IsDigit))
+                {
+                    return "ISBN musí obsahovat přesně 13 číslic (pomlčky jsou povoleny, text ne).";
+                }
+
+                book.ISBN = cleanIsbn;
             }
             if (book.Authors == null || book.Authors.Count == 0)
             {

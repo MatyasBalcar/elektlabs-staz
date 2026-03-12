@@ -31,7 +31,7 @@ CREATE TABLE Books (
     Description BLOB SUB_TYPE TEXT,
     HaveRead BOOLEAN DEFAULT FALSE,
     Rating SMALLINT CHECK (Rating >= 1 AND Rating <= 5),
-    ISBN VARCHAR(13) UNIQUE,
+    ISBN VARCHAR(13) UNIQUE CHECK (ISBN IS NULL OR ISBN SIMILAR TO '[0-9]{13}'),
     FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID),
     FOREIGN KEY (LanguageID) REFERENCES Languages(LanguageID)
 );

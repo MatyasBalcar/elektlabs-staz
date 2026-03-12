@@ -1,6 +1,6 @@
 ﻿namespace Knihovna.Models
 {
-    public class Book
+    public class Book : ICloneable
     {
         public int BookID { get; set; }
         public string Name { get; set; }
@@ -16,7 +16,7 @@
         public int? PublisherID { get; set; }
         public virtual Publisher Publisher { get; set; }
         public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
-        public Book Clone()
+        public object Clone()
         {
             return new Book
             {

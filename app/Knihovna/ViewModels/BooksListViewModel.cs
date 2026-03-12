@@ -99,7 +99,7 @@ namespace Knihovna.ViewModels
         }
 
         [RelayCommand]
-        public void OpenForm(Book book) 
+        public void OpenForm(Book book)
         {
             BookFormViewModel formVM;
 
@@ -109,7 +109,7 @@ namespace Knihovna.ViewModels
             }
             else
             {
-                var bookCopy = book.Clone();
+                var bookCopy = (Book)book.Clone();
                 formVM = new BookFormViewModel(_dbManager, bookCopy);
             }
 
@@ -118,7 +118,6 @@ namespace Knihovna.ViewModels
 
             if (window.ShowDialog() == true)
             {
-
                 RefreshData();
             }
         }

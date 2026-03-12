@@ -79,7 +79,7 @@ namespace Knihovna.ViewModels
             }
             else
             {
-                var authorCopy = author.Clone();
+                var authorCopy = (Author)author.Clone();
                 formVm = new AuthorFormViewModel(_dbManager, authorCopy);
             }
 

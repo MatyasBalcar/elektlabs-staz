@@ -2,7 +2,7 @@
     x:Class="Knihovna.Views.BookDetailWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Detail Autora"
+    Title="Detail Knihy"
     Style="{StaticResource BookDetailWindow}"
     WindowStartupLocation="CenterOwner">
 

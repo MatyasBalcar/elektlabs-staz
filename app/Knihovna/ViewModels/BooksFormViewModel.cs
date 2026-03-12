@@ -87,7 +87,23 @@ namespace Knihovna.ViewModels
         public bool Save()
         {
             if (!string.IsNullOrWhiteSpace(LanguageText))
-                EditingBook.Language = new Language { Name = LanguageText.Trim() };
+            {
+                string langName = LanguageText.Trim();
+
+                var existingLang = AllLanguages.FirstOrDefault(l =>
+                    l.Name.Equals(langName, StringComparison.OrdinalIgnoreCase));
+
+                if (existingLang != null)
+                {
+                    EditingBook.Language = existingLang;
+                    EditingBook.LanguageID = existingLang.LanguageID;
+                }
+                else
+                {
+                    EditingBook.Language = new Language { Name = langName };
+                    EditingBook.LanguageID = null;
+                }
+            }
             else
             {
                 EditingBook.Language = null;
@@ -95,7 +111,23 @@ namespace Knihovna.ViewModels
             }
 
             if (!string.IsNullOrWhiteSpace(PublisherText))
-                EditingBook.Publisher = new Publisher { Name = PublisherText.Trim() };
+            {
+                string pubName = PublisherText.Trim();
+
+                var existingPub = AllPublishers.FirstOrDefault(p =>
+                    p.Name.Equals(pubName, StringComparison.OrdinalIgnoreCase));
+
+                if (existingPub != null)
+                {
+                    EditingBook.Publisher = existingPub;
+                    EditingBook.PublisherID = existingPub.PublisherID;
+                }
+                else
+                {
+                    EditingBook.Publisher = new Publisher { Name = pubName };
+                    EditingBook.PublisherID = null;
+                }
+            }
             else
             {
                 EditingBook.Publisher = null;
@@ -123,7 +155,6 @@ namespace Knihovna.ViewModels
             _dbManager.SaveBook(EditingBook);
             return true;
         }
-
         partial void OnLanguageTextChanged(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -156,12 +187,15 @@ namespace Knihovna.ViewModels
             SuggestedPublishers = new ObservableCollection<Publisher>(filtered);
             IsPubSuggestionsVisible = SuggestedPublishers.Any();
         }
-
         [RelayCommand]
         private void SelectLanguage(Language selected)
         {
             if (selected == null) return;
-            LanguageText = selected.Name;
+            LanguageText = selected.Name; 
+
+            EditingBook.Language = selected;
+            EditingBook.LanguageID = selected.LanguageID;
+
             IsLangSuggestionsVisible = false;
         }
 
@@ -170,6 +204,10 @@ namespace Knihovna.ViewModels
         {
             if (selected == null) return;
             PublisherText = selected.Name;
+
+            EditingBook.Publisher = selected;
+            EditingBook.PublisherID = selected.PublisherID;
+
             IsPubSuggestionsVisible = false;
         }
         [RelayCommand]

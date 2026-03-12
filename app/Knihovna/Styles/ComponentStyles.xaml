@@ -6,6 +6,7 @@
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#555555" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="35" />
         <Setter Property="Padding" Value="3,2" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Tag" Value="..." />
@@ -57,6 +58,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style
+        x:Key="SearchBox"
+        BasedOn="{StaticResource {x:Type TextBox}}"
+        TargetType="TextBox">
+        <Setter Property="Width" Value="465" />
+        <Setter Property="Height" Value="25" />
     </Style>
 
 
@@ -200,6 +209,7 @@
     <Style x:Key="RoundedDatePickerStyle" TargetType="DatePicker">
         <Setter Property="CalendarStyle" Value="{StaticResource RoundedCalendarStyle}" />
         <Setter Property="Padding" Value="0,0" />
+        <Setter Property="Height" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DatePicker">

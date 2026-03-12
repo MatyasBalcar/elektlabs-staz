@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Knihovna.Models
 {
     public class DatabaseManager
     {
+        public static CultureInfo Culture { get; } = new("cs-CZ");
         public static List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
             using var context = new AppDbContext();
@@ -34,7 +36,9 @@ namespace Knihovna.Models
                 query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
             }
 
-            return query.OrderBy(b => b.Name).ToList();
+            return query.ToList()
+                        .OrderBy(a => a.Name, StringComparer.Create(Culture, false))
+                        .ToList();
         }
 
         //public List<Book> GetAllBooks()
@@ -67,7 +71,9 @@ namespace Knihovna.Models
 
             }
 
-            return query.OrderBy(a => a.LastName).ToList();
+            return query.ToList()
+                        .OrderBy(a => a.FullName, StringComparer.Create(Culture, false))
+                        .ToList();
         }
 
         //public List<Author> GetAllAuthors()
@@ -224,24 +230,35 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
+
+
+
         public static List<Nationality> GetAllNationalities()
         {
             using var context = new AppDbContext();
-            return context.Nationalities.OrderBy(n => n.Name).ToList();
+            return context.Nationalities
+                .ToList()
+                .OrderBy(n => n.Name, StringComparer.Create(Culture, false)) 
+                .ToList();
         }
 
         public static List<Publisher> GetAllPublishers()
         {
             using var context = new AppDbContext();
-            return context.Publishers.OrderBy(p => p.Name).ToList();
+            return context.Publishers
+                .ToList()
+                .OrderBy(p => p.Name, StringComparer.Create(Culture, false))
+                .ToList();
         }
-
 
         public static List<Language> GetAllLanguages()
         {
             using var context = new AppDbContext();
-            return context.Languages.OrderBy(l => l.Name).ToList();
+            return context.Languages
+                .ToList()
+                .OrderBy(l => l.Name, StringComparer.Create(Culture, false))
+                .ToList();
         }
-        
-    }
+
+}
 }

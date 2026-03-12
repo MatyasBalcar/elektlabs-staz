@@ -40,7 +40,7 @@
 
         <ScrollViewer Padding="0,0,5,0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <Label Content="Název knihy:" FontWeight="SemiBold" />
+                <Label Content="Název knihy:" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name}" />
 
                 <Label
@@ -62,14 +62,14 @@
                 <Label
                     Margin="0,10,0,0"
                     Content="Autor:"
-                    FontWeight="SemiBold" />
+                    Style="{StaticResource RequiredLabelStyle}" />
                 <ComboBox
                     DisplayMemberPath="FullName"
                     ItemsSource="{Binding AllAuthors}"
                     SelectedItem="{Binding SelectedAuthor}" />
 
                 <StackPanel Margin="0,10,0,0">
-                    <Label Content="Jazyk:" FontWeight="SemiBold" />
+                    <Label Content="Jazyk:" Style="{StaticResource RequiredLabelStyle}" />
                     <TextBox Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged}" />
                     <ListBox
                         MaxHeight="80"
@@ -80,7 +80,7 @@
                 </StackPanel>
 
                 <StackPanel Margin="0,10,0,0">
-                    <Label Content="Vydavatel:" FontWeight="SemiBold" />
+                    <Label Content="Vydavatel:" Style="{StaticResource RequiredLabelStyle}" />
                     <TextBox Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged}" />
                     <ListBox
                         MaxHeight="80"

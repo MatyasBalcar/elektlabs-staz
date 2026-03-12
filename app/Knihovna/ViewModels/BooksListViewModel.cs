@@ -130,6 +130,7 @@ namespace Knihovna.ViewModels
             if (window.ShowDialog() == true)
             {
                 RefreshData();
+                LoadFilterData();
             }
         }
         [RelayCommand]

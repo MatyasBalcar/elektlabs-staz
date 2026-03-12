@@ -59,7 +59,7 @@ public partial class AuthorFormViewModel : ObservableObject
             CurrentAuthor.NationalityID = null;
         }
 
-        string validationError = Knihovna.Services.Validator.ValidateAuthor(CurrentAuthor);
+        string validationError = CurrentAuthor.Validate();
         if (!string.IsNullOrEmpty(validationError))
         {
             System.Windows.MessageBox.Show(

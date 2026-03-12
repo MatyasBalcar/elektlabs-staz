@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
-using Knihovna.Services;
 using System.Collections.ObjectModel;
 
 namespace Knihovna.ViewModels
@@ -140,7 +139,7 @@ namespace Knihovna.ViewModels
                 EditingBook.Authors.Add(SelectedAuthor);
             }
 
-            string validationError = Validator.ValidateBook(EditingBook);
+            string validationError = EditingBook.Validate();
             if (!string.IsNullOrEmpty(validationError))
             {
                 System.Windows.MessageBox.Show(

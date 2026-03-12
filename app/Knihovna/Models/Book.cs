@@ -34,7 +34,27 @@
                 Authors = this.Authors != null ? new List<Author>(this.Authors) : new List<Author>()
             };
         }
+        public string Validate()
+        {
+            if (string.IsNullOrWhiteSpace(Name)) return "Název knihy je povinný.";
+            if (Name.Length > 255) return "Název knihy je příliš dlouhý, maximální delka je 255 znaků.";
 
+            if (!string.IsNullOrWhiteSpace(ISBN))
+            {
+                string cleanIsbn = ISBN.Replace("-", "").Replace(" ", "").Trim();
+
+                if (cleanIsbn.Length != 13 || !cleanIsbn.All(char.IsDigit))
+                    return "ISBN musí obsahovat přesně 13 číslic (pomlčky jsou povoleny, ale text ne).";
+
+                ISBN = cleanIsbn;
+            }
+
+            if (Authors == null || Authors.Count == 0) return "Autor je povinný.";
+            if (Language == null && LanguageID == null) return "Jazyk je povinný.";
+            if (Publisher == null && PublisherID == null) return "Vydavatel je povinný.";
+
+            return string.Empty;
+        }
 
     }
 }

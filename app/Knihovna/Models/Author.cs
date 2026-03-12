@@ -26,5 +26,18 @@
                 Books = this.Books != null ? new List<Book>(this.Books) : new List<Book>()
             };
         }
+
+        public string Validate()
+        {
+            if (string.IsNullOrWhiteSpace(FirstName)) return "Křestní jméno autora je povinné.";
+            if (FirstName.Length > 100) return "Křestní jméno autora ma maximální delku 100 znaků.";
+
+            if (string.IsNullOrWhiteSpace(LastName)) return "Příjmení autora je povinné.";
+            if (LastName.Length > 100) return "Příjmení autora ma maximální delku 100 znaků.";
+
+            if (Nationality == null && NationalityID == null) return "Národnost je povinná.";
+
+            return string.Empty;
+        }
     }
 }

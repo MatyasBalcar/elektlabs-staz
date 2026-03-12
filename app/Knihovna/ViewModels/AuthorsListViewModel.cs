@@ -97,9 +97,8 @@ namespace Knihovna.ViewModels
         {
             if (author == null) return;
 
-            var detailVM = new AuthorDetailViewModel(author);
             var window = new Views.AuthorDetailWindow();
-            window.DataContext = detailVM;
+            window.DataContext = new AuthorDetailViewModel(author);
 
             window.ShowDialog();
 

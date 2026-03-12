@@ -126,9 +126,8 @@ namespace Knihovna.ViewModels
         {
             if (book == null) return;
 
-            var detailVM = new BookDetailViewModel(book);
             var window = new Views.BookDetailWindow();
-            window.DataContext = detailVM;
+            window.DataContext = new BookDetailViewModel(book);
 
             window.ShowDialog();
 

@@ -1,6 +1,7 @@
 ﻿using Knihovna.Models;
 using System.Windows;
 using System.Windows.Controls;
+using Knihovna.ViewModels;
 
 namespace Knihovna.Views
 {

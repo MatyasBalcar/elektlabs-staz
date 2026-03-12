@@ -29,7 +29,7 @@ public partial class AuthorFormViewModel : ObservableObject
     {
         _dbManager = dbManager;
 
-        var nationalities = _dbManager.GetAllNationalities();
+        var nationalities = DatabaseManager.GetAllNationalities();
         AllNationalities = new ObservableCollection<Nationality>(nationalities);
 
         if (author == null)
@@ -80,7 +80,7 @@ public partial class AuthorFormViewModel : ObservableObject
 
         try
         {
-            _dbManager.SaveAuthor(CurrentAuthor);
+            DatabaseManager.SaveAuthor(CurrentAuthor);
             return true;
         }
         catch (Microsoft.EntityFrameworkCore.DbUpdateException)
@@ -111,7 +111,7 @@ public partial class AuthorFormViewModel : ObservableObject
             return;
         }
 
-        var filtered = _dbManager.GetAllNationalities()
+        var filtered = DatabaseManager.GetAllNationalities()
             .Where(n => n.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
             .OrderBy(n => n.Name)
             .Take(ShownResultsCount)

@@ -33,7 +33,7 @@ namespace Knihovna.ViewModels
 
         public void LoadFilterData()
         {
-            AllNationalities = new ObservableCollection<Nationality>(_dbManager.GetAllNationalities());
+            AllNationalities = new ObservableCollection<Nationality>(DatabaseManager.GetAllNationalities());
         }
 
         [RelayCommand]
@@ -45,7 +45,7 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void RefreshData()
         {
-            var seznamZDb = _dbManager.GetAuthors(SearchText, SelectedNationality?.Name);
+            var seznamZDb = DatabaseManager.GetAuthors(SearchText, SelectedNationality?.Name);
             Authors = new ObservableCollection<Author>(seznamZDb);
         }
 
@@ -64,7 +64,7 @@ namespace Knihovna.ViewModels
             {
                 try
                 {
-                    _dbManager.DeleteAuthor(author.AuthorId);
+                    DatabaseManager.DeleteAuthor(author.AuthorId);
                     RefreshData();
                 }
                 catch (Exception ex)

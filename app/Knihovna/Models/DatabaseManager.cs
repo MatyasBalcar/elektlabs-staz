@@ -4,41 +4,37 @@ namespace Knihovna.Models
 {
     public class DatabaseManager
     {
-        public List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
+        public static List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
-            using (var context = new AppDbContext())
+            using var context = new AppDbContext();
+            var query = context.Books
+                .Include(b => b.Publisher)
+                .Include(b => b.Language)
+                .Include(b => b.Authors)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                var query = context.Books
-                    .Include(b => b.Publisher)
-                    .Include(b => b.Language)
-                    .Include(b => b.Authors)
-                    .AsQueryable();
-
-                if (!string.IsNullOrWhiteSpace(name))
-                {
-                    query = query.Where(b => b.Name != null && b.Name.ToLower().Contains(name.ToLower()));
-                }
-
-                if (!string.IsNullOrWhiteSpace(author))
-                {
-                    query = query.Where(b => b.Authors.Any(a =>
-                        a.FullName.Contains(author)));
-                }
-
-                if (!string.IsNullOrWhiteSpace(language))
-                {
-                    query = query.Where(b => b.Language != null && b.Language.Name.Contains(language));
-                }
-
-                if (!string.IsNullOrWhiteSpace(publisher))
-                {
-                    query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
-                }
-
-                return query.OrderBy(b => b.Name).ToList();
-
-
+                query = query.Where(b => b.Name != null && b.Name.ToLower().Contains(name.ToLower()));
             }
+
+            if (!string.IsNullOrWhiteSpace(author))
+            {
+                query = query.Where(b => b.Authors.Any(a =>
+                    a.FullName.Contains(author)));
+            }
+
+            if (!string.IsNullOrWhiteSpace(language))
+            {
+                query = query.Where(b => b.Language != null && b.Language.Name.Contains(language));
+            }
+
+            if (!string.IsNullOrWhiteSpace(publisher))
+            {
+                query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
+            }
+
+            return query.OrderBy(b => b.Name).ToList();
         }
 
         //public List<Book> GetAllBooks()
@@ -53,27 +49,25 @@ namespace Knihovna.Models
         //    }
         //}
 
-        public List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
+        public static List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
         {
-            using (var context = new AppDbContext())
-            {
-                var query = context.Authors
-                       .Include(a => a.Books)     
-                       .Include(a => a.Nationality)
-                       .AsQueryable();
+            using var context = new AppDbContext();
+            var query = context.Authors
+                .Include(a => a.Books)     
+                .Include(a => a.Nationality)
+                .AsQueryable();
 
-                if (!string.IsNullOrWhiteSpace(searchTerm))
-                { 
-                    query = query.Where(a => (a.FirstName + " " + a.LastName).ToLower().Contains(searchTerm.ToLower()));
-                }
-                if (!string.IsNullOrWhiteSpace(nationality))
-                {
-                    query = query.Where(a => a.Nationality != null && a.Nationality.Name.Contains(nationality));
-
-                }
-
-                return query.OrderBy(a => a.LastName).ToList();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            { 
+                query = query.Where(a => (a.FirstName + " " + a.LastName).ToLower().Contains(searchTerm.ToLower()));
             }
+            if (!string.IsNullOrWhiteSpace(nationality))
+            {
+                query = query.Where(a => a.Nationality != null && a.Nationality.Name.Contains(nationality));
+
+            }
+
+            return query.OrderBy(a => a.LastName).ToList();
         }
 
         //public List<Author> GetAllAuthors()
@@ -87,92 +81,85 @@ namespace Knihovna.Models
         //    }
         //}
 
-        public void SaveBook(Book book)
+        public static void SaveBook(Book book)
         {
-            using (var context = new AppDbContext())
+            using var context = new AppDbContext();
+            var existingLang = context.Languages
+                .FirstOrDefault(l => book.Language != null && l.Name.ToLower() == book.Language.Name.ToLower());
+
+            if (existingLang != null)
+            {
+                book.Language = existingLang;
+                book.LanguageId = existingLang.LanguageID;
+                context.Entry(existingLang).State = EntityState.Unchanged;
+            }
+            else
+            {
+                book.Language.LanguageID = 0; 
+            }
+                
+
+
+            var existingPub = context.Publishers
+                .FirstOrDefault(p => book.Publisher != null && p.Name.ToLower() == book.Publisher.Name.ToLower());
+
+            if (existingPub != null)
+            {
+                book.Publisher = existingPub;
+                book.PublisherId = existingPub.PublisherID;
+                context.Entry(existingPub).State = EntityState.Unchanged;
+            }
+            else
+            {
+                book.Publisher.PublisherID = 0; 
+            }
+                
+
+            if (book.BookId == 0)
             {
 
-                var existingLang = context.Languages
-                    .FirstOrDefault(l => book.Language != null && l.Name.ToLower() == book.Language.Name.ToLower());
-
-                if (existingLang != null)
+                foreach (var author in book.Authors)
                 {
-                    book.Language = existingLang;
-                    book.LanguageId = existingLang.LanguageID;
-                    context.Entry(existingLang).State = EntityState.Unchanged;
+                    context.Entry(author).State = EntityState.Unchanged;
                 }
-                else
+
+                context.Books.Add(book);
+            }
+            else
+            {
+                var dbBook = context.Books
+                    .Include(b => b.Authors)
+                    .FirstOrDefault(b => b.BookId == book.BookId);
+
+                if (dbBook != null)
                 {
-                    book.Language.LanguageID = 0; 
-                }
-                
+                    context.Entry(dbBook).CurrentValues.SetValues(book);
 
+                    dbBook.Language = book.Language;
+                    dbBook.LanguageId = book.LanguageId;
+                    dbBook.Publisher = book.Publisher;
+                    dbBook.PublisherId = book.PublisherId;
 
-                var existingPub = context.Publishers
-                    .FirstOrDefault(p => book.Publisher != null && p.Name.ToLower() == book.Publisher.Name.ToLower());
-
-                if (existingPub != null)
-                {
-                    book.Publisher = existingPub;
-                    book.PublisherId = existingPub.PublisherID;
-                    context.Entry(existingPub).State = EntityState.Unchanged;
-                }
-                else
-                {
-                    book.Publisher.PublisherID = 0; 
-                }
-                
-
-                if (book.BookId == 0)
-                {
-
+                    dbBook.Authors.Clear();
                     foreach (var author in book.Authors)
                     {
-                        context.Entry(author).State = EntityState.Unchanged;
-                    }
-
-                    context.Books.Add(book);
-                }
-                else
-                {
-                    var dbBook = context.Books
-                        .Include(b => b.Authors)
-                        .FirstOrDefault(b => b.BookId == book.BookId);
-
-                    if (dbBook != null)
-                    {
-                        context.Entry(dbBook).CurrentValues.SetValues(book);
-
-                        dbBook.Language = book.Language;
-                        dbBook.LanguageId = book.LanguageId;
-                        dbBook.Publisher = book.Publisher;
-                        dbBook.PublisherId = book.PublisherId;
-
-                        dbBook.Authors.Clear();
-                        foreach (var author in book.Authors)
-                        {
-                            var dbAuthor = context.Authors.Find(author.AuthorId);
-                            if (dbAuthor != null) dbBook.Authors.Add(dbAuthor);
-                        }
+                        var dbAuthor = context.Authors.Find(author.AuthorId);
+                        if (dbAuthor != null) dbBook.Authors.Add(dbAuthor);
                     }
                 }
-
-                context.SaveChanges();
             }
+
+            context.SaveChanges();
         }
 
 
-        public void DeleteBook(int bookId)
+        public static void DeleteBook(int bookId)
         {
-            using (var context = new AppDbContext())
-            {
-                var book = context.Books.Find(bookId);
-                if (book != null)
-                {
-                    context.Books.Remove(book);
-                    context.SaveChanges();
-                }
-            }
+            using var context = new AppDbContext();
+            var book = context.Books.Find(bookId);
+            if (book == null) return;
+            context.Books.Remove(book);
+            context.SaveChanges();
         }
 
         //No longer used, but kept for future usage
@@ -183,89 +170,77 @@ namespace Knihovna.Models
         //        .Any(a => a.AuthorID == authorId && a.Books.Any());
         //}
 
-        public void DeleteAuthor(int authorId)
+        public static void DeleteAuthor(int authorId)
         {
-            using (var context = new AppDbContext())
-            {
-                //also deletes authors books
-                var booksToDelete = context.Books
-                    .Where(b => b.Authors.Any(a => a.AuthorId == authorId))
-                    .ToList();
+            using var context = new AppDbContext();
+            //also deletes authors books
+            var booksToDelete = context.Books
+                .Where(b => b.Authors.Any(a => a.AuthorId == authorId))
+                .ToList();
 
-                context.Books.RemoveRange(booksToDelete);
+            context.Books.RemoveRange(booksToDelete);
 
-                var author = context.Authors.Find(authorId);
-                if (author != null) context.Authors.Remove(author);
+            var author = context.Authors.Find(authorId);
+            if (author != null) context.Authors.Remove(author);
 
-                context.SaveChanges();
-            }
+            context.SaveChanges();
         }
-        public void SaveAuthor(Author author)
+        public static void SaveAuthor(Author author)
         {
-            using (var context = new AppDbContext())
+            using var context = new AppDbContext();
+            var existingNationality = context.Nationalities
+                .FirstOrDefault(n => n.Name.ToLower() == author.Nationality.Name.ToLower());
+
+            if (existingNationality != null)
+            {
+                author.Nationality = existingNationality;
+                author.NationalityId = existingNationality.NationalityID;
+
+                context.Entry(existingNationality).State = EntityState.Unchanged;
+            }
+            else
             {
 
-
-                var existingNationality = context.Nationalities
-                    .FirstOrDefault(n => n.Name.ToLower() == author.Nationality.Name.ToLower());
-
-                if (existingNationality != null)
-                {
-                    author.Nationality = existingNationality;
-                    author.NationalityId = existingNationality.NationalityID;
-
-                    context.Entry(existingNationality).State = EntityState.Unchanged;
-                }
-                else
-                {
-
-                    author.Nationality.NationalityID = 0;
-                }
+                author.Nationality.NationalityID = 0;
+            }
                 
 
-                if (author.AuthorId == 0)
+            if (author.AuthorId == 0)
+            {
+                context.Authors.Add(author);
+            }
+            else
+            {
+                var dbAuthor = context.Authors.FirstOrDefault(a => a.AuthorId == author.AuthorId);
+                if (dbAuthor != null)
                 {
-                    context.Authors.Add(author);
+
+                    dbAuthor.NationalityId = author.NationalityId;
+                    dbAuthor.Nationality = author.Nationality;
+                    context.Entry(dbAuthor).CurrentValues.SetValues(author);
                 }
-                else
-                {
-                    var dbAuthor = context.Authors.FirstOrDefault(a => a.AuthorId == author.AuthorId);
-                    if (dbAuthor != null)
-                    {
-
-                        dbAuthor.NationalityId = author.NationalityId;
-                        dbAuthor.Nationality = author.Nationality;
-                        context.Entry(dbAuthor).CurrentValues.SetValues(author);
-                    }
-                }
-
-                context.SaveChanges();
             }
+
+            context.SaveChanges();
         }
 
-        public List<Nationality> GetAllNationalities()
+        public static List<Nationality> GetAllNationalities()
         {
-            using (var context = new AppDbContext())
-            {
-                return context.Nationalities.OrderBy(n => n.Name).ToList();
-            }
+            using var context = new AppDbContext();
+            return context.Nationalities.OrderBy(n => n.Name).ToList();
         }
 
-        public List<Publisher> GetAllPublishers()
+        public static List<Publisher> GetAllPublishers()
         {
-            using (var context = new AppDbContext())
-            {
-                return context.Publishers.OrderBy(p => p.Name).ToList();
-            }
+            using var context = new AppDbContext();
+            return context.Publishers.OrderBy(p => p.Name).ToList();
         }
 
 
-        public List<Language> GetAllLanguages()
+        public static List<Language> GetAllLanguages()
         {
-            using (var context = new AppDbContext())
-            {
-                return context.Languages.OrderBy(l => l.Name).ToList();
-            }
+            using var context = new AppDbContext();
+            return context.Languages.OrderBy(l => l.Name).ToList();
         }
         
     }

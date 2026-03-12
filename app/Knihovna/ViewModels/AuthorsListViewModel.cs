@@ -10,16 +10,16 @@ namespace Knihovna.ViewModels
         private readonly DatabaseManager _dbManager;
 
         [ObservableProperty]
-        private ObservableCollection<Author> _authors;
+        private ObservableCollection<Author>? _authors;
 
         [ObservableProperty]
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ObservableCollection<Nationality> _allNationalities;
+        private ObservableCollection<Nationality>? _allNationalities;
 
         [ObservableProperty]
-        private Nationality _selectedNationality;
+        private Nationality? _selectedNationality;
 
         public AuthorsListViewModel(DatabaseManager dbManager)
         {
@@ -28,7 +28,7 @@ namespace Knihovna.ViewModels
             LoadFilterData();
         }
 
-        partial void OnSelectedNationalityChanged(Nationality value) => RefreshData();
+        partial void OnSelectedNationalityChanged(Nationality? value) => RefreshData();
         partial void OnSearchTextChanged(string value) => RefreshData();
 
         public void LoadFilterData()
@@ -52,7 +52,6 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void Delete(Author author)
         {
-            if (author == null) return;
 
             var result = System.Windows.MessageBox.Show(
                 $"Opravdu chcete smazat autora '{author.FullName}'? \n\n" +
@@ -80,7 +79,7 @@ namespace Knihovna.ViewModels
         }
 
         [RelayCommand]
-        public void OpenForm(Author author)
+        public void OpenForm(Author? author)
         {
             AuthorFormViewModel formVm;
 
@@ -107,7 +106,6 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void OpenDetail(Author author)
         {
-            if (author == null) return;
 
             var window = new Views.AuthorDetailWindow();
             window.DataContext = new AuthorDetailViewModel(author);

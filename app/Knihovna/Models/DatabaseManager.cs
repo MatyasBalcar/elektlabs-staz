@@ -4,7 +4,7 @@ namespace Knihovna.Models
 {
     public class DatabaseManager
     {
-        public List<Book> GetBooks(string name = "", string author = "", string language = "", string publisher = "")
+        public List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
             using (var context = new AppDbContext())
             {
@@ -16,7 +16,7 @@ namespace Knihovna.Models
 
                 if (!string.IsNullOrWhiteSpace(name))
                 {
-                    query = query.Where(b => b.Name.ToLower().Contains(name.ToLower()));
+                    query = query.Where(b => b.Name != null && b.Name.ToLower().Contains(name.ToLower()));
                 }
 
                 if (!string.IsNullOrWhiteSpace(author))
@@ -27,12 +27,12 @@ namespace Knihovna.Models
 
                 if (!string.IsNullOrWhiteSpace(language))
                 {
-                    query = query.Where(b => b.Language.Name.Contains(language));
+                    query = query.Where(b => b.Language != null && b.Language.Name.Contains(language));
                 }
 
                 if (!string.IsNullOrWhiteSpace(publisher))
                 {
-                    query = query.Where(b => b.Publisher.Name.Contains(publisher));
+                    query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
                 }
 
                 return query.OrderBy(b => b.Name).ToList();
@@ -53,7 +53,7 @@ namespace Knihovna.Models
         //    }
         //}
 
-        public List<Author> GetAuthors(string searchTerm = "", string nationality = "")
+        public List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
         {
             using (var context = new AppDbContext())
             {
@@ -68,7 +68,7 @@ namespace Knihovna.Models
                 }
                 if (!string.IsNullOrWhiteSpace(nationality))
                 {
-                    query = query.Where(a => a.Nationality.Name.Contains(nationality));
+                    query = query.Where(a => a.Nationality != null && a.Nationality.Name.Contains(nationality));
 
                 }
 
@@ -93,12 +93,12 @@ namespace Knihovna.Models
             {
 
                 var existingLang = context.Languages
-                    .FirstOrDefault(l => l.Name.ToLower() == book.Language.Name.ToLower());
+                    .FirstOrDefault(l => book.Language != null && l.Name.ToLower() == book.Language.Name.ToLower());
 
                 if (existingLang != null)
                 {
                     book.Language = existingLang;
-                    book.LanguageID = existingLang.LanguageID;
+                    book.LanguageId = existingLang.LanguageID;
                     context.Entry(existingLang).State = EntityState.Unchanged;
                 }
                 else
@@ -109,12 +109,12 @@ namespace Knihovna.Models
 
 
                 var existingPub = context.Publishers
-                    .FirstOrDefault(p => p.Name.ToLower() == book.Publisher.Name.ToLower());
+                    .FirstOrDefault(p => book.Publisher != null && p.Name.ToLower() == book.Publisher.Name.ToLower());
 
                 if (existingPub != null)
                 {
                     book.Publisher = existingPub;
-                    book.PublisherID = existingPub.PublisherID;
+                    book.PublisherId = existingPub.PublisherID;
                     context.Entry(existingPub).State = EntityState.Unchanged;
                 }
                 else
@@ -123,7 +123,7 @@ namespace Knihovna.Models
                 }
                 
 
-                if (book.BookID == 0)
+                if (book.BookId == 0)
                 {
 
                     foreach (var author in book.Authors)
@@ -137,16 +137,16 @@ namespace Knihovna.Models
                 {
                     var dbBook = context.Books
                         .Include(b => b.Authors)
-                        .FirstOrDefault(b => b.BookID == book.BookID);
+                        .FirstOrDefault(b => b.BookId == book.BookId);
 
                     if (dbBook != null)
                     {
                         context.Entry(dbBook).CurrentValues.SetValues(book);
 
                         dbBook.Language = book.Language;
-                        dbBook.LanguageID = book.LanguageID;
+                        dbBook.LanguageId = book.LanguageId;
                         dbBook.Publisher = book.Publisher;
-                        dbBook.PublisherID = book.PublisherID;
+                        dbBook.PublisherId = book.PublisherId;
 
                         dbBook.Authors.Clear();
                         foreach (var author in book.Authors)
@@ -212,7 +212,7 @@ namespace Knihovna.Models
                 if (existingNationality != null)
                 {
                     author.Nationality = existingNationality;
-                    author.NationalityID = existingNationality.NationalityID;
+                    author.NationalityId = existingNationality.NationalityID;
 
                     context.Entry(existingNationality).State = EntityState.Unchanged;
                 }
@@ -233,7 +233,7 @@ namespace Knihovna.Models
                     if (dbAuthor != null)
                     {
 
-                        dbAuthor.NationalityID = author.NationalityID;
+                        dbAuthor.NationalityId = author.NationalityId;
                         dbAuthor.Nationality = author.Nationality;
                         context.Entry(dbAuthor).CurrentValues.SetValues(author);
                     }

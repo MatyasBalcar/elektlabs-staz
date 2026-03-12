@@ -7,7 +7,7 @@ public partial class AuthorFormViewModel : ObservableObject
 {
     private readonly DatabaseManager _dbManager;
 
-    private const int shownResultsCount = 3;
+    private const int ShownResultsCount = 3;
 
     [ObservableProperty]
     private Author _currentAuthor;
@@ -16,16 +16,16 @@ public partial class AuthorFormViewModel : ObservableObject
     private ObservableCollection<Nationality> _allNationalities;
 
     [ObservableProperty]
-    private Nationality _selectedNationality;
+    private Nationality? _selectedNationality;
     [ObservableProperty]
     private string _nationalityText = string.Empty;
 
     [ObservableProperty]
-    private ObservableCollection<Nationality> _suggestedNationalities;
+    private ObservableCollection<Nationality>? _suggestedNationalities;
     [ObservableProperty]
     private bool _isSuggestionsVisible;
 
-    public AuthorFormViewModel(DatabaseManager dbManager, Author author = null)
+    public AuthorFormViewModel(DatabaseManager dbManager, Author? author = null)
     {
         _dbManager = dbManager;
 
@@ -56,18 +56,18 @@ public partial class AuthorFormViewModel : ObservableObject
             if (existingNat != null)
             {
                 CurrentAuthor.Nationality = existingNat;
-                CurrentAuthor.NationalityID = existingNat.NationalityID;
+                CurrentAuthor.NationalityId = existingNat.NationalityID;
             }
             else
             {
                 CurrentAuthor.Nationality = new Nationality { Name = natName };
-                CurrentAuthor.NationalityID = null;
+                CurrentAuthor.NationalityId = null;
             }
         }
         else
         {
             CurrentAuthor.Nationality = null;
-            CurrentAuthor.NationalityID = null;
+            CurrentAuthor.NationalityId = null;
         }
 
         string validationError = CurrentAuthor.Validate();
@@ -114,7 +114,7 @@ public partial class AuthorFormViewModel : ObservableObject
         var filtered = _dbManager.GetAllNationalities()
             .Where(n => n.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
             .OrderBy(n => n.Name)
-            .Take(shownResultsCount)
+            .Take(ShownResultsCount)
             .ToList();
 
         SuggestedNationalities = new ObservableCollection<Nationality>(filtered);
@@ -122,13 +122,13 @@ public partial class AuthorFormViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void SelectNationality(Nationality selected)
+    private void SelectNationality(Nationality? selected)
     {
         if (selected == null) return;
 
         NationalityText = selected.Name;
 
-        SuggestedNationalities.Clear();
+        SuggestedNationalities?.Clear();
         IsSuggestionsVisible = false;
     }
 }

@@ -24,7 +24,7 @@ namespace Knihovna.ViewModels
         private ObservableCollection<Language> _allLanguages;
 
         [ObservableProperty]
-        private Author _selectedAuthor;
+        private Author? _selectedAuthor;
 
         [ObservableProperty]
         private string _languageText = string.Empty;
@@ -46,7 +46,7 @@ namespace Knihovna.ViewModels
 
 
 
-        public BookFormViewModel(DatabaseManager dbManager, Book book = null)
+        public BookFormViewModel(DatabaseManager dbManager, Book? book = null)
         {
             _dbManager = dbManager;
 
@@ -66,16 +66,12 @@ namespace Knihovna.ViewModels
             {
                 EditingBook = book;
 
-                if (book.Language != null)
-                {
-                    LanguageText = book.Language.Name;
-                }
+
+                LanguageText = book.Language.Name;
 
 
-                if (book.Publisher != null)
-                {
-                    PublisherText = book.Publisher.Name;
-                }
+                PublisherText = book.Publisher.Name;
+                
                 IsLangSuggestionsVisible = false;
                 IsPubSuggestionsVisible= false;
 
@@ -95,18 +91,18 @@ namespace Knihovna.ViewModels
                 if (existingLang != null)
                 {
                     EditingBook.Language = existingLang;
-                    EditingBook.LanguageID = existingLang.LanguageID;
+                    EditingBook.LanguageId = existingLang.LanguageID;
                 }
                 else
                 {
                     EditingBook.Language = new Language { Name = langName };
-                    EditingBook.LanguageID = null;
+                    EditingBook.LanguageId = null;
                 }
             }
             else
             {
                 EditingBook.Language = null;
-                EditingBook.LanguageID = null;
+                EditingBook.LanguageId = null;
             }
 
             if (!string.IsNullOrWhiteSpace(PublisherText))
@@ -119,18 +115,18 @@ namespace Knihovna.ViewModels
                 if (existingPub != null)
                 {
                     EditingBook.Publisher = existingPub;
-                    EditingBook.PublisherID = existingPub.PublisherID;
+                    EditingBook.PublisherId = existingPub.PublisherID;
                 }
                 else
                 {
                     EditingBook.Publisher = new Publisher { Name = pubName };
-                    EditingBook.PublisherID = null;
+                    EditingBook.PublisherId = null;
                 }
             }
             else
             {
                 EditingBook.Publisher = null;
-                EditingBook.PublisherID = null;
+                EditingBook.PublisherId = null;
             }
 
             if (SelectedAuthor != null)
@@ -208,46 +204,48 @@ namespace Knihovna.ViewModels
             IsPubSuggestionsVisible = SuggestedPublishers.Any();
         }
         [RelayCommand]
-        private void SelectLanguage(Language selected)
+        private void SelectLanguage(Language? selected)
         {
             if (selected == null) return;
             LanguageText = selected.Name; 
 
             EditingBook.Language = selected;
-            EditingBook.LanguageID = selected.LanguageID;
+            EditingBook.LanguageId = selected.LanguageID;
 
             IsLangSuggestionsVisible = false;
         }
 
         [RelayCommand]
-        private void SelectPublisher(Publisher selected)
+        private void SelectPublisher(Publisher? selected)
         {
             if (selected == null) return;
             PublisherText = selected.Name;
 
             EditingBook.Publisher = selected;
-            EditingBook.PublisherID = selected.PublisherID;
+            EditingBook.PublisherId = selected.PublisherID;
 
             IsPubSuggestionsVisible = false;
         }
         [RelayCommand]
         public void AddAuthor()
         {
-            var formVM = new AuthorFormViewModel(_dbManager);
-            var window = new Views.AuthorWindow();
-            window.DataContext = formVM;
+            var formVm = new AuthorFormViewModel(_dbManager);
+            var window = new Views.AuthorWindow
+            {
+                DataContext = formVm
+            };
 
             //window.Owner = System.Windows.Application.Current.Windows.OfType<Views.BookWindow>().FirstOrDefault();
 
             if (window.ShowDialog() == true)
             {
-                formVM.Save();
+                formVm.Save();
 
 
                 var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
 
-                SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVM.CurrentAuthor.AuthorId);
+                SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);
             }
         }
 

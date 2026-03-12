@@ -3,12 +3,12 @@
     public class Author : ICloneable
     {
         public int AuthorId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
 
-        public int? NationalityID { get; set; }
-        public virtual Nationality Nationality { get; set; }
+        public int? NationalityId { get; set; }
+        public virtual Nationality? Nationality { get; set; }
 
         public virtual ICollection<Book> Books { get; set; } = new List<Book>();
 
@@ -21,7 +21,7 @@
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 DateOfBirth = this.DateOfBirth,
-                NationalityID = this.NationalityID,
+                NationalityId = this.NationalityId,
                 Nationality = this.Nationality,
                 Books = this.Books != null ? new List<Book>(this.Books) : new List<Book>()
             };
@@ -35,7 +35,7 @@
             if (string.IsNullOrWhiteSpace(LastName)) return "Příjmení autora je povinné.";
             if (LastName.Length > 100) return "Příjmení autora ma maximální delku 100 znaků.";
 
-            if (Nationality == null && NationalityID == null) return "Národnost je povinná.";
+            if (Nationality == null && NationalityId == null) return "Národnost je povinná.";
 
             return string.Empty;
         }

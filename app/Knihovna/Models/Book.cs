@@ -2,30 +2,30 @@
 {
     public class Book : ICloneable
     {
-        public int BookID { get; set; }
-        public string Name { get; set; }
+        public int BookId { get; set; }
+        public string? Name { get; set; }
         public DateTime? PublishDate { get; set; }
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
         public short Rating { get; set; }
         public bool HaveRead { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public int? LanguageID { get; set; }
-        public virtual Language Language { get; set; }
+        public int? LanguageId { get; set; }
+        public virtual Language? Language { get; set; }
 
-        public int? PublisherID { get; set; }
-        public virtual Publisher Publisher { get; set; }
+        public int? PublisherId { get; set; }
+        public virtual Publisher? Publisher { get; set; }
         public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
         public object Clone()
         {
             return new Book
             {
-                BookID = this.BookID,
+                BookId = this.BookId,
                 Name = this.Name,
                 ISBN = this.ISBN,
                 PublishDate = this.PublishDate,
-                PublisherID = this.PublisherID,
-                LanguageID = this.LanguageID,
+                PublisherId = this.PublisherId,
+                LanguageId = this.LanguageId,
                 Language = this.Language,
                 Publisher = this.Publisher,
                 Description = this.Description,
@@ -50,8 +50,8 @@
             }
 
             if (Authors == null || Authors.Count == 0) return "Autor je povinný.";
-            if (Language == null && LanguageID == null) return "Jazyk je povinný.";
-            if (Publisher == null && PublisherID == null) return "Vydavatel je povinný.";
+            if (Language == null && LanguageId == null) return "Jazyk je povinný.";
+            if (Publisher == null && PublisherId == null) return "Vydavatel je povinný.";
 
             return string.Empty;
         }

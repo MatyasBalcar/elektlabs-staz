@@ -10,27 +10,27 @@ namespace Knihovna.ViewModels
         private readonly DatabaseManager _dbManager;
 
         [ObservableProperty]
-        private ObservableCollection<Book> _books;
+        private ObservableCollection<Book>? _books;
 
         [ObservableProperty]
         private string _searchText = string.Empty;
         [ObservableProperty]
-        private ObservableCollection<Author> _allAuthors;
+        private ObservableCollection<Author>? _allAuthors;
 
         [ObservableProperty]
-        private ObservableCollection<Language> _allLanguages;
+        private ObservableCollection<Language>? _allLanguages;
 
         [ObservableProperty]
-        private ObservableCollection<Publisher> _allPublishers;
+        private ObservableCollection<Publisher>? _allPublishers;
 
         [ObservableProperty]
-        private Author _selectedAuthor;
+        private Author? _selectedAuthor;
 
         [ObservableProperty]
-        private Language _selectedLanguage;
+        private Language? _selectedLanguage;
 
         [ObservableProperty]
-        private Publisher _selectedPublisher;
+        private Publisher? _selectedPublisher;
         public BooksListViewModel(DatabaseManager dbManager)
         {
             _dbManager = dbManager;
@@ -38,9 +38,9 @@ namespace Knihovna.ViewModels
             LoadFilterData();
         }
 
-        partial void OnSelectedAuthorChanged(Author value) => RefreshData();
-        partial void OnSelectedLanguageChanged(Language value) => RefreshData();
-        partial void OnSelectedPublisherChanged(Publisher value) => RefreshData();
+        partial void OnSelectedAuthorChanged(Author? value) => RefreshData();
+        partial void OnSelectedLanguageChanged(Language? value) => RefreshData();
+        partial void OnSelectedPublisherChanged(Publisher? value) => RefreshData();
         partial void OnSearchTextChanged(string value) => RefreshData();
 
         public void LoadFilterData()
@@ -86,8 +86,6 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void Delete(Book book)
         {
-            if (book == null) return;
-
             var result = System.Windows.MessageBox.Show($"Smazat '{book.Name}'?", "Potvrzení",
                 System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Warning);
 
@@ -95,7 +93,7 @@ namespace Knihovna.ViewModels
             {
                 try
                 {
-                    _dbManager.DeleteBook(book.BookID);
+                    _dbManager.DeleteBook(book.BookId);
                     RefreshData();
                 }
                 catch (Exception ex)
@@ -110,22 +108,22 @@ namespace Knihovna.ViewModels
         }
 
         [RelayCommand]
-        public void OpenForm(Book book)
+        public void OpenForm(Book? book)
         {
-            BookFormViewModel formVM;
+            BookFormViewModel formVm;
 
             if (book == null)
             {
-                formVM = new BookFormViewModel(_dbManager);
+                formVm = new BookFormViewModel(_dbManager);
             }
             else
             {
                 var bookCopy = (Book)book.Clone();
-                formVM = new BookFormViewModel(_dbManager, bookCopy);
+                formVm = new BookFormViewModel(_dbManager, bookCopy);
             }
 
             var window = new Views.BookWindow();
-            window.DataContext = formVM;
+            window.DataContext = formVm;
 
             if (window.ShowDialog() == true)
             {
@@ -136,7 +134,6 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void OpenDetail(Book book)
         {
-            if (book == null) return;
 
             var window = new Views.BookDetailWindow();
             window.DataContext = new BookDetailViewModel(book);

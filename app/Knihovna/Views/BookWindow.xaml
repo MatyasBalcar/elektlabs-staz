@@ -41,12 +41,10 @@
         <ScrollViewer Padding="0,0,5,0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Label Content="Název knihy:" Style="{StaticResource RequiredLabelStyle}" />
-                <TextBox Text="{Binding EditingBook.Name}" />
+                <TextBox Text="{Binding EditingBook.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="ISBN:" FontWeight="SemiBold" />
-                <TextBox Text="{Binding EditingBook.ISBN}" />
-
-
+                <TextBox Text="{Binding EditingBook.ISBN, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />
                 <ComboBox
@@ -56,24 +54,46 @@
 
                 <StackPanel>
                     <Label Content="Jazyk:" Style="{StaticResource RequiredLabelStyle}" />
-                    <TextBox Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged}" />
-                    <ListBox
-                        MaxHeight="80"
-                        DisplayMemberPath="Name"
-                        ItemsSource="{Binding SuggestedLanguages}"
-                        SelectionChanged="Lang_SelectionChanged"
-                        Visibility="{Binding IsLangSuggestionsVisible, Converter={StaticResource BoolToVis}}" />
+                    <Grid>
+                        <TextBox x:Name="LanguageTextBox" Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Popup
+                            AllowsTransparency="True"
+                            IsOpen="{Binding IsLangSuggestionsVisible}"
+                            Placement="Bottom"
+                            PlacementTarget="{Binding ElementName=LanguageTextBox}"
+                            PopupAnimation="Slide"
+                            StaysOpen="False">
+                            <ListBox
+                                MinWidth="{Binding ActualWidth, ElementName=LanguageTextBox}"
+                                MaxHeight="150"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding SuggestedLanguages}"
+                                SelectionChanged="Lang_SelectionChanged" />
+                        </Popup>
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel>
                     <Label Content="Vydavatel:" Style="{StaticResource RequiredLabelStyle}" />
-                    <TextBox Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged}" />
-                    <ListBox
-                        MaxHeight="80"
-                        DisplayMemberPath="Name"
-                        ItemsSource="{Binding SuggestedPublishers}"
-                        SelectionChanged="Pub_SelectionChanged"
-                        Visibility="{Binding IsPubSuggestionsVisible, Converter={StaticResource BoolToVis}}" />
+                    <Grid>
+                        <TextBox x:Name="PublisherTextBox" Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Popup
+                            AllowsTransparency="True"
+                            IsOpen="{Binding IsPubSuggestionsVisible}"
+                            Placement="Bottom"
+                            PlacementTarget="{Binding ElementName=PublisherTextBox}"
+                            PopupAnimation="Slide"
+                            StaysOpen="False">
+                            <ListBox
+                                MinWidth="{Binding ActualWidth, ElementName=PublisherTextBox}"
+                                MaxHeight="150"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding SuggestedPublishers}"
+                                SelectionChanged="Pub_SelectionChanged" />
+                        </Popup>
+                    </Grid>
                 </StackPanel>
 
                 <Label Content="Datum vydání:" FontWeight="SemiBold" />
@@ -103,7 +123,6 @@
                         Content="{x:Null}"
                         IsChecked="{Binding EditingBook.HaveRead}"
                         Style="{StaticResource Switch}" />
-
                 </StackPanel>
 
                 <StackPanel
@@ -142,9 +161,6 @@
                             Style="{StaticResource StarButtonStyle}" />
                     </StackPanel>
                 </StackPanel>
-
-
-
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

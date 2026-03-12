@@ -237,7 +237,7 @@ namespace Knihovna.ViewModels
 
             //window.Owner = System.Windows.Application.Current.Windows.OfType<Views.BookWindow>().FirstOrDefault();
 
-            if (window.ShowDialog() == true)
+            if (window.ShowDialog() ?? false)
             {
                 formVm.Save();
 

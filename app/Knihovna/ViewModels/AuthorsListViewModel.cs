@@ -96,7 +96,7 @@ namespace Knihovna.ViewModels
             var window = new Views.AuthorWindow();
             window.DataContext = formVm;
 
-            if (window.ShowDialog() == true)
+            if (window.ShowDialog() ?? false)
             {
                 RefreshData();
                 LoadFilterData();

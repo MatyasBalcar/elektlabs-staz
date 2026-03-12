@@ -46,12 +46,7 @@
                 <Label Content="ISBN:" FontWeight="SemiBold" />
                 <TextBox Text="{Binding EditingBook.ISBN}" />
 
-                <Label Content="Popis:" FontWeight="SemiBold" />
-                <TextBox
-                    MinHeight="80"
-                    VerticalContentAlignment="Top"
-                    Text="{Binding EditingBook.Description}"
-                    TextWrapping="Wrap" />
+
 
                 <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />
                 <ComboBox
@@ -87,6 +82,29 @@
                     SelectedDate="{Binding EditingBook.PublishDate}"
                     Style="{StaticResource RoundedDatePickerStyle}" />
 
+                <Label Content="Popis:" FontWeight="SemiBold" />
+                <TextBox
+                    MinHeight="80"
+                    VerticalContentAlignment="Top"
+                    Text="{Binding EditingBook.Description}"
+                    TextWrapping="Wrap" />
+
+                <StackPanel
+                    Margin="0,15,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Content="Přečteno:"
+                        FontWeight="SemiBold" />
+
+                    <CheckBox
+                        Content="{x:Null}"
+                        IsChecked="{Binding EditingBook.HaveRead}"
+                        Style="{StaticResource Switch}" />
+
+                </StackPanel>
                 <Label
                     Margin="0,10,0,0"
                     Content="Hodnocení:"
@@ -118,22 +136,7 @@
                         Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}"
                         Style="{StaticResource StarButtonStyle}" />
                 </StackPanel>
-                <StackPanel
-                    Margin="0,15,0,0"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <Label
-                        Margin="0,0,10,0"
-                        VerticalAlignment="Center"
-                        Content="Přečteno:"
-                        FontWeight="SemiBold" />
 
-                    <CheckBox
-                        Content="{x:Null}"
-                        IsChecked="{Binding EditingBook.HaveRead}"
-                        Style="{StaticResource Switch}" />
-
-                </StackPanel>
 
             </StackPanel>
         </ScrollViewer>

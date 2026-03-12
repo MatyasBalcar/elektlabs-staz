@@ -28,21 +28,7 @@
         <Setter Property="BorderBrush" Value="#28a745" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#33e85c" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style
-        x:Key="SuccessButtonOutlineStyle"
-        BasedOn="{StaticResource {x:Type Button}}"
-        TargetType="Button">
-        <Setter Property="Background" Value="#ffffff" />
-        <Setter Property="Foreground" Value="#28a745" />
-        <Setter Property="BorderBrush" Value="#28a745" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#e0e0e0" />
+                <Setter Property="Background" Value="#157347" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -51,12 +37,12 @@
         x:Key="DangerButtonStyle"
         BasedOn="{StaticResource {x:Type Button}}"
         TargetType="Button">
-        <Setter Property="Background" Value="#C62828" />
+        <Setter Property="Background" Value="#dc3545" />
         <Setter Property="Foreground" Value="white" />
-        <Setter Property="BorderBrush" Value="#e64c4c" />
+        <Setter Property="BorderBrush" Value="#dc3545" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#e64c4c" />
+                <Setter Property="Background" Value="#bb2d3b" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -70,7 +56,7 @@
         <Setter Property="BorderBrush" Value="#e64c4c" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#fa8c8c" />
+                <Setter Property="Background" Value="#FFCDC9" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -94,29 +80,16 @@
         x:Key="PrimaryButtonStyle"
         BasedOn="{StaticResource {x:Type Button}}"
         TargetType="Button">
-        <Setter Property="Background" Value="#337ab7" />
+        <Setter Property="Background" Value="#0d6efd" />
         <Setter Property="Foreground" Value="#FFFFFF" />
-        <Setter Property="BorderBrush" Value="#0a70c7" />
+        <Setter Property="BorderBrush" Value="#0d6efd" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#1484e3" />
+                <Setter Property="Background" Value="#0b5ed7" />
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style
-        x:Key="PrimaryButtonOutlineStyle"
-        BasedOn="{StaticResource {x:Type Button}}"
-        TargetType="Button">
-        <Setter Property="Background" Value="#ffffff" />
-        <Setter Property="Foreground" Value="#337ab7" />
-        <Setter Property="BorderBrush" Value="#0a70c7" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#E0E0E0" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
 
     <Style x:Key="LinkButtonStyle" TargetType="Button">
         <Setter Property="Margin" Value="10" />

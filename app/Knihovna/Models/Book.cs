@@ -43,8 +43,8 @@
             {
                 string cleanIsbn = ISBN.Replace("-", "").Replace(" ", "").Trim();
 
-                if (cleanIsbn.Length > 13 || !cleanIsbn.All(char.IsDigit))
-                    return "ISBN musí obsahovat max 13 číslic (pomlčky jsou povoleny, ale text ne).";
+                if (cleanIsbn.Length > 13 || cleanIsbn.Length < 10 || !cleanIsbn.All(char.IsDigit))
+                    return "ISBN musí obsahovat od 10 do 13 číslic (pomlčky jsou povoleny, ale text ne).";
 
                 ISBN = cleanIsbn;
             }

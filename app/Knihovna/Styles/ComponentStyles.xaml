@@ -495,7 +495,25 @@
             StrokeThickness="1" />
     </DataTemplate>
 
-
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="#333333" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style x:Key="RequiredLabelStyle" TargetType="Label">
         <Setter Property="FontWeight" Value="SemiBold" />
@@ -505,6 +523,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Label">
                     <StackPanel Orientation="Horizontal">
+
                         <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -513,9 +532,13 @@
                         <TextBlock
                             Margin="2,0,0,0"
                             VerticalAlignment="Center"
+                            Background="Transparent"
                             FontWeight="Bold"
                             Foreground="Red"
-                            Text="*" />
+                            Text="*"
+                            ToolTip="Tento údaj je povinný."
+                            ToolTipService.InitialShowDelay="0" />
+
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

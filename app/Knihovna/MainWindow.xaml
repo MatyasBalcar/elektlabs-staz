@@ -30,6 +30,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Grid.Column="0"
+                                Width="70"
                                 Style="{StaticResource HeaderTextBlockStyle}"
                                 Text="Knihy" />
 
@@ -40,7 +41,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                                 <TextBox
-                                    Width="475"
+                                    Width="465"
                                     Tag="Zadej jméno knihy..."
                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
@@ -214,6 +215,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 Grid.Column="0"
+                                Width="70"
                                 Style="{StaticResource HeaderTextBlockStyle}"
                                 Text="Autoři" />
 
@@ -224,7 +226,7 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                                 <TextBox
-                                    Width="475"
+                                    Width="465"
                                     Tag="Zadej jméno autora..."
                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>

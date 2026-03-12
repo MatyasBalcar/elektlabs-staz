@@ -130,12 +130,23 @@
                         Foreground="{Binding EditingBook.Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}"
                         Style="{StaticResource StarButtonStyle}" />
                 </StackPanel>
+                <StackPanel
+                    Margin="0,15,0,0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Content="Přečteno:"
+                        FontWeight="SemiBold" />
 
-                <CheckBox
-                    Margin="0,10"
-                    Content="Přečteno"
-                    FontWeight="SemiBold"
-                    IsChecked="{Binding EditingBook.HaveRead}" />
+                    <CheckBox
+                        Content="{x:Null}"
+                        IsChecked="{Binding EditingBook.HaveRead}"
+                        Style="{StaticResource Switch}" />
+
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

@@ -70,7 +70,7 @@
         <Setter Property="BorderBrush" Value="#e64c4c" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#E0E0E0" />
+                <Setter Property="Background" Value="#fa8c8c" />
             </Trigger>
         </Style.Triggers>
     </Style>

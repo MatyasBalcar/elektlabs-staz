@@ -496,26 +496,28 @@
 
     </Style>
 
-
-    <!--  Changes data grid rows selected colors  -->
     <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="BorderThickness" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="BorderBrush" Value="#E0E0E0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
-            <Trigger Property="DataGridCell.IsSelected" Value="True">
-                <!-- Remove color assignment, border removed with 0 thickness
-                <Setter Property="BorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="Transparent" />
-                    </Setter.Value>
-                </Setter>
-                -->
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="BorderBrush" Value="White" />
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="LightGray" />
-                    </Setter.Value>
-                </Setter>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="LightGray" />
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="BorderThickness" Value="0,0,0,0" />
+                <Setter Property="BorderBrush" Value="LightGray" />
             </Trigger>
         </Style.Triggers>
     </Style>

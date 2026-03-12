@@ -18,7 +18,7 @@
         x:Key="BookWindow"
         BasedOn="{StaticResource {x:Type Window}}"
         TargetType="Window">
-        <Setter Property="Height" Value="750" />
+        <Setter Property="Height" Value="775" />
         <Setter Property="Width" Value="400" />
         <Setter Property="Title" Value="Detail Knihy" />
     </Style>

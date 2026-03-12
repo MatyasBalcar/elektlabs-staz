@@ -43,32 +43,23 @@
                 <Label Content="Název knihy:" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name}" />
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="ISBN:"
-                    FontWeight="SemiBold" />
+                <Label Content="ISBN:" FontWeight="SemiBold" />
                 <TextBox Text="{Binding EditingBook.ISBN}" />
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Popis:"
-                    FontWeight="SemiBold" />
+                <Label Content="Popis:" FontWeight="SemiBold" />
                 <TextBox
                     MinHeight="80"
                     VerticalContentAlignment="Top"
                     Text="{Binding EditingBook.Description}"
                     TextWrapping="Wrap" />
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Autor:"
-                    Style="{StaticResource RequiredLabelStyle}" />
+                <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />
                 <ComboBox
                     DisplayMemberPath="FullName"
                     ItemsSource="{Binding AllAuthors}"
                     SelectedItem="{Binding SelectedAuthor}" />
 
-                <StackPanel Margin="0,10,0,0">
+                <StackPanel>
                     <Label Content="Jazyk:" Style="{StaticResource RequiredLabelStyle}" />
                     <TextBox Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged}" />
                     <ListBox
@@ -79,7 +70,7 @@
                         Visibility="{Binding IsLangSuggestionsVisible, Converter={StaticResource BoolToVis}}" />
                 </StackPanel>
 
-                <StackPanel Margin="0,10,0,0">
+                <StackPanel>
                     <Label Content="Vydavatel:" Style="{StaticResource RequiredLabelStyle}" />
                     <TextBox Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged}" />
                     <ListBox
@@ -90,10 +81,7 @@
                         Visibility="{Binding IsPubSuggestionsVisible, Converter={StaticResource BoolToVis}}" />
                 </StackPanel>
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Datum vydání:"
-                    FontWeight="SemiBold" />
+                <Label Content="Datum vydání:" FontWeight="SemiBold" />
                 <DatePicker
                     Foreground="Black"
                     SelectedDate="{Binding EditingBook.PublishDate}"

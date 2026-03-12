@@ -42,16 +42,10 @@
                 <Label Content="Jméno:" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding CurrentAuthor.FirstName}" />
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Příjmení:"
-                    Style="{StaticResource RequiredLabelStyle}" />
+                <Label Content="Příjmení:" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding CurrentAuthor.LastName}" />
 
-                <Label
-                    Margin="0,10,0,0"
-                    Content="Datum narození:"
-                    FontWeight="SemiBold" />
+                <Label Content="Datum narození:" FontWeight="SemiBold" />
                 <DatePicker
                     Foreground="Black"
                     SelectedDate="{Binding CurrentAuthor.DateOfBirth}"

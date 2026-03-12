@@ -81,7 +81,8 @@
                                         Width="150"
                                         DisplayMemberPath="FullName"
                                         ItemsSource="{Binding AllAuthors}"
-                                        SelectedItem="{Binding SelectedAuthor}" />
+                                        SelectedItem="{Binding SelectedAuthor}"
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
@@ -90,7 +91,8 @@
                                         Width="150"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllLanguages}"
-                                        SelectedItem="{Binding SelectedLanguage}" />
+                                        SelectedItem="{Binding SelectedLanguage}"
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
@@ -99,7 +101,8 @@
                                         Width="150"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllPublishers}"
-                                        SelectedItem="{Binding SelectedPublisher}" />
+                                        SelectedItem="{Binding SelectedPublisher}"
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <Button
@@ -266,7 +269,8 @@
                                         Width="150"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllNationalities}"
-                                        SelectedItem="{Binding SelectedNationality}" />
+                                        SelectedItem="{Binding SelectedNationality}"
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <Button

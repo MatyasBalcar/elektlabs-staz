@@ -149,8 +149,9 @@
     <!--  Rounded datepicker styles  -->
     <Style x:Key="RoundedCalendarStyle" TargetType="Calendar">
         <Setter Property="Background" Value="White" />
-        <Setter Property="BorderBrush" Value="#ADB2B5" />
+        <Setter Property="BorderBrush" Value="#555555" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="35" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Calendar">
@@ -217,7 +218,7 @@
                         <Border
                             x:Name="MainBorder"
                             Background="White"
-                            BorderBrush="Gray"
+                            BorderBrush="#555555"
                             BorderThickness="1"
                             CornerRadius="5" />
 
@@ -265,8 +266,7 @@
 
     <!--  Rounded combobox,white  -->
     <Style TargetType="ComboBox">
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="Height" Value="35" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -343,6 +343,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style
+        x:Key="FilterComboBox"
+        BasedOn="{StaticResource {x:Type ComboBox}}"
+        TargetType="ComboBox">
+        <Setter Property="Height" Value="30" />
+    </Style>
+
     <!--  Header text  -->
 
     <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
@@ -526,11 +534,18 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Label">
+        <Setter Property="Padding" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="0,10,0,5" />
+    </Style>
+
     <!--  Adds red star to a label and enabled tooltip  -->
-    <Style x:Key="RequiredLabelStyle" TargetType="Label">
+    <Style
+        x:Key="RequiredLabelStyle"
+        BasedOn="{StaticResource {x:Type Label}}"
+        TargetType="Label">
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Padding" Value="0,0,5,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Label">

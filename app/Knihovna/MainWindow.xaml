@@ -164,16 +164,25 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="110" Header="Hodnocení">
+                                <DataGridTemplateColumn Width="Auto" Header="Hodnocení">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ItemsControl ItemTemplate="{StaticResource StarIconTemplate}" ItemsSource="{Binding Rating, Converter={StaticResource RatingToStarsConverter}}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                            </ItemsControl>
+                                            <StackPanel
+                                                Margin="5,0"
+                                                HorizontalAlignment="Center"
+                                                Orientation="Horizontal">
+
+                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=1}" />
+
+                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=2}" />
+
+                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=3}" />
+
+                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=4}" />
+
+                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}" />
+
+                                            </StackPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

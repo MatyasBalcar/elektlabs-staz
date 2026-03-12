@@ -489,12 +489,13 @@
             Height="16"
             Margin="1"
             Data="M 10,0 L 13,7 L 20,7 L 14,12 L 16,19 L 10,15 L 4,19 L 6,12 L 0,7 L 7,7 Z"
-            Fill="Gold"
+            Fill="{Binding RelativeSource={RelativeSource AncestorType=ContentControl}, Path=Foreground}"
             Stretch="Uniform"
             Stroke="Black"
-            StrokeThickness="1" />
+            StrokeThickness="0.5" />
     </DataTemplate>
 
+    <!--  Required tooltip  -->
     <Style TargetType="ToolTip">
         <Setter Property="Background" Value="#333333" />
         <Setter Property="Foreground" Value="White" />
@@ -515,6 +516,7 @@
         </Setter>
     </Style>
 
+    <!--  Adds red star to a label and enabled tooltip  -->
     <Style x:Key="RequiredLabelStyle" TargetType="Label">
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="VerticalAlignment" Value="Center" />

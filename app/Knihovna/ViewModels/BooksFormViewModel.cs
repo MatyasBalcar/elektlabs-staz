@@ -80,7 +80,7 @@ namespace Knihovna.ViewModels
                 IsLangSuggestionsVisible = false;
                 IsPubSuggestionsVisible= false;
 
-                SelectedAuthor = AllAuthors.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorID == a.AuthorID));
+                SelectedAuthor = AllAuthors.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId));
             }
         }
 
@@ -189,7 +189,7 @@ namespace Knihovna.ViewModels
                 var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
 
-                SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorID == formVM.CurrentAuthor.AuthorID);
+                SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVM.CurrentAuthor.AuthorId);
             }
         }
 

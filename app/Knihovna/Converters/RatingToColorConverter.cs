@@ -8,7 +8,7 @@ namespace Knihovna.Converters
     {
         private readonly SolidColorBrush _selectedColor = Brushes.Gold;
         private readonly SolidColorBrush _notSelectedColor = Brushes.LightGray;
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is short rating)
             {
@@ -24,7 +24,7 @@ namespace Knihovna.Converters
             return _notSelectedColor;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             return Binding.DoNothing;
         }

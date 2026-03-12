@@ -63,7 +63,7 @@ namespace Knihovna.ViewModels
 
             if (result == System.Windows.MessageBoxResult.Yes)
             {
-                _dbManager.DeleteAuthor(author.AuthorID);
+                _dbManager.DeleteAuthor(author.AuthorId);
                 RefreshData();
             }
         }

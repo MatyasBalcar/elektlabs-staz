@@ -17,7 +17,8 @@ namespace Knihovna.Models
              * Connection string
              "User=SYSDBA;Password=masterkey;Database=localhost:C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\db\\KNIHOVNADB.FDB;Charset=UTF8;";
              */
-            DirectoryInfo pathtoDbFolder = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.Parent;
+            DirectoryInfo? pathtoDbFolder = new DirectoryInfo(Environment.CurrentDirectory).Parent?.Parent?.Parent;
+            //TODO check for null, thow and handle exception
             string newConnectionString = "User=SYSDBA;Password=masterkey;Database=localhost:"+ pathtoDbFolder + "\\db\\KNIHOVNADB.FDB;Charset=UTF8;";
             optionsBuilder.UseFirebird(newConnectionString);
         }

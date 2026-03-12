@@ -34,5 +34,7 @@
                 Authors = this.Authors != null ? new List<Author>(this.Authors) : new List<Author>()
             };
         }
+
+
     }
 }

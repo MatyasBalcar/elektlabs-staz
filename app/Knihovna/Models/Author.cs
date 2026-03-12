@@ -2,7 +2,7 @@
 {
     public class Author
     {
-        public int AuthorID { get; set; }
+        public int AuthorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime? DateOfBirth { get; set; }
@@ -17,7 +17,7 @@
         {
             return new Author
             {
-                AuthorID = this.AuthorID,
+                AuthorId = this.AuthorId,
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 DateOfBirth = this.DateOfBirth,

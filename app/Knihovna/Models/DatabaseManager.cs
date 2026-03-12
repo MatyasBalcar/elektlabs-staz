@@ -151,7 +151,7 @@ namespace Knihovna.Models
                         dbBook.Authors.Clear();
                         foreach (var author in book.Authors)
                         {
-                            var dbAuthor = context.Authors.Find(author.AuthorID);
+                            var dbAuthor = context.Authors.Find(author.AuthorId);
                             if (dbAuthor != null) dbBook.Authors.Add(dbAuthor);
                         }
                     }
@@ -189,7 +189,7 @@ namespace Knihovna.Models
             {
                 //also deletes authors books
                 var booksToDelete = context.Books
-                    .Where(b => b.Authors.Any(a => a.AuthorID == authorId))
+                    .Where(b => b.Authors.Any(a => a.AuthorId == authorId))
                     .ToList();
 
                 context.Books.RemoveRange(booksToDelete);
@@ -223,13 +223,13 @@ namespace Knihovna.Models
                 }
                 
 
-                if (author.AuthorID == 0)
+                if (author.AuthorId == 0)
                 {
                     context.Authors.Add(author);
                 }
                 else
                 {
-                    var dbAuthor = context.Authors.FirstOrDefault(a => a.AuthorID == author.AuthorID);
+                    var dbAuthor = context.Authors.FirstOrDefault(a => a.AuthorId == author.AuthorId);
                     if (dbAuthor != null)
                     {
 

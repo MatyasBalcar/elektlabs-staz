@@ -179,7 +179,7 @@
                                 </DataGridTemplateColumn>
 
                                 <DataGridTemplateColumn
-                                    Width="175"
+                                    Width="160"
                                     CellTemplate="{StaticResource ActionColumnTemplate}"
                                     Header="Akce" />
                             </DataGrid.Columns>
@@ -296,7 +296,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn
-                                    Width="175"
+                                    Width="160"
                                     CellTemplate="{StaticResource ActionColumnTemplate}"
                                     Header="Akce" />
                             </DataGrid.Columns>

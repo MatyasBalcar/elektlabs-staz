@@ -1,25 +1,25 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--  Templates for repeating parts of xaml  -->
     <DataTemplate x:Key="ActionColumnTemplate">
-        <Grid Margin="10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="75" />
-            </Grid.ColumnDefinitions>
+        <StackPanel
+            Margin="5,0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
             <Button
-                Grid.Column="0"
-                Margin="2"
+                MinWidth="65"
+                Margin="4,2"
+                Padding="8,2"
                 Command="{Binding DataContext.OpenFormCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
                 Content="Upravit"
                 Style="{StaticResource PrimaryButtonStyle}" />
             <Button
-                Grid.Column="1"
-                Margin="2"
+                MinWidth="65"
+                Margin="4,2"
+                Padding="8,2"
                 Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
                 Content="Smazat"
                 Style="{StaticResource DangerButtonStyle}" />
-        </Grid>
+        </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

@@ -35,7 +35,7 @@ namespace Knihovna.ViewModels
             else
             {
                 CurrentAuthor = author;
-                NationalityText = author.Nationality.Name;
+                NationalityText = author.Nationality?.Name ?? string.Empty;
                 IsSuggestionsVisible = false;
             }
         }

@@ -42,18 +42,6 @@ namespace Knihovna.Models
                         .ToList();
         }
 
-        //public List<Book> GetAllBooks()
-        //{
-        //    using (var context = new AppDbContext())
-        //    {
-        //        return context.Books
-        //            .Include(b => b.Authors)
-        //            .Include(b => b.Language)
-        //            .Include(b => b.Publisher)
-        //            .ToList();
-        //    }
-        //}
-
         public static List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
         {
             using var context = new AppDbContext();
@@ -76,17 +64,6 @@ namespace Knihovna.Models
                         .OrderBy(a => a.FullName, StringComparer.Create(Culture, false))
                         .ToList();
         }
-
-        //public List<Author> GetAllAuthors()
-        //{
-        //    using (var context = new AppDbContext())
-        //    {
-        //        return context.Authors
-        //            .Include(a => a.Nationality)
-        //            .Include(a => a.Books)
-        //            .ToList();
-        //    }
-        //}
 
         public static void SaveBook(Book book)
         {
@@ -190,14 +167,6 @@ namespace Knihovna.Models
             context.Books.Remove(book);
             context.SaveChanges();
         }
-
-        //No longer used, but kept for future usage
-        //public bool CanDeleteAuthor(int authorId)
-        //{
-        //    using var context = new AppDbContext();
-        //    return !context.Authors
-        //        .Any(a => a.AuthorID == authorId && a.Books.Any());
-        //}
 
         public static void DeleteAuthor(int authorId)
         {

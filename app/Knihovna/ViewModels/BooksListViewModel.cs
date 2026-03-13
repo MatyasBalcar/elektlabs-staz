@@ -70,20 +70,6 @@ namespace Knihovna.ViewModels
             Books = new ObservableCollection<Book>(data);
         }
 
-
-        //[RelayCommand]
-        //public void AddBook()
-        //{
-        //    var formVM = new BookFormViewModel(_dbManager);
-        //    var window = new Views.BookWindow { DataContext = formVM };
-
-        //    if (window.ShowDialog() == true)
-        //    {
-        //        formVM.Save();
-        //        RefreshData();
-        //    }
-        //}
-
         [RelayCommand]
         public void Delete(Book book)
         {

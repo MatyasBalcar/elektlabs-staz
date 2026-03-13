@@ -27,36 +27,24 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void ShowBooks()
         {
-            var savedAuthorId = BooksListVm.SelectedAuthor?.AuthorId;
-            var savedLangId = BooksListVm.SelectedLanguage?.LanguageID; 
-            var savedPubId = BooksListVm.SelectedPublisher?.PublisherID;
+
 
             CurrentView = BooksListVm;
             BooksListVm.RefreshData();
             BooksListVm.LoadFilterData();
+            BooksListVm.ClearFilters();
 
-            if (savedAuthorId != null && BooksListVm.AllAuthors != null)
-                BooksListVm.SelectedAuthor = BooksListVm.AllAuthors.FirstOrDefault(a => a.AuthorId == savedAuthorId);
-
-            if (savedLangId != null && BooksListVm.AllLanguages != null)
-                BooksListVm.SelectedLanguage = BooksListVm.AllLanguages.FirstOrDefault(l => l.LanguageID == savedLangId);
-
-            if (savedPubId != null && BooksListVm.AllPublishers != null)
-                BooksListVm.SelectedPublisher = BooksListVm.AllPublishers.FirstOrDefault(p => p.PublisherID == savedPubId);
         }
 
         [RelayCommand]
         public void ShowAuthors()
         {
-            var savedNatId = AuthorsListVm.SelectedNationality?.NationalityID;
 
             CurrentView = AuthorsListVm;
             AuthorsListVm.RefreshData();
             AuthorsListVm.LoadFilterData();
+            AuthorsListVm.ClearFilters();
 
-            if (savedNatId != null && AuthorsListVm.AllNationalities != null)
-                AuthorsListVm.SelectedNationality =
-                    AuthorsListVm.AllNationalities.FirstOrDefault(n => n.NationalityID == savedNatId);
         }
 
 

@@ -34,13 +34,11 @@ namespace Knihovna.Helpers
 
                     comboBox.AddHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent, new TextChangedEventHandler(OnTextChanged));
                     comboBox.DropDownClosed += OnDropDownClosed;
-                    comboBox.PreviewKeyDown += OnPreviewKeyDown;
                 }
                 else
                 {
                     comboBox.RemoveHandler(System.Windows.Controls.Primitives.TextBoxBase.TextChangedEvent, new TextChangedEventHandler(OnTextChanged));
                     comboBox.DropDownClosed -= OnDropDownClosed;
-                    comboBox.PreviewKeyDown -= OnPreviewKeyDown;
                 }
             }
         }
@@ -89,34 +87,6 @@ namespace Knihovna.Helpers
             }
         }
 
-        private static void OnPreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter && sender is ComboBox comboBox && comboBox.IsDropDownOpen)
-            {
-                var view = CollectionViewSource.GetDefaultView(comboBox.ItemsSource);
-                if (view != null && !view.IsEmpty)
-                {
-                    var enumerator = view.GetEnumerator();
-                    if (enumerator.MoveNext())
-                    {
-                        var selected = enumerator.Current;
-                        comboBox.SelectedItem = selected;
 
-                        var property = selected.GetType().GetProperty(comboBox.DisplayMemberPath);
-                        if (property != null)
-                        {
-                            comboBox.Text = property.GetValue(selected)?.ToString();
-                        }
-
-                        var textBox = comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
-                        if (textBox != null) textBox.CaretIndex = comboBox.Text.Length;
-                    }
-
-                    comboBox.IsDropDownOpen = false;
-                    e.Handled = true;
-                    comboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                }
-            }
-        }
     }
 }

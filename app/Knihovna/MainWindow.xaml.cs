@@ -19,7 +19,11 @@ namespace Knihovna
             Storyboard sb = (Storyboard)FindResource("ToastAnimation");
             sb.Begin();
         }
-
+        /*
+         * Had do write this, default combobox search was instant (so searchign would change the table a lot), and didnt show selected thing up top, THis intercepts that
+         * and makes it so its easily searchable without the table changing while looking for the right filter.
+         * TODO add enter and highlighting
+         */
         private void FilterComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is ComboBox comboBox && comboBox.IsEditable && comboBox.IsKeyboardFocusWithin)

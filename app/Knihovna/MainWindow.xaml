@@ -96,7 +96,7 @@
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
                                     <ComboBox
-                                        Width="150"
+                                        Width="200"
                                         DisplayMemberPath="FullName"
                                         DropDownClosed="FilterComboBox_DropDownClosed"
                                         IsEditable="True"

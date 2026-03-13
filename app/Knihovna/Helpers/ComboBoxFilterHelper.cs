@@ -78,7 +78,7 @@ namespace Knihovna.Helpers
             }
         }
 
-        private static void OnDropDownClosed(object sender, EventArgs e)
+        private static void OnDropDownClosed(object? sender, EventArgs e)
         {
             if (sender is ComboBox comboBox)
             {

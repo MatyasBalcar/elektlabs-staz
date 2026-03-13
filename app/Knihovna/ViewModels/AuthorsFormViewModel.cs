@@ -48,7 +48,7 @@ namespace Knihovna.ViewModels
             {
                 string natName = NationalityText.Trim();
                 var existingNat =
-                    AllNationalities.FirstOrDefault(n => n.Name.Equals(natName, StringComparison.OrdinalIgnoreCase));
+                    AllNationalities?.FirstOrDefault(n => n.Name.Equals(natName, StringComparison.OrdinalIgnoreCase));
 
                 if (existingNat != null)
                 {

@@ -35,13 +35,13 @@ namespace Knihovna.ViewModels
             BooksListVm.RefreshData();
             BooksListVm.LoadFilterData();
 
-            if (savedAuthorId != null)
+            if (savedAuthorId != null && BooksListVm.AllAuthors != null)
                 BooksListVm.SelectedAuthor = BooksListVm.AllAuthors.FirstOrDefault(a => a.AuthorId == savedAuthorId);
 
-            if (savedLangId != null)
+            if (savedLangId != null && BooksListVm.AllLanguages != null)
                 BooksListVm.SelectedLanguage = BooksListVm.AllLanguages.FirstOrDefault(l => l.LanguageID == savedLangId);
 
-            if (savedPubId != null)
+            if (savedPubId != null && BooksListVm.AllPublishers != null)
                 BooksListVm.SelectedPublisher = BooksListVm.AllPublishers.FirstOrDefault(p => p.PublisherID == savedPubId);
         }
 
@@ -54,11 +54,9 @@ namespace Knihovna.ViewModels
             AuthorsListVm.RefreshData();
             AuthorsListVm.LoadFilterData();
 
-            if (savedNatId != null)
-            {
+            if (savedNatId != null && AuthorsListVm.AllNationalities != null)
                 AuthorsListVm.SelectedNationality =
                     AuthorsListVm.AllNationalities.FirstOrDefault(n => n.NationalityID == savedNatId);
-            }
         }
 
 

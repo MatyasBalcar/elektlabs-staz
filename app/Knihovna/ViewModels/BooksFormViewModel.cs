@@ -73,7 +73,7 @@ namespace Knihovna.ViewModels
                 IsLangSuggestionsVisible = false;
                 IsPubSuggestionsVisible= false;
 
-                SelectedAuthor = AllAuthors.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId));
+                SelectedAuthor = AllAuthors?.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId));
             }
         }
 
@@ -83,7 +83,7 @@ namespace Knihovna.ViewModels
             {
                 string langName = LanguageText.Trim();
 
-                var existingLang = AllLanguages.FirstOrDefault(l =>
+                var existingLang = AllLanguages?.FirstOrDefault(l =>
                     l.Name.Equals(langName, StringComparison.OrdinalIgnoreCase));
 
                 if (existingLang != null)
@@ -107,7 +107,7 @@ namespace Knihovna.ViewModels
             {
                 string pubName = PublisherText.Trim();
 
-                var existingPub = AllPublishers.FirstOrDefault(p =>
+                var existingPub = AllPublishers?.FirstOrDefault(p =>
                     p.Name.Equals(pubName, StringComparison.OrdinalIgnoreCase));
 
                 if (existingPub != null)
@@ -178,9 +178,9 @@ namespace Knihovna.ViewModels
                 return;
             }
 
-            var filtered = AllLanguages 
+            var filtered = AllLanguages?
                 .Where(l => l.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(l => l.Name).Take(ShownResultsCount).ToList();
+                .OrderBy(l => l.Name).Take(ShownResultsCount).ToList() ?? new List<Language>();
 
             SuggestedLanguages = new ObservableCollection<Language>(filtered);
             IsLangSuggestionsVisible = SuggestedLanguages.Any();
@@ -194,9 +194,9 @@ namespace Knihovna.ViewModels
                 return;
             }
 
-            var filtered = AllPublishers
+            var filtered = AllPublishers?
                 .Where(p => p.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
-                .OrderBy(p => p.Name).Take(ShownResultsCount).ToList();
+                .OrderBy(p => p.Name).Take(ShownResultsCount).ToList() ?? new List<Publisher>();
 
             SuggestedPublishers = new ObservableCollection<Publisher>(filtered);
             IsPubSuggestionsVisible = SuggestedPublishers.Any();

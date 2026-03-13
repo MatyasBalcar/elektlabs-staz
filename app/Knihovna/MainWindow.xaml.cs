@@ -29,16 +29,7 @@ namespace Knihovna
             if (sender is ComboBox comboBox && comboBox.IsEditable && comboBox.IsKeyboardFocusWithin)
             {
                 var textBox = comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
-
                 int caretPosition = textBox?.CaretIndex ?? 0;
-
-                comboBox.IsDropDownOpen = true;
-
-                if (textBox != null)
-                {
-                    textBox.SelectionLength = 0;
-                    textBox.CaretIndex = caretPosition;
-                }
 
                 string searchText = comboBox.Text;
 
@@ -52,8 +43,24 @@ namespace Knihovna
                         var property = item.GetType().GetProperty(comboBox.DisplayMemberPath);
                         var value = property?.GetValue(item)?.ToString();
 
+                        //maybe do starts_with
                         return value != null && value.Contains(searchText, StringComparison.OrdinalIgnoreCase);
                     };
+
+                    if (string.IsNullOrEmpty(searchText) || view.IsEmpty)
+                    {
+                        comboBox.IsDropDownOpen = false; 
+                    }
+                    else
+                    {
+                        comboBox.IsDropDownOpen = true; 
+                    }
+                }
+
+                if (textBox != null)
+                {
+                    textBox.SelectionLength = 0;
+                    textBox.CaretIndex = caretPosition;
                 }
             }
         }

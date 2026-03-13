@@ -118,85 +118,101 @@
 
                         <Separator DockPanel.Dock="Top" Style="{StaticResource ThickSeparatorStyle}" />
 
-                        <DataGrid ItemsSource="{Binding Books}">
-                            <DataGrid.Columns>
+                        <Grid>
+                            <DataGrid x:Name="BooksGrid" ItemsSource="{Binding Books}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="200" Header="Název">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="{Binding Name}"
+                                                    Style="{StaticResource LinkButtonStyle}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="200" Header="Název">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button
-                                                Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                CommandParameter="{Binding}"
-                                                Content="{Binding Name}"
-                                                Style="{StaticResource LinkButtonStyle}" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="*" Header="Autoři">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel />
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Margin="10">
+                                                                <Run Text="{Binding FirstName}" />
+                                                                <Run Text="{Binding LastName}" />
+                                                            </TextBlock>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Autoři">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Margin="10">
-                                                            <Run Text="{Binding FirstName}" />
-                                                            <Run Text="{Binding LastName}" />
-                                                        </TextBlock>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="80" Header="Přečteno">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox
+                                                    Margin="5,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    IsChecked="{Binding HaveRead}"
+                                                    Style="{StaticResource IsReadCheckBox}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="80" Header="Přečteno">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox
-                                                Margin="5,0"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                IsChecked="{Binding HaveRead}"
-                                                Style="{StaticResource IsReadCheckBox}" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="Auto" Header="Hodnocení">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel
+                                                    Margin="5,0"
+                                                    HorizontalAlignment="Center"
+                                                    Orientation="Horizontal">
+                                                    <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=1}" />
+                                                    <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=2}" />
+                                                    <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=3}" />
+                                                    <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=4}" />
+                                                    <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="Hodnocení">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel
-                                                Margin="5,0"
-                                                HorizontalAlignment="Center"
-                                                Orientation="Horizontal">
+                                    <DataGridTemplateColumn
+                                        Width="160"
+                                        CellTemplate="{StaticResource ActionColumnTemplate}"
+                                        Header="Akce" />
+                                </DataGrid.Columns>
+                            </DataGrid>
 
-                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=1}" />
-
-                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=2}" />
-
-                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=3}" />
-
-                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=4}" />
-
-                                                <ContentControl ContentTemplate="{StaticResource StarIconTemplate}" Foreground="{Binding Rating, Converter={StaticResource RatingToColorConverter}, ConverterParameter=5}" />
-
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                                <DataGridTemplateColumn
-                                    Width="160"
-                                    CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="Akce" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            <TextBlock
+                                Margin="0,40,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                FontStyle="Italic"
+                                Foreground="#A0A0A0"
+                                IsHitTestVisible="False"
+                                Text="Nenalezeny žádné knihy. Zkuste upravit filtry nebo přidat novou.">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Items.Count, ElementName=BooksGrid}" Value="0">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
 
                     </DockPanel>
                 </DataTemplate>
@@ -286,36 +302,60 @@
 
                         <Separator DockPanel.Dock="Top" Style="{StaticResource ThickSeparatorStyle}" />
 
-                        <DataGrid ItemsSource="{Binding Authors}">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="150" Header="Jméno">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button
-                                                Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                CommandParameter="{Binding}"
-                                                Content="{Binding FullName}"
-                                                Style="{StaticResource LinkButtonStyle}" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                        <Grid>
+                            <DataGrid x:Name="AuthorsGrid" ItemsSource="{Binding Authors}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="150" Header="Jméno">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    Command="{Binding DataContext.OpenDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="{Binding FullName}"
+                                                    Style="{StaticResource LinkButtonStyle}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Národnost">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock
-                                                Margin="10"
-                                                FontWeight="Bold"
-                                                Text="{Binding Nationality.Name}" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn
-                                    Width="160"
-                                    CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="Akce" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                    <DataGridTemplateColumn Width="*" Header="Národnost">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    Margin="10"
+                                                    FontWeight="Bold"
+                                                    Text="{Binding Nationality.Name}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn
+                                        Width="160"
+                                        CellTemplate="{StaticResource ActionColumnTemplate}"
+                                        Header="Akce" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <TextBlock
+                                Margin="0,40,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                FontStyle="Italic"
+                                Foreground="#A0A0A0"
+                                IsHitTestVisible="False"
+                                Text="Nenalezeni žádní autoři. Zkuste hledat jinak nebo přidejte nového.">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Items.Count, ElementName=AuthorsGrid}" Value="0">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
                     </DockPanel>
                 </DataTemplate>
             </ContentControl.Resources>

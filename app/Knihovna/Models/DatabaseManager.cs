@@ -92,7 +92,7 @@ namespace Knihovna.Models
         {
             using var context = new AppDbContext();
             var existingLang = context.Languages
-                .FirstOrDefault(l => book.Language != null && l.Name.ToLower() == book.Language.Name.ToLower());
+                .FirstOrDefault(l => book.Language != null && l.LanguageID == book.Language.LanguageID);
 
             if (existingLang != null)
             {
@@ -108,7 +108,7 @@ namespace Knihovna.Models
 
 
             var existingPub = context.Publishers
-                .FirstOrDefault(p => book.Publisher != null && p.Name.ToLower() == book.Publisher.Name.ToLower());
+                .FirstOrDefault(p => book.Publisher != null && p.PublisherID == book.Publisher.PublisherID);
 
             if (existingPub != null)
             {
@@ -196,7 +196,7 @@ namespace Knihovna.Models
         {
             using var context = new AppDbContext();
             var existingNationality = context.Nationalities
-                .FirstOrDefault(n => n.Name.ToLower() == author.Nationality.Name.ToLower());
+                .FirstOrDefault(n => author.Nationality != null && n.NationalityID== author.Nationality.NationalityID);
 
             if (existingNationality != null)
             {

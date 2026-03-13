@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:Knihovna.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Knihovna.ViewModels"
     Style="{StaticResource MainWindow}"
@@ -97,43 +98,33 @@
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
                                     <ComboBox
                                         Width="200"
+                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="FullName"
-                                        DropDownClosed="FilterComboBox_DropDownClosed"
-                                        IsEditable="True"
-                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllAuthors}"
                                         SelectedItem="{Binding SelectedAuthor}"
-                                        StaysOpenOnEdit="True"
-                                        Style="{StaticResource FilterComboBox}"
-                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
                                     <ComboBox
                                         Width="150"
+                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="Name"
-                                        DropDownClosed="FilterComboBox_DropDownClosed"
-                                        IsEditable="True"
-                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}"
-                                        Style="{StaticResource FilterComboBox}"
-                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
                                     <ComboBox
                                         Width="150"
+                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="Name"
-                                        DropDownClosed="FilterComboBox_DropDownClosed"
-                                        IsEditable="True"
-                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllPublishers}"
                                         SelectedItem="{Binding SelectedPublisher}"
-                                        Style="{StaticResource FilterComboBox}"
-                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <Button
@@ -314,14 +305,11 @@
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Národnost:" />
                                     <ComboBox
                                         Width="150"
+                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="Name"
-                                        DropDownClosed="FilterComboBox_DropDownClosed"
-                                        IsEditable="True"
-                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllNationalities}"
                                         SelectedItem="{Binding SelectedNationality}"
-                                        Style="{StaticResource FilterComboBox}"
-                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
+                                        Style="{StaticResource FilterComboBox}" />
                                 </StackPanel>
 
                                 <Button

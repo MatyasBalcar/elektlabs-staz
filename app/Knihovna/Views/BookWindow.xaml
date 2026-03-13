@@ -2,6 +2,7 @@
     x:Class="Knihovna.Views.BookWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:Knihovna.Helpers"
     Style="{StaticResource BookWindow}"
     WindowStartupLocation="CenterOwner">
 
@@ -48,6 +49,7 @@
 
                 <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />
                 <ComboBox
+                    helpers:ComboBoxFilterHelper.IsSearchable="True"
                     DisplayMemberPath="FullName"
                     ItemsSource="{Binding AllAuthors}"
                     SelectedItem="{Binding SelectedAuthor}" />

@@ -2,6 +2,7 @@
     x:Class="Knihovna.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:DotNetKit.Windows.Controls;assembly=DotNetKit.Wpf.AutoCompleteComboBox"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:Knihovna.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -96,35 +97,40 @@
 
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
-                                    <ComboBox
+
+                                    <controls:AutoCompleteComboBox
                                         Width="200"
-                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="FullName"
+                                        FontWeight="Light"
                                         ItemsSource="{Binding AllAuthors}"
                                         SelectedItem="{Binding SelectedAuthor}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextSearch.TextPath="FullName" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
-                                    <ComboBox
+
+                                    <controls:AutoCompleteComboBox
                                         Width="150"
-                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="Name"
+                                        FontWeight="Light"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextSearch.TextPath="Name" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
-                                    <ComboBox
+                                    <controls:AutoCompleteComboBox
                                         Width="150"
-                                        helpers:ComboBoxFilterHelper.IsSearchable="True"
                                         DisplayMemberPath="Name"
+                                        FontWeight="Light"
                                         ItemsSource="{Binding AllPublishers}"
                                         SelectedItem="{Binding SelectedPublisher}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextSearch.TextPath="Name" />
                                 </StackPanel>
 
                                 <Button

@@ -44,7 +44,10 @@
                 <Label Content="Název knihy:" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="ISBN:" FontWeight="SemiBold" />
+                <Label
+                    Content="ISBN:"
+                    Style="{StaticResource InfoLabelStyle}"
+                    Tag="ISBN je číslo o délce od 10 do 13 číslic, pomlčky a mezery jsou povoleny" />
                 <TextBox Text="{Binding EditingBook.ISBN, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />

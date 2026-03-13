@@ -647,7 +647,7 @@
                             FontWeight="Bold"
                             Foreground="Red"
                             Text="*"
-                            ToolTip="Tento údaj je povinný."
+                            ToolTip="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue='Tento údaj je poviný'}"
                             ToolTipService.InitialShowDelay="0" />
 
                     </StackPanel>
@@ -655,6 +655,52 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style
+        x:Key="InfoLabelStyle"
+        BasedOn="{StaticResource {x:Type Label}}"
+        TargetType="Label">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <StackPanel Orientation="Horizontal">
+
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True" />
+
+                        <Border
+                            Width="14"
+                            Height="14"
+                            Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            BorderBrush="Black"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            ToolTip="{TemplateBinding Tag}"
+                            ToolTipService.InitialShowDelay="0">
+
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="White"
+                                FontSize="9"
+                                FontWeight="Bold"
+                                Foreground="Black"
+                                Text="i" />
+
+                        </Border>
+
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 
 
     <Style x:Key="Switch" TargetType="{x:Type CheckBox}">

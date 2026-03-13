@@ -1,7 +1,4 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--  Stylesheet for UI components  -->
-
-    <!--  Rounded textbox, white  -->
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#555555" />
@@ -70,7 +67,6 @@
 
 
 
-    <!--  <CheckBox for if the book is read, green bg , white, rounded  -->
     <Style x:Key="IsReadCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -147,7 +143,6 @@
     </Style>
 
 
-    <!--  For inner calendar tetxbox, so it doesn't highlight  -->
     <Style x:Key="NoHighlightTextBoxStyle" TargetType="DatePickerTextBox">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -165,7 +160,6 @@
         </Setter>
     </Style>
 
-    <!--  Rounded datepicker styles  -->
     <Style x:Key="RoundedCalendarStyle" TargetType="Calendar">
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#555555" />
@@ -193,7 +187,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--  <DatePicker button (the calendar one)  -->
     <ControlTemplate x:Key="DatePickerButtonTemplate" TargetType="Button">
         <Grid Background="Transparent">
             <Border
@@ -225,7 +218,6 @@
         </Grid>
     </ControlTemplate>
 
-    <!--  This is for the calendar itself  -->
     <Style x:Key="RoundedDatePickerStyle" TargetType="DatePicker">
         <Setter Property="CalendarStyle" Value="{StaticResource RoundedCalendarStyle}" />
         <Setter Property="Padding" Value="0,0" />
@@ -283,7 +275,6 @@
         </Setter>
     </Style>
 
-    <!--  Rounded combobox,white  -->
     <Style TargetType="ComboBox">
         <Setter Property="Height" Value="35" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -333,6 +324,33 @@
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                             IsHitTestVisible="False" />
 
+                        <TextBox
+                            x:Name="PART_EditableTextBox"
+                            Margin="10,0,30,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CaretBrush="#007ACC"
+                            Focusable="True"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Foreground="#333333"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"
+                            SelectionBrush="#007ACC"
+                            SelectionOpacity="0.4"
+                            Style="{x:Null}"
+                            Visibility="Hidden">
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox">
+                                    <ScrollViewer
+                                        x:Name="PART_ContentHost"
+                                        Background="Transparent"
+                                        Focusable="False" />
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+
                         <Popup
                             Name="Popup"
                             AllowsTransparency="True"
@@ -362,6 +380,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -423,15 +442,12 @@
         <Setter Property="Height" Value="30" />
     </Style>
 
-    <!--  Header text  -->
-
     <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="22" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
-    <!--  Label above the filters  -->
     <Style x:Key="FilterLabelTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="2,0,0,2" />
         <Setter Property="FontSize" Value="12" />
@@ -444,7 +460,6 @@
         <Setter Property="Background" Value="Black" />
     </Style>
 
-    <!--  Old style for rating stars  -->
     <Style x:Key="RatingTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="5,5,5,0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -462,7 +477,6 @@
         </Setter>
     </Style>
 
-    <!--  Datagrid  -->
     <Style TargetType="DataGrid">
         <Setter Property="RowHeight" Value="40" />
         <Setter Property="IsReadOnly" Value="True" />
@@ -534,7 +548,6 @@
         </Setter>
     </Style>
 
-    <!--  Datagrid header  -->
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="White" />
         <Setter Property="Foreground" Value="#333333" />
@@ -544,7 +557,6 @@
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,4,0,0" />
-        <!--  This disables clicking on the header because i dont want the sizes of columns to be user changes, and also the order of them not to be user changeable  -->
         <Setter Property="IsHitTestVisible" Value="False" />
 
     </Style>
@@ -576,7 +588,6 @@
     </Style>
 
 
-    <!--  This is a star shape coppied from the internet  -->
     <DataTemplate x:Key="StarIconTemplate">
         <Path
             Width="16"
@@ -589,7 +600,6 @@
             StrokeThickness="0.5" />
     </DataTemplate>
 
-    <!--  Required tooltip  -->
     <Style TargetType="ToolTip">
         <Setter Property="Background" Value="#333333" />
         <Setter Property="Foreground" Value="White" />
@@ -615,7 +625,6 @@
         <Setter Property="Margin" Value="0,10,0,5" />
     </Style>
 
-    <!--  Adds red star to a label and enabled tooltip  -->
     <Style
         x:Key="RequiredLabelStyle"
         BasedOn="{StaticResource {x:Type Label}}"
@@ -649,7 +658,6 @@
     </Style>
 
 
-    <!--  Better style for checkbox for read input  -->
     <Style x:Key="Switch" TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="#E0E0E0" />
         <Setter Property="Height" Value="24" />
@@ -728,9 +736,6 @@
         </Setter>
     </Style>
 
-    <!--
-        This is for items in autocomplete, its listbox not combobox
-    -->
     <Style TargetType="ListBoxItem">
         <Setter Property="Padding" Value="10,5" />
         <Setter Property="Background" Value="Transparent" />
@@ -812,4 +817,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-</ResourceDictionary>   
+</ResourceDictionary>

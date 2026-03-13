@@ -98,9 +98,14 @@
                                     <ComboBox
                                         Width="150"
                                         DisplayMemberPath="FullName"
+                                        DropDownClosed="FilterComboBox_DropDownClosed"
+                                        IsEditable="True"
+                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllAuthors}"
                                         SelectedItem="{Binding SelectedAuthor}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        StaysOpenOnEdit="True"
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
@@ -108,9 +113,13 @@
                                     <ComboBox
                                         Width="150"
                                         DisplayMemberPath="Name"
+                                        DropDownClosed="FilterComboBox_DropDownClosed"
+                                        IsEditable="True"
+                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
                                 </StackPanel>
 
                                 <StackPanel Margin="0,0,10,0">
@@ -118,9 +127,13 @@
                                     <ComboBox
                                         Width="150"
                                         DisplayMemberPath="Name"
+                                        DropDownClosed="FilterComboBox_DropDownClosed"
+                                        IsEditable="True"
+                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllPublishers}"
                                         SelectedItem="{Binding SelectedPublisher}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
                                 </StackPanel>
 
                                 <Button
@@ -302,9 +315,13 @@
                                     <ComboBox
                                         Width="150"
                                         DisplayMemberPath="Name"
+                                        DropDownClosed="FilterComboBox_DropDownClosed"
+                                        IsEditable="True"
+                                        IsTextSearchEnabled="False"
                                         ItemsSource="{Binding AllNationalities}"
                                         SelectedItem="{Binding SelectedNationality}"
-                                        Style="{StaticResource FilterComboBox}" />
+                                        Style="{StaticResource FilterComboBox}"
+                                        TextBoxBase.TextChanged="FilterComboBox_TextChanged" />
                                 </StackPanel>
 
                                 <Button

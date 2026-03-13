@@ -8,6 +8,24 @@
     Style="{StaticResource MainWindow}"
     mc:Ignorable="d">
 
+    <Window.Resources>
+        <Storyboard x:Key="ToastAnimation">
+            <DoubleAnimation
+                Storyboard.TargetName="ToastBorder"
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.3" />
+            <DoubleAnimation
+                BeginTime="0:0:3"
+                Storyboard.TargetName="ToastBorder"
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.5" />
+        </Storyboard>
+    </Window.Resources>
+
     <Grid Margin="10">
         <ContentControl Content="{Binding CurrentView}">
             <ContentControl.Resources>
@@ -360,5 +378,23 @@
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
+
+        <Border
+            x:Name="ToastBorder"
+            Margin="0,0,0,20"
+            Padding="20,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="#333333"
+            CornerRadius="8"
+            IsHitTestVisible="False"
+            Opacity="0">
+            <TextBlock
+                x:Name="ToastText"
+                FontSize="14"
+                FontWeight="SemiBold"
+                Foreground="White"
+                Text="Akce byla úspěšná." />
+        </Border>
     </Grid>
 </Window>

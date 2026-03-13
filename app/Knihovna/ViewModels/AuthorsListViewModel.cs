@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Knihovna.ViewModels
 {
@@ -100,6 +101,10 @@ namespace Knihovna.ViewModels
             {
                 RefreshData();
                 LoadFilterData();
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.ShowToast("Autor byl úspěšně uložen!");
+                }
             }
         }
 

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Knihovna.ViewModels
 {
@@ -239,13 +240,16 @@ namespace Knihovna.ViewModels
 
             if (window.ShowDialog() ?? false)
             {
-                formVm.Save();
 
 
                 var newAuthors = DatabaseManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
 
                 SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.ShowToast("Nový autor byl úspěšně přidán!");
+                }
             }
         }
 

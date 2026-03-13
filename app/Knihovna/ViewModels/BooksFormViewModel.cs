@@ -67,12 +67,9 @@ namespace Knihovna.ViewModels
             {
                 EditingBook = book;
 
+                LanguageText = book.Language?.Name ?? string.Empty;
+                PublisherText = book.Publisher?.Name ?? string.Empty;
 
-                LanguageText = book.Language.Name;
-
-
-                PublisherText = book.Publisher.Name;
-                
                 IsLangSuggestionsVisible = false;
                 IsPubSuggestionsVisible= false;
 

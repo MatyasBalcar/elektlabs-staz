@@ -54,6 +54,7 @@
                 <ComboBox
                     helpers:ComboBoxFilterHelper.IsSearchable="True"
                     DisplayMemberPath="FullName"
+                    FontWeight="Light"
                     ItemsSource="{Binding AllAuthors}"
                     SelectedItem="{Binding SelectedAuthor}" />
 

@@ -61,7 +61,7 @@
         x:Key="SearchBox"
         BasedOn="{StaticResource {x:Type TextBox}}"
         TargetType="TextBox">
-        <Setter Property="Width" Value="515" />
+        <Setter Property="Width" Value="535" />
         <Setter Property="Height" Value="28" />
     </Style>
 

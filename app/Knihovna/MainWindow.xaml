@@ -110,7 +110,7 @@
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
 
                                     <controls:AutoCompleteComboBox
-                                        Width="150"
+                                        Width="160"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}"
@@ -121,7 +121,7 @@
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
                                     <controls:AutoCompleteComboBox
-                                        Width="150"
+                                        Width="160"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllPublishers}"
                                         SelectedItem="{Binding SelectedPublisher}"

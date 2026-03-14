@@ -1,11 +1,41 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Windows; 
 
 namespace Knihovna.Models
 {
     public class DatabaseManager
     {
         public static CultureInfo Culture { get; } = new("cs-CZ");
+
+        public DatabaseManager()
+        {
+            using var context = new AppDbContext();
+            try
+            {
+                if (!context.Database.CanConnect())
+                {
+                    MessageBox.Show(
+                        "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.\n\nZkuste spustit ´create_db.bat´",
+                        "Chybějící databáze",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+
+                    Environment.Exit(1);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Chyba při ověřování spojení s databází:\nDetail: {ex.Message}",
+                    "Chyba Databáze",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                Environment.Exit(1);
+            }
+        }
+
         public static List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
             using var context = new AppDbContext();
@@ -46,12 +76,12 @@ namespace Knihovna.Models
         {
             using var context = new AppDbContext();
             var query = context.Authors
-                .Include(a => a.Books)     
+                .Include(a => a.Books)
                 .Include(a => a.Nationality)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
-            { 
+            {
                 query = query.Where(a => (a.FirstName + " " + a.LastName).ToLower().Contains(searchTerm.ToLower()));
             }
             if (!string.IsNullOrWhiteSpace(nationality))
@@ -69,7 +99,6 @@ namespace Knihovna.Models
         {
             using var context = new AppDbContext();
 
-            // Handle Language
             if (book.Language != null)
             {
                 var existingLang = context.Languages
@@ -91,7 +120,6 @@ namespace Knihovna.Models
                 book.LanguageId = null;
             }
 
-            // Handle Publisher
             if (book.Publisher != null)
             {
                 var existingPub = context.Publishers
@@ -115,7 +143,6 @@ namespace Knihovna.Models
 
             if (book.BookId == 0)
             {
-                // New book: attach existing authors, add new ones
                 foreach (var author in book.Authors)
                 {
                     if (author.AuthorId != 0)
@@ -132,7 +159,6 @@ namespace Knihovna.Models
             }
             else
             {
-                // Update existing book
                 var dbBook = context.Books
                     .Include(b => b.Authors)
                     .FirstOrDefault(b => b.BookId == book.BookId);
@@ -158,7 +184,6 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-
         public static void DeleteBook(int bookId)
         {
             using var context = new AppDbContext();
@@ -183,11 +208,11 @@ namespace Knihovna.Models
 
             context.SaveChanges();
         }
+
         public static void SaveAuthor(Author author)
         {
             using var context = new AppDbContext();
 
-            // Handle Nationality
             if (author.Nationality != null)
             {
                 var existingNationality = context.Nationalities
@@ -227,15 +252,12 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-
-
-
         public static List<Nationality> GetAllNationalities()
         {
             using var context = new AppDbContext();
             return context.Nationalities
                 .ToList()
-                .OrderBy(n => n.Name, StringComparer.Create(Culture, false)) 
+                .OrderBy(n => n.Name, StringComparer.Create(Culture, false))
                 .ToList();
         }
 
@@ -256,6 +278,5 @@ namespace Knihovna.Models
                 .OrderBy(l => l.Name, StringComparer.Create(Culture, false))
                 .ToList();
         }
-
-}
+    }
 }

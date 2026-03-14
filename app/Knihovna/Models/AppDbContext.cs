@@ -13,12 +13,18 @@ namespace Knihovna.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*
-             * Connection string
-             "User=SYSDBA;Password=masterkey;Database=localhost:C:\\Users\\balcarm\\Desktop\\staz\\app\\Knihovna\\db\\KNIHOVNADB.FDB;Charset=UTF8;";
-             */
-            DirectoryInfo? pathtoDbFolder = new DirectoryInfo(Environment.CurrentDirectory).Parent?.Parent?.Parent;
-            string newConnectionString = "User=SYSDBA;Password=masterkey;Database=localhost:"+ pathtoDbFolder + "\\db\\KNIHOVNADB.FDB;Charset=UTF8;"; 
+            string baseDir = AppContext.BaseDirectory;
+            //publish
+            string dbPath = Path.Combine(baseDir, "db", "KNIHOVNADB.FDB");
+
+            //vs 
+            if (!File.Exists(dbPath))
+            {
+                dbPath = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", "db", "KNIHOVNADB.FDB"));
+            }
+
+            string newConnectionString = $"User=SYSDBA;Password=masterkey;Database=localhost:{dbPath};Charset=UTF8;";
+
             optionsBuilder.UseFirebird(newConnectionString);
         }
 

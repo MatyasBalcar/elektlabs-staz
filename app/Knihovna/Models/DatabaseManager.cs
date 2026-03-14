@@ -58,7 +58,7 @@ namespace Knihovna.Models
                 query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
             }
 
-            return query.ToList()
+            return query.ToList()//I am sorting in c# not on db level but I use czech chars, same in authors
                         .OrderBy(a => a.Name, StringComparer.Create(Culture, false))
                         .ToList();
         }

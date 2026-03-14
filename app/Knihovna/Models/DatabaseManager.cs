@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using System.Windows; 
 
 namespace Knihovna.Models
 {
@@ -139,11 +138,7 @@ namespace Knihovna.Models
                 {
                     if (author.AuthorId != 0)
                     {
-                        var dbAuthor = context.Authors.Find(author.AuthorId);
-                        if (dbAuthor != null)
-                        {
-                            context.Entry(author).State = EntityState.Unchanged;
-                        }
+                        context.Entry(author).State = EntityState.Unchanged;
                     }
                 }
 

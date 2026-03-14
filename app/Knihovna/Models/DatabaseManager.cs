@@ -8,31 +8,23 @@ namespace Knihovna.Models
     {
         public static CultureInfo Culture { get; } = new("cs-CZ");
 
-        public DatabaseManager()
+        public static bool TestConnection(out string errorMessage)
         {
-            using var context = new AppDbContext();
+            errorMessage = string.Empty;
             try
             {
+                using var context = new AppDbContext();
                 if (!context.Database.CanConnect())
                 {
-                    MessageBox.Show(
-                        "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.\n\nZkuste spustit ´create_db.bat´",
-                        "Chybějící databáze",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-
-                    Environment.Exit(1);
+                    errorMessage = "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.\n\nZkuste spustit create_db.bat";
+                    return false;
                 }
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Chyba při ověřování spojení s databází:\nDetail: {ex.Message}",
-                    "Chyba Databáze",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-
-                Environment.Exit(1);
+                errorMessage = $"Chyba při ověřování spojení s databází:\nDetail: {ex.Message}";
+                return false;
             }
         }
 

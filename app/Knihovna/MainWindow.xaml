@@ -194,8 +194,7 @@
                                                         Margin="1"
                                                         Data="{StaticResource BookIconGeometry}"
                                                         Fill="Black"
-                                                        Stretch="Uniform"
-                                                        ToolTip="Tuto knihu jste ještě nečetli" />
+                                                        Stretch="Uniform" />
 
                                                     <CheckBox
                                                         x:Name="ReadCheckBox"

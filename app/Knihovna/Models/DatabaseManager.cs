@@ -15,7 +15,7 @@ namespace Knihovna.Models
                 using var context = new AppDbContext();
                 if (!context.Database.CanConnect())
                 {
-                    errorMessage = "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.\n\nZkuste spustit create_db.bat";
+                    errorMessage = "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.";
                     return false;
                 }
                 return true;

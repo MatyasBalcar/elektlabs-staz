@@ -2,123 +2,183 @@
     x:Class="Knihovna.Views.BookDetailWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Detail Knihy"
+    Width="550"
+    Height="650"
+    Background="#F5F7FA"
     Style="{StaticResource BookDetailWindow}"
     WindowStartupLocation="CenterOwner">
 
-    <DockPanel Margin="20">
-        <StackPanel
-            HorizontalAlignment="Right"
-            DockPanel.Dock="Bottom"
-            Orientation="Horizontal">
+    <DockPanel>
+
+        <Border
+            Padding="20,15"
+            Background="White"
+            BorderBrush="#E5E7EB"
+            BorderThickness="0,1,0,0"
+            DockPanel.Dock="Bottom">
             <Button
-                Width="100"
-                Height="30"
+                Width="120"
+                Height="35"
+                HorizontalAlignment="Right"
                 Command="{Binding CloseCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Content="Zavřít"
                 IsCancel="True"
                 Style="{StaticResource DangerButtonOutlineStyle}" />
-        </StackPanel>
+        </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="0,0,10,0">
+            <StackPanel Margin="20">
 
-                <TextBlock
-                    Margin="0,0,0,15"
-                    FontSize="26"
-                    FontWeight="Bold"
-                    Text="{Binding CurrentBook.Name}"
-                    TextWrapping="Wrap" />
+                <Border
+                    Padding="30"
+                    Background="White"
+                    CornerRadius="12">
+                    <Border.Effect>
+                        <DropShadowEffect
+                            BlurRadius="15"
+                            Opacity="0.05"
+                            ShadowDepth="2"
+                            Color="Black" />
+                    </Border.Effect>
 
-                <Label
-                    Padding="0,0,0,2"
-                    Content="Autor:"
-                    FontWeight="SemiBold" />
-                <ItemsControl ItemsSource="{Binding CurrentBook.Authors}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock
-                                Margin="0,2,0,5"
-                                FontSize="16"
-                                Text="{Binding FullName}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                    <StackPanel>
 
-                <Separator Margin="0,10" Background="LightGray" />
+                        <TextBlock
+                            Margin="0,0,0,5"
+                            FontSize="32"
+                            FontWeight="Bold"
+                            Foreground="#111827"
+                            Text="{Binding CurrentBook.Name}"
+                            TextWrapping="Wrap" />
 
-                <Grid Margin="0,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        <ItemsControl Margin="0,0,0,10" ItemsSource="{Binding CurrentBook.Authors}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Margin="0,0,10,0"
+                                        FontSize="18"
+                                        FontWeight="Medium"
+                                        Foreground="#6B7280"
+                                        Text="{Binding FullName}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
-                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
-                        <Label
-                            Padding="0"
-                            Content="Vydavatel:"
-                            FontWeight="SemiBold" />
-                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentBook.Publisher.Name}" />
-
-                        <Label
-                            Padding="0"
-                            Content="ISBN:"
-                            FontWeight="SemiBold" />
-                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentBook.ISBN}" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1">
-                        <Label
-                            Padding="0"
-                            Content="Jazyk:"
-                            FontWeight="SemiBold" />
-                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentBook.Language.Name}" />
-
-                        <Label
-                            Padding="0"
-                            Content="Datum vydání:"
-                            FontWeight="SemiBold" />
-                        <TextBlock Margin="0,2,0,10" Text="{Binding CurrentBook.PublishDate, StringFormat=d}" />
-                    </StackPanel>
-                </Grid>
-
-                <Separator Margin="0,10" Background="LightGray" />
-
-                <Grid Margin="0,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                        <Label
-                            Padding="0"
-                            Content="Hodnocení:"
-                            FontWeight="SemiBold" />
-
-                        <ItemsControl ItemTemplate="{StaticResource StarIconTemplate}" ItemsSource="{Binding CurrentBook.Rating, Converter={StaticResource RatingToStarsConverter}}">
+                        <ItemsControl
+                            Margin="0,0,0,25"
+                            ItemTemplate="{StaticResource StarIconTemplate}"
+                            ItemsSource="{Binding CurrentBook.Rating, Converter={StaticResource RatingToStarsConverter}}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
+
+                        <Border
+                            Margin="0,0,0,30"
+                            Padding="20"
+                            Background="#F9FAFB"
+                            BorderBrush="#F3F4F6"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="0,0,15,0">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        FontSize="12"
+                                        FontWeight="Bold"
+                                        Foreground="#9CA3AF"
+                                        Text="VYDAVATEL" />
+                                    <TextBlock
+                                        FontSize="15"
+                                        FontWeight="Medium"
+                                        Foreground="#374151"
+                                        Text="{Binding CurrentBook.Publisher.Name}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="0" Grid.Column="1">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        FontSize="12"
+                                        FontWeight="Bold"
+                                        Foreground="#9CA3AF"
+                                        Text="JAZYK" />
+                                    <TextBlock
+                                        FontSize="15"
+                                        FontWeight="Medium"
+                                        Foreground="#374151"
+                                        Text="{Binding CurrentBook.Language.Name}" />
+                                </StackPanel>
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Margin="0,0,15,0">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        FontSize="12"
+                                        FontWeight="Bold"
+                                        Foreground="#9CA3AF"
+                                        Text="ISBN" />
+                                    <TextBlock
+                                        FontSize="15"
+                                        FontWeight="Medium"
+                                        Foreground="#374151"
+                                        Text="{Binding CurrentBook.ISBN}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Grid.Column="1">
+                                    <TextBlock
+                                        Margin="0,0,0,4"
+                                        FontSize="12"
+                                        FontWeight="Bold"
+                                        Foreground="#9CA3AF"
+                                        Text="DATUM VYDÁNÍ" />
+                                    <TextBlock
+                                        FontSize="15"
+                                        FontWeight="Medium"
+                                        Foreground="#374151"
+                                        Text="{Binding CurrentBook.PublishDate, StringFormat=d}" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock
+                            Margin="0,0,0,10"
+                            FontSize="13"
+                            FontWeight="Bold"
+                            Foreground="#9CA3AF"
+                            Text="O KNIZE" />
+                        <TextBlock
+                            FontSize="15"
+                            Foreground="#4B5563"
+                            LineHeight="24"
+                            Text="{Binding CurrentBook.Description}"
+                            TextWrapping="Wrap" />
+
                     </StackPanel>
-                </Grid>
-
-                <Label
-                    Padding="0,15,0,2"
-                    Content="Popis:"
-                    FontWeight="SemiBold" />
-                <TextBlock
-                    Margin="0,0,0,25"
-                    LineHeight="20"
-                    Text="{Binding CurrentBook.Description}"
-                    TextWrapping="Wrap" />
-
-
-
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </DockPanel>

@@ -17,10 +17,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
 	<ItemGroup>
 		<None Update="db\KNIHOVNADB.FDB">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

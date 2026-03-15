@@ -36,7 +36,7 @@ namespace Knihovna.Helpers
 
         private static void ComboBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && sender is AutoCompleteComboBox comboBox)
+            if ((e.Key == Key.Enter || e.Key == Key.Tab) && sender is AutoCompleteComboBox comboBox)
             {
                 var itemToSelect = comboBox.Items.CurrentItem;
 
@@ -47,6 +47,8 @@ namespace Knihovna.Helpers
 
                 if (itemToSelect != null)
                 {
+                    e.Handled = true;
+
                     comboBox.SelectedItem = itemToSelect;
                     comboBox.IsDropDownOpen = false;
 

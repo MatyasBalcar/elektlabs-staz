@@ -15,8 +15,11 @@ namespace Knihovna.Helpers
                 typeof(AutoCompleteHelper),
                 new UIPropertyMetadata(false, OnSelectFirstOnEnterChanged));
 
-        public static bool GetSelectFirstOnEnter(DependencyObject obj) => (bool)obj.GetValue(SelectFirstOnEnterProperty);
-        public static void SetSelectFirstOnEnter(DependencyObject obj, bool value) => obj.SetValue(SelectFirstOnEnterProperty, value);
+        public static bool GetSelectFirstOnEnter(DependencyObject obj) =>
+            (bool)obj.GetValue(SelectFirstOnEnterProperty);
+
+        public static void SetSelectFirstOnEnter(DependencyObject obj, bool value) =>
+            obj.SetValue(SelectFirstOnEnterProperty, value);
 
         private static void OnSelectFirstOnEnterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -24,7 +27,8 @@ namespace Knihovna.Helpers
             {
                 if ((bool)e.NewValue)
                 {
-                    element.AddHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(Element_PreviewKeyDown), true);
+                    element.AddHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(Element_PreviewKeyDown),
+                        true);
                 }
                 else
                 {
@@ -44,7 +48,7 @@ namespace Knihovna.Helpers
 
                 if (itemToSelect != null)
                 {
-                    e.Handled = true; 
+                    e.Handled = true;
                     comboBox.SelectedItem = itemToSelect;
                     comboBox.IsDropDownOpen = false;
 
@@ -57,6 +61,8 @@ namespace Knihovna.Helpers
             else if (sender is TextBox textBox)
             {
                 if (e.Key != Key.Enter) return;
+
+                e.Handled = true;
 
                 if (textBox.Parent is Panel parentPanel)
                 {
@@ -76,23 +82,21 @@ namespace Knihovna.Helpers
                     if (listBox != null)
                     {
                         var itemToSelect = listBox.Items.CurrentItem;
-
-                        if (itemToSelect == null && listBox.HasItems)
-                        {
-                            itemToSelect = listBox.Items[0];
-                        }
+                        if (itemToSelect == null && listBox.HasItems) itemToSelect = listBox.Items[0];
 
                         if (itemToSelect != null)
                         {
-                            e.Handled = true;
-
                             listBox.SelectedItem = itemToSelect;
-
-                            if (popup != null) popup.IsOpen = false;
-                            textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
                         }
+
+                        if (popup != null) popup.IsOpen = false;
                     }
                 }
+
+
+                Application.Current.Dispatcher.InvokeAsync(
+                    () => { textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next)); },
+                    System.Windows.Threading.DispatcherPriority.Input);
             }
         }
     }

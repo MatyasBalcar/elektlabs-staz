@@ -20,35 +20,31 @@ namespace Knihovna.Helpers
 
         private static void OnSelectFirstOnEnterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is ComboBox comboBox)
+            if (d is UIElement element)
             {
                 if ((bool)e.NewValue)
                 {
-                    //also handle breakpoints that have been handled, as is the first enter key press
-                    comboBox.AddHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(ComboBox_PreviewKeyDown), true);
+                    element.AddHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(Element_PreviewKeyDown), true);
                 }
                 else
                 {
-                    comboBox.RemoveHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(ComboBox_PreviewKeyDown));
+                    element.RemoveHandler(UIElement.PreviewKeyDownEvent, new KeyEventHandler(Element_PreviewKeyDown));
                 }
             }
         }
 
-        private static void ComboBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private static void Element_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.Key == Key.Enter || e.Key == Key.Tab) && sender is AutoCompleteComboBox comboBox)
+            if (e.Key != Key.Enter && e.Key != Key.Tab) return;
+
+            if (sender is AutoCompleteComboBox comboBox)
             {
                 var itemToSelect = comboBox.Items.CurrentItem;
-
-                if (itemToSelect == null && comboBox.HasItems)
-                {
-                    itemToSelect = comboBox.Items[0];
-                }
+                if (itemToSelect == null && comboBox.HasItems) itemToSelect = comboBox.Items[0];
 
                 if (itemToSelect != null)
                 {
-                    e.Handled = true;
-
+                    e.Handled = true; 
                     comboBox.SelectedItem = itemToSelect;
                     comboBox.IsDropDownOpen = false;
 
@@ -56,6 +52,46 @@ namespace Knihovna.Helpers
                     binding?.UpdateSource();
 
                     comboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                }
+            }
+            else if (sender is TextBox textBox)
+            {
+                if (e.Key != Key.Enter) return;
+
+                if (textBox.Parent is Panel parentPanel)
+                {
+                    ListBox listBox = null;
+                    System.Windows.Controls.Primitives.Popup popup = null;
+
+                    foreach (UIElement child in parentPanel.Children)
+                    {
+                        if (child is System.Windows.Controls.Primitives.Popup p)
+                        {
+                            popup = p;
+                            listBox = p.Child as ListBox;
+                            break;
+                        }
+                    }
+
+                    if (listBox != null)
+                    {
+                        var itemToSelect = listBox.Items.CurrentItem;
+
+                        if (itemToSelect == null && listBox.HasItems)
+                        {
+                            itemToSelect = listBox.Items[0];
+                        }
+
+                        if (itemToSelect != null)
+                        {
+                            e.Handled = true;
+
+                            listBox.SelectedItem = itemToSelect;
+
+                            if (popup != null) popup.IsOpen = false;
+                            textBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                        }
+                    }
                 }
             }
         }

@@ -68,7 +68,12 @@
         <Setter Property="Height" Value="28" />
     </Style>
 
-
+    <Style
+        x:Key="AutoCompleteTextBox"
+        BasedOn="{StaticResource {x:Type TextBox}}"
+        TargetType="TextBox">
+        <Setter Property="helpers:AutoCompleteHelper.SelectFirstOnEnter" Value="True" />
+    </Style>
 
     <Style x:Key="IsReadCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="Transparent" />
@@ -1001,7 +1006,7 @@
         <Setter Property="BorderBrush" Value="#555555" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="2" />
-
+        <Setter Property="helpers:AutoCompleteHelper.SelectFirstOnEnter" Value="True" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
 

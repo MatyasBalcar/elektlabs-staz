@@ -1,6 +1,7 @@
 ﻿using DotNetKit.Windows.Controls;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Data;
 
@@ -66,8 +67,8 @@ namespace Knihovna.Helpers
 
                 if (textBox.Parent is Panel parentPanel)
                 {
-                    ListBox listBox = null;
-                    System.Windows.Controls.Primitives.Popup popup = null;
+                    ListBox? listBox = null;
+                    Popup? popup = null;
 
                     foreach (UIElement child in parentPanel.Children)
                     {

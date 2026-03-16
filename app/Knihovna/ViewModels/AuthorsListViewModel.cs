@@ -20,6 +20,7 @@ namespace Knihovna.ViewModels
         private ObservableCollection<Nationality>? _allNationalities;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasActiveFilters))] 
         private Nationality? _selectedNationality;
 
         public AuthorsListViewModel(DatabaseManager dbManager)
@@ -119,5 +120,8 @@ namespace Knihovna.ViewModels
 
             RefreshData();
         }
+
+        public bool HasActiveFilters =>
+            SelectedNationality != null;
     }
 }

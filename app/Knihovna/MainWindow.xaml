@@ -71,7 +71,6 @@
                                 Grid.Column="2"
                                 Width="100"
                                 Height="25"
-                                Margin="5"
                                 VerticalAlignment="Center"
                                 Command="{Binding DataContext.ShowAuthorsCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                                 Content="Seznam autorů"
@@ -95,7 +94,7 @@
                                 HorizontalAlignment="Left"
                                 Orientation="Horizontal">
 
-                                <StackPanel Margin="0,0,10,0">
+                                <StackPanel Margin="0,0,12,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
 
                                     <controls:AutoCompleteComboBox
@@ -107,11 +106,11 @@
                                         TextSearch.TextPath="FullName" />
                                 </StackPanel>
 
-                                <StackPanel Margin="0,0,10,0">
+                                <StackPanel Margin="0,0,12,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
 
                                     <controls:AutoCompleteComboBox
-                                        Width="160"
+                                        Width="200"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllLanguages}"
                                         SelectedItem="{Binding SelectedLanguage}"
@@ -122,7 +121,7 @@
                                 <StackPanel Margin="0,0,10,0">
                                     <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
                                     <controls:AutoCompleteComboBox
-                                        Width="160"
+                                        Width="200"
                                         DisplayMemberPath="Name"
                                         ItemsSource="{Binding AllPublishers}"
                                         SelectedItem="{Binding SelectedPublisher}"
@@ -137,7 +136,7 @@
                                     VerticalAlignment="Bottom"
                                     Command="{Binding ClearFiltersCommand}"
                                     Content="Zrušit filtry"
-                                    Style="{StaticResource DangerButtonStyle}" />
+                                    Style="{StaticResource FilterButtonStyle}" />
                             </StackPanel>
                         </Grid>
 
@@ -344,7 +343,7 @@
                                     VerticalAlignment="Bottom"
                                     Command="{Binding ClearFiltersCommand}"
                                     Content="Zrušit filtry"
-                                    Style="{StaticResource DangerButtonStyle}" />
+                                    Style="{StaticResource FilterButtonStyle}" />
                             </StackPanel>
                         </Grid>
 

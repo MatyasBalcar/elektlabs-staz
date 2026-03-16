@@ -1,7 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Knihovna
@@ -12,7 +9,7 @@ namespace Knihovna
         {
             InitializeComponent();
             this.DataContext = new ViewModels.MainViewModel();
-        }
+        }   
         public void ShowToast(string message)
         {
             ToastText.Text = message;

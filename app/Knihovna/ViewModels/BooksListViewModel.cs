@@ -25,13 +25,17 @@ namespace Knihovna.ViewModels
         private ObservableCollection<Publisher>? _allPublishers;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasActiveFilters))]
         private Author? _selectedAuthor;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasActiveFilters))]
         private Language? _selectedLanguage;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(HasActiveFilters))]
         private Publisher? _selectedPublisher;
+
         public BooksListViewModel(DatabaseManager dbManager)
         {
             _dbManager = dbManager;
@@ -133,5 +137,10 @@ namespace Knihovna.ViewModels
 
             RefreshData();
         }
+
+        public bool HasActiveFilters =>
+            SelectedAuthor != null ||
+            SelectedLanguage != null ||
+            SelectedPublisher != null;
     }
 }

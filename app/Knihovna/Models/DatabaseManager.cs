@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace Knihovna.Models
 {
+    /*
+     * Method here could be instance method, for testing and such
+     */
     public class DatabaseManager
     {
         public static CultureInfo Culture { get; } = new("cs-CZ");

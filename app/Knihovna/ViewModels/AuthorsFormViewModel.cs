@@ -108,7 +108,7 @@ namespace Knihovna.ViewModels
                 return;
             }
 
-            var filtered = DatabaseManager.GetAllNationalities()
+            var filtered = AllNationalities?
                 .Where(n => n.Name.StartsWith(value, StringComparison.OrdinalIgnoreCase))
                 .OrderBy(n => n.Name)
                 .Take(ShownResultsCount)

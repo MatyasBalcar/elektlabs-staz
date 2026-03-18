@@ -58,7 +58,10 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Hledat:" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            Style="{StaticResource FilterLabelTextBlockStyle}"
+                            Text="Hledat:" />
 
                         <StackPanel
                             Grid.Row="1"
@@ -286,6 +289,7 @@
                         <TextBlock
                             Grid.Row="0"
                             Grid.Column="0"
+                            Margin="0,10,0,0"
                             VerticalAlignment="Center"
                             Style="{StaticResource FilterLabelTextBlockStyle}"
                             Text="Hledat:" />

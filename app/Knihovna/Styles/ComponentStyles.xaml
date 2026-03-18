@@ -665,7 +665,7 @@
         <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0" />
         <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource BaseColumnHeaderStyle}" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -710,7 +710,7 @@
                                             Orientation="Vertical"
                                             ViewportSize="{TemplateBinding ViewportHeight}"
                                             Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                            Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
                                     </Grid>
                                 </ControlTemplate>
                             </ScrollViewer.Template>
@@ -724,18 +724,45 @@
         </Setter>
     </Style>
 
+
+
+
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="#333333" />
+        <Setter Property="Background" Value="#f0f0f0" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Padding" Value="10,5" />
-        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <Border
+                        x:Name="HeaderBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="7,7,0,0"
+                        SnapsToDevicePixels="True">
 
+                        <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="True" />
+                    </Border>
+
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
+
+
 
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="BorderThickness" Value="0,0,0,0" />
@@ -1071,10 +1098,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
 
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="TabBorder" Property="Background" Value="White" />
-                            <Setter TargetName="TabBorder" Property="BorderBrush" Value="#007ACC" />
-                            <Setter TargetName="TabBorder" Property="BorderThickness" Value="1,1,1,0" />
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter Property="Background" Value="#f0f0f0" />
                             <Setter Property="Panel.ZIndex" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>

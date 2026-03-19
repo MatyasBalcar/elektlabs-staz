@@ -147,6 +147,14 @@ namespace Knihovna.Tests.Models
         }
 
         [TestMethod]
+        public void GetAuthors_FilterByName_ReturnsNothing()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAuthors(searchTerm: "Nezname Jmeno");
+            Assert.HasCount(0, result);
+        }
+
+        [TestMethod]
         public void GetAuthors_FilterByNationality_ReturnsMatch()
         {
             var manager = new DatabaseManager(_options!);

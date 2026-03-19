@@ -30,7 +30,7 @@ namespace Knihovna.Models
             }
         }
 
-        public static List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
+        public List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
             using var context = new AppDbContext();
             var query = context.Books
@@ -66,7 +66,7 @@ namespace Knihovna.Models
                         .ToList();
         }
 
-        public static List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
+        public List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
         {
             using var context = new AppDbContext();
             var query = context.Authors
@@ -89,7 +89,7 @@ namespace Knihovna.Models
                         .ToList();
         }
 
-        public static void SaveBook(Book book)
+        public void SaveBook(Book book)
         {
             using var context = new AppDbContext();
 
@@ -174,7 +174,7 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public static void DeleteBook(int bookId)
+        public void DeleteBook(int bookId)
         {
             using var context = new AppDbContext();
             var book = context.Books.Find(bookId);
@@ -183,7 +183,7 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public static void DeleteAuthor(int authorId)
+        public  void DeleteAuthor(int authorId)
         {
             using var context = new AppDbContext();
             //also deletes authors books
@@ -199,7 +199,7 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public static void SaveAuthor(Author author)
+        public  void SaveAuthor(Author author)
         {
             using var context = new AppDbContext();
 
@@ -242,7 +242,7 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public static List<Nationality> GetAllNationalities()
+        public  List<Nationality> GetAllNationalities()
         {
             using var context = new AppDbContext();
             return context.Nationalities
@@ -251,7 +251,7 @@ namespace Knihovna.Models
                 .ToList();
         }
 
-        public static List<Publisher> GetAllPublishers()
+        public  List<Publisher> GetAllPublishers()
         {
             using var context = new AppDbContext();
             return context.Publishers
@@ -260,7 +260,7 @@ namespace Knihovna.Models
                 .ToList();
         }
 
-        public static List<Language> GetAllLanguages()
+        public  List<Language> GetAllLanguages()
         {
             using var context = new AppDbContext();
             return context.Languages

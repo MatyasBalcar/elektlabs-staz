@@ -1,7 +1,6 @@
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\.msCoverageExtensionSourceRootsMapping_Knihovna.Tests
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\.msCoverageSourceRootsMapping_Knihovna.Tests
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\testhost.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\Microsoft.TestPlatform.AdapterUtilities.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\Knihovna.deps.json
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\Knihovna.runtimeconfig.json
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\Knihovna.exe
@@ -139,19 +138,6 @@ C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\ru\Mi
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\tr\Microsoft.Testing.Extensions.MSBuild.resources.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\zh-Hans\Microsoft.Testing.Extensions.MSBuild.resources.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\zh-Hant\Microsoft.Testing.Extensions.MSBuild.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\cs\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\de\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\es\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\fr\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\it\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\ja\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\ko\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\pl\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\pt-BR\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\ru\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\tr\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\zh-Hans\Microsoft.TestPlatform.AdapterUtilities.resources.dll
-C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\zh-Hant\Microsoft.TestPlatform.AdapterUtilities.resources.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 C:\Users\balcarm\Desktop\staz\app\Knihovna.Tests\bin\Debug\net10.0-windows\de\Microsoft.TestPlatform.CoreUtilities.resources.dll

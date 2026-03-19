@@ -12,7 +12,7 @@
           "DotNetKit.Wpf.AutoCompleteComboBox": "2.0.2",
           "FirebirdSql.EntityFrameworkCore.Firebird": "13.0.0",
           "Microsoft.EntityFrameworkCore.InMemory": "10.0.5",
-          "Microsoft.EntityFrameworkCore.Tools": "10.0.3"
+          "Microsoft.EntityFrameworkCore.Tools": "10.0.5"
         },
         "runtime": {
           "Knihovna.dll": {}
@@ -45,7 +45,7 @@
       "FirebirdSql.EntityFrameworkCore.Firebird/13.0.0": {
         "dependencies": {
           "FirebirdSql.Data.FirebirdClient": "10.3.4",
-          "Microsoft.EntityFrameworkCore.Relational": "10.0.3"
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/FirebirdSql.EntityFrameworkCore.Firebird.dll": {
@@ -368,25 +368,25 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Design/10.0.3": {
+      "Microsoft.EntityFrameworkCore.Design/10.0.5": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.Build.Framework": "18.0.2",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "5.0.0",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "5.0.0",
-          "Microsoft.EntityFrameworkCore.Relational": "10.0.3",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5",
           "Microsoft.Extensions.Caching.Memory": "10.0.5",
-          "Microsoft.Extensions.Configuration.Abstractions": "10.0.3",
-          "Microsoft.Extensions.DependencyModel": "10.0.3",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.5",
+          "Microsoft.Extensions.DependencyModel": "10.0.5",
           "Microsoft.Extensions.Logging": "10.0.5",
           "Mono.TextTemplating": "3.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "10.0.3.0",
-            "fileVersion": "10.0.326.7603"
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -403,23 +403,23 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/10.0.3": {
+      "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.Extensions.Caching.Memory": "10.0.5",
-          "Microsoft.Extensions.Configuration.Abstractions": "10.0.3",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.5",
           "Microsoft.Extensions.Logging": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "10.0.3.0",
-            "fileVersion": "10.0.326.7603"
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/10.0.3": {
+      "Microsoft.EntityFrameworkCore.Tools/10.0.5": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "10.0.3"
+          "Microsoft.EntityFrameworkCore.Design": "10.0.5"
         }
       },
       "Microsoft.Extensions.Caching.Abstractions/10.0.5": {
@@ -448,14 +448,14 @@
           }
         }
       },
-      "Microsoft.Extensions.Configuration.Abstractions/10.0.3": {
+      "Microsoft.Extensions.Configuration.Abstractions/10.0.5": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.326.7603"
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -478,11 +478,11 @@
           }
         }
       },
-      "Microsoft.Extensions.DependencyModel/10.0.3": {
+      "Microsoft.Extensions.DependencyModel/10.0.5": {
         "runtime": {
           "lib/net10.0/Microsoft.Extensions.DependencyModel.dll": {
-            "assemblyVersion": "10.0.0.3",
-            "fileVersion": "10.0.326.7603"
+            "assemblyVersion": "10.0.0.5",
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -713,12 +713,12 @@
       "path": "microsoft.entityframeworkcore.abstractions/10.0.5",
       "hashPath": "microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Design/10.0.3": {
+    "Microsoft.EntityFrameworkCore.Design/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OPZ/u7fONQFmnyUIDB8SeJtKnyFkj1zJsZ0Ke2Cp17q8hYs6jGmYEFd6Ne4Hdcd6auUdFdV7di+uFo2w+L34NA==",
-      "path": "microsoft.entityframeworkcore.design/10.0.3",
-      "hashPath": "microsoft.entityframeworkcore.design.10.0.3.nupkg.sha512"
+      "sha512": "sha512-gm6f0cC2w/2tcd4GeZJqEMruTercpIJfO5sSAFLtqTqblDBHgAFk70xwshUIUVX4I6sZwdEUSd1YxoKFk1AL0w==",
+      "path": "microsoft.entityframeworkcore.design/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.design.10.0.5.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.InMemory/10.0.5": {
       "type": "package",
@@ -727,19 +727,19 @@
       "path": "microsoft.entityframeworkcore.inmemory/10.0.5",
       "hashPath": "microsoft.entityframeworkcore.inmemory.10.0.5.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/10.0.3": {
+    "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Pmh60OK9neVr/M0FJwm9hlzm2bD4Kd65SID8E6SP5c90tExNgXwORrlEWl0oGU/ig9ifpNN4PSpIrnHNozlT5w==",
-      "path": "microsoft.entityframeworkcore.relational/10.0.3",
-      "hashPath": "microsoft.entityframeworkcore.relational.10.0.3.nupkg.sha512"
+      "sha512": "sha512-uxmFjZEAB/KbsgWFSS4lLqkEHCfXxB2x0UcbiO4e5fCRpFFeTMSx/me6009nYJLu5IKlDwO1POh++P6RilFTDw==",
+      "path": "microsoft.entityframeworkcore.relational/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.relational.10.0.5.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Tools/10.0.3": {
+    "Microsoft.EntityFrameworkCore.Tools/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-m6DcnrjYfYwNrxcLjchzehd7kLEVGo33Vq83O2y6GXtEgAL0JdBTWtqZzGuRa/8YFcrEUxfYlsSpu4w1SdYcAg==",
-      "path": "microsoft.entityframeworkcore.tools/10.0.3",
-      "hashPath": "microsoft.entityframeworkcore.tools.10.0.3.nupkg.sha512"
+      "sha512": "sha512-maSlvKez/gwy88zoLXCafRh0gEFmakM7fnf6zEi6nyItp7A1Negmp/YBodiuWcxLUguvVkPJZX15MnLeuJwjQA==",
+      "path": "microsoft.entityframeworkcore.tools/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.tools.10.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/10.0.5": {
       "type": "package",
@@ -755,12 +755,12 @@
       "path": "microsoft.extensions.caching.memory/10.0.5",
       "hashPath": "microsoft.extensions.caching.memory.10.0.5.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.Abstractions/10.0.3": {
+    "Microsoft.Extensions.Configuration.Abstractions/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xVDHL0+SIgemfh95fTO9cGLe17TWv/ZP0n7m01z8X6pzt2DmQpucioWR/mYZA1sRlkWnkXzfl0JweLNWmE9WMg==",
-      "path": "microsoft.extensions.configuration.abstractions/10.0.3",
-      "hashPath": "microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512"
+      "sha512": "sha512-P09QpTHjqHmCLQOTC+WyLkoRNxek4NIvfWt+TnU0etoDUSRxcltyd6+j/ouRbMdLR0j44GqGO+lhI2M4fAHG4g==",
+      "path": "microsoft.extensions.configuration.abstractions/10.0.5",
+      "hashPath": "microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/10.0.5": {
       "type": "package",
@@ -776,12 +776,12 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/10.0.5",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.10.0.5.nupkg.sha512"
     },
-    "Microsoft.Extensions.DependencyModel/10.0.3": {
+    "Microsoft.Extensions.DependencyModel/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-31kRjr1fgdJO1UZ/AsjL2noqwht+juHMQ8c/oh8CEsDhlM2+0zwVZVsZjxSfOFiPtn5+6kRGuvSbLAufAPT0kA==",
-      "path": "microsoft.extensions.dependencymodel/10.0.3",
-      "hashPath": "microsoft.extensions.dependencymodel.10.0.3.nupkg.sha512"
+      "sha512": "sha512-xA4kkL+QS6KCAOKz/O0oquHs44Ob8J7zpBCNt3wjkBWDg5aCqfwG8rWWLsg5V86AM0sB849g9JjPjIdksTCIKg==",
+      "path": "microsoft.extensions.dependencymodel/10.0.5",
+      "hashPath": "microsoft.extensions.dependencymodel.10.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/10.0.5": {
       "type": "package",

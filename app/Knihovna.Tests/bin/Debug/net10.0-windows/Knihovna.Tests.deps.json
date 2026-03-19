@@ -12,6 +12,7 @@
           "MSTest": "4.0.2",
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.EntityFrameworkCore.InMemory": "10.0.5",
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5",
           "MSTest.TestFramework.Extensions": "4.0.2.0"
         },
         "runtime": {
@@ -45,7 +46,7 @@
       "FirebirdSql.EntityFrameworkCore.Firebird/13.0.0": {
         "dependencies": {
           "FirebirdSql.Data.FirebirdClient": "10.3.4",
-          "Microsoft.EntityFrameworkCore.Relational": "10.0.0"
+          "Microsoft.EntityFrameworkCore.Relational": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/FirebirdSql.EntityFrameworkCore.Firebird.dll": {
@@ -104,17 +105,17 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/10.0.0": {
+      "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.Extensions.Caching.Memory": "10.0.5",
-          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.5",
           "Microsoft.Extensions.Logging": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.25.52411"
+            "assemblyVersion": "10.0.5.0",
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -144,14 +145,14 @@
           }
         }
       },
-      "Microsoft.Extensions.Configuration.Abstractions/10.0.0": {
+      "Microsoft.Extensions.Configuration.Abstractions/10.0.5": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "10.0.5"
         },
         "runtime": {
           "lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.25.52411"
+            "fileVersion": "10.0.526.15411"
           }
         }
       },
@@ -1277,12 +1278,12 @@
       "path": "microsoft.entityframeworkcore.inmemory/10.0.5",
       "hashPath": "microsoft.entityframeworkcore.inmemory.10.0.5.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/10.0.0": {
+    "Microsoft.EntityFrameworkCore.Relational/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-A3MX1ee7RDxWCUdx/KqP+74fbksz0UIhkVZh56YHvbPkEKsffCXgHU3LGkRDwqR/MrBNWLCWC/IVX79tzM30ZA==",
-      "path": "microsoft.entityframeworkcore.relational/10.0.0",
-      "hashPath": "microsoft.entityframeworkcore.relational.10.0.0.nupkg.sha512"
+      "sha512": "sha512-uxmFjZEAB/KbsgWFSS4lLqkEHCfXxB2x0UcbiO4e5fCRpFFeTMSx/me6009nYJLu5IKlDwO1POh++P6RilFTDw==",
+      "path": "microsoft.entityframeworkcore.relational/10.0.5",
+      "hashPath": "microsoft.entityframeworkcore.relational.10.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/10.0.5": {
       "type": "package",
@@ -1298,12 +1299,12 @@
       "path": "microsoft.extensions.caching.memory/10.0.5",
       "hashPath": "microsoft.extensions.caching.memory.10.0.5.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.Abstractions/10.0.0": {
+    "Microsoft.Extensions.Configuration.Abstractions/10.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-d2kDKnCsJvY7mBVhcjPSp9BkJk48DsaHPg5u+Oy4f8XaOqnEedRy/USyvnpHL92wpJ6DrTPy7htppUUzskbCXQ==",
-      "path": "microsoft.extensions.configuration.abstractions/10.0.0",
-      "hashPath": "microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512"
+      "sha512": "sha512-P09QpTHjqHmCLQOTC+WyLkoRNxek4NIvfWt+TnU0etoDUSRxcltyd6+j/ouRbMdLR0j44GqGO+lhI2M4fAHG4g==",
+      "path": "microsoft.extensions.configuration.abstractions/10.0.5",
+      "hashPath": "microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/10.0.5": {
       "type": "package",

@@ -1,5 +1,5 @@
 Write-Host "Running Tests"
-
+cd ..
 dotnet test --nologo --verbosity quiet
 
 if ($LASTEXITCODE -ne 0) {

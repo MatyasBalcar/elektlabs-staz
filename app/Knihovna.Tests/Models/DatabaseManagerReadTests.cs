@@ -1,5 +1,8 @@
 ﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace Knihovna.Tests.Models
 {
@@ -247,6 +250,40 @@ namespace Knihovna.Tests.Models
             Assert.AreEqual("R.U.R.", result[1].Name);
             Assert.AreEqual("Rychlé šípy", result[2].Name);
             Assert.AreEqual("Válka s mloky", result[3].Name);
+        }
+
+        [TestMethod]
+        public void GetAllNationalities_ReturnsSorted()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+
+            using (var context = new AppDbContext(options))
+            {
+                context.Nationalities.Add(new Nationality { Name = "USA" });
+                context.Nationalities.Add(new Nationality { Name = "Albania" });
+                context.SaveChanges();
+            }
+
+            var manager = new DatabaseManager(options);
+            var result = manager.GetAllNationalities();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Albania", result[0].Name);
+        }
+
+        [TestMethod]
+        public void GetAllNationalities_ReturnsNothing()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+
+            var manager = new DatabaseManager(options);
+            var result = manager.GetAllNationalities();
+
+            Assert.AreEqual(0, result.Count);
         }
     }
 }

@@ -21,6 +21,6 @@
 
   <ItemGroup>
     <None Include=".githooks\pre-commit" />
-    <None Include=".githooks\test.ps1" />
+    <None Include=".githooks\pre-commit.ps1" />
   </ItemGroup>
 </Project>

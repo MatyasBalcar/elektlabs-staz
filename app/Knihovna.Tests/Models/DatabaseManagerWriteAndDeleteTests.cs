@@ -1,5 +1,9 @@
 ﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Knihovna.Tests.Models
@@ -26,7 +30,7 @@ namespace Knihovna.Tests.Models
             manager.SaveBook(book);
 
             using var context = new AppDbContext(_options!);
-            Assert.HasCount(1, context.Books);
+            Assert.AreEqual(1, context.Books.Count());
             Assert.AreEqual("Test Book", context.Books.First().Name);
         }
 
@@ -87,26 +91,47 @@ namespace Knihovna.Tests.Models
 
             using (var context = new AppDbContext(_options!))
             {
-                Assert.HasCount(0, context.Authors);
-                Assert.HasCount(0, context.Books);
+                Assert.AreEqual(0, context.Authors.Count());
+                Assert.AreEqual(0, context.Books.Count());
             }
         }
 
+
+
         [TestMethod]
-        public void GetAllNationalities_ReturnsSorted()
+        public void SaveAuthor_NewAuthor_Inserts()
+        {
+            var manager = new DatabaseManager(_options!);
+            var author = new Author { FirstName = "New", LastName = "Author" };
+
+            manager.SaveAuthor(author);
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(1, context.Authors.Count());
+            Assert.AreEqual("New", context.Authors.First().FirstName);
+        }
+
+        [TestMethod]
+        public void SaveBook_WithExistingAuthor_AssociatesAuthor()
         {
             using (var context = new AppDbContext(_options!))
             {
-                context.Nationalities.Add(new Nationality { Name = "USA" });
-                context.Nationalities.Add(new Nationality { Name = "Albania" });
+                context.Authors.Add(new Author { AuthorId = 42, FirstName = "Linked", LastName = "Author" });
                 context.SaveChanges();
             }
 
             var manager = new DatabaseManager(_options!);
-            var result = manager.GetAllNationalities();
+            var book = new Book { Name = "Book With Author", Authors = new List<Author> { new Author { AuthorId = 42 } } };
 
-            Assert.HasCount(2, result);
-            Assert.AreEqual("Albania", result[0].Name);
+            manager.SaveBook(book);
+
+            using (var context = new AppDbContext(_options!))
+            {
+                var dbBook = context.Books.Include(b => b.Authors).FirstOrDefault(b => b.Name == "Book With Author");
+                Assert.IsNotNull(dbBook);
+                Assert.AreEqual(1, dbBook.Authors.Count);
+                Assert.AreEqual(42, dbBook.Authors.First().AuthorId);
+            }
         }
     }
 }

@@ -6,5 +6,5 @@ app/Knihovna/obj/
 *.user
 app/Knihovna/.vs/
 app/Knihovna/Properties
-app/Knihovna.Tests/bin
-app/Knihovna.Tests/obj
+app/Knihovna.Tests/bin/
+app/Knihovna.Tests/obj/

@@ -51,10 +51,10 @@ namespace Knihovna.ViewModels
         {
             _dbManager = dbManager;
 
-            AllAuthors = new ObservableCollection<Author>(DatabaseManager.GetAuthors());
+            AllAuthors = new ObservableCollection<Author>(_dbManager.GetAuthors());
 
-            var languages = DatabaseManager.GetAllLanguages();
-            var publishers = DatabaseManager.GetAllPublishers();
+            var languages = _dbManager.GetAllLanguages();
+            var publishers = _dbManager.GetAllPublishers();
 
             AllPublishers = new ObservableCollection<Publisher>(publishers);
             AllLanguages = new ObservableCollection<Language>(languages);
@@ -147,7 +147,7 @@ namespace Knihovna.ViewModels
 
             try
             {
-                DatabaseManager.SaveBook(EditingBook);
+                _dbManager.SaveBook(EditingBook);
                 return true;
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
@@ -239,7 +239,7 @@ namespace Knihovna.ViewModels
             {
 
 
-                var newAuthors = DatabaseManager.GetAuthors();
+                var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
 
                 SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);

@@ -25,7 +25,7 @@ namespace Knihovna.ViewModels
         {
             _dbManager = dbManager;
 
-            var nationalities = DatabaseManager.GetAllNationalities();
+            var nationalities = _dbManager.GetAllNationalities();
             AllNationalities = new ObservableCollection<Nationality>(nationalities);
 
             if (author == null)
@@ -77,7 +77,7 @@ namespace Knihovna.ViewModels
 
             try
             {
-                DatabaseManager.SaveAuthor(CurrentAuthor);
+                _dbManager.SaveAuthor(CurrentAuthor);
                 return true;
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
@@ -114,7 +114,7 @@ namespace Knihovna.ViewModels
                 .Take(ShownResultsCount)
                 .ToList();
 
-            SuggestedNationalities = new ObservableCollection<Nationality>(filtered);
+            SuggestedNationalities = new ObservableCollection<Nationality>(filtered)t;
             IsSuggestionsVisible = SuggestedNationalities.Count > 0;
         }
 

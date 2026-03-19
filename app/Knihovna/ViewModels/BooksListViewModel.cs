@@ -50,9 +50,9 @@ namespace Knihovna.ViewModels
 
         public void LoadFilterData()
         {
-            AllAuthors = new ObservableCollection<Author>(DatabaseManager.GetAuthors());
-            AllLanguages = new ObservableCollection<Language>(DatabaseManager.GetAllLanguages());
-            AllPublishers = new ObservableCollection<Publisher>(DatabaseManager.GetAllPublishers());
+            AllAuthors = new ObservableCollection<Author>(_dbManager.GetAuthors());
+            AllLanguages = new ObservableCollection<Language>(_dbManager.GetAllLanguages());
+            AllPublishers = new ObservableCollection<Publisher>(_dbManager.GetAllPublishers());
         }
 
         [RelayCommand]
@@ -66,7 +66,7 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void RefreshData()
         {
-            var data = DatabaseManager.GetBooks(
+            var data = _dbManager.GetBooks(
                 SearchText,
                 SelectedAuthor?.FullName,
                 SelectedLanguage?.Name,
@@ -84,7 +84,7 @@ namespace Knihovna.ViewModels
             {
                 try
                 {
-                    DatabaseManager.DeleteBook(book.BookId);
+                    _dbManager.DeleteBook(book.BookId);
                     RefreshData();
                 }
                 catch (Exception ex)

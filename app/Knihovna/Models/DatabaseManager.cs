@@ -1,14 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace Knihovna.Models
 {
-    /*
-     * Method here could be instance method, for testing and such
-     */
     public class DatabaseManager
     {
+        private readonly DbContextOptions<AppDbContext>? _options;
+
         public static CultureInfo Culture { get; } = new("cs-CZ");
+
+        public DatabaseManager(DbContextOptions<AppDbContext> options)
+        {
+            _options = options;
+        }
+
+        public DatabaseManager() { }
+
+        private AppDbContext CreateContext()
+        {
+            return _options != null ? new AppDbContext(_options) : new AppDbContext();
+        }
 
         public static bool TestConnection(out string errorMessage)
         {
@@ -32,7 +46,7 @@ namespace Knihovna.Models
 
         public List<Book> GetBooks(string? name = "", string? author = "", string? language = "", string? publisher = "")
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             var query = context.Books
                 .Include(b => b.Publisher)
                 .Include(b => b.Language)
@@ -61,14 +75,14 @@ namespace Knihovna.Models
                 query = query.Where(b => b.Publisher != null && b.Publisher.Name.Contains(publisher));
             }
 
-            return query.ToList()//I am sorting in c# not on db level but I use czech chars, same in authors
+            return query.ToList()
                         .OrderBy(a => a.Name, StringComparer.Create(Culture, false))
                         .ToList();
         }
 
         public List<Author> GetAuthors(string? searchTerm = "", string? nationality = "")
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             var query = context.Authors
                 .Include(a => a.Books)
                 .Include(a => a.Nationality)
@@ -81,7 +95,6 @@ namespace Knihovna.Models
             if (!string.IsNullOrWhiteSpace(nationality))
             {
                 query = query.Where(a => a.Nationality != null && a.Nationality.Name.Contains(nationality));
-
             }
 
             return query.ToList()
@@ -91,7 +104,7 @@ namespace Knihovna.Models
 
         public void SaveBook(Book book)
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
 
             if (book.Language != null)
             {
@@ -176,17 +189,17 @@ namespace Knihovna.Models
 
         public void DeleteBook(int bookId)
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             var book = context.Books.Find(bookId);
             if (book == null) return;
             context.Books.Remove(book);
             context.SaveChanges();
         }
 
-        public  void DeleteAuthor(int authorId)
+        public void DeleteAuthor(int authorId)
         {
-            using var context = new AppDbContext();
-            //also deletes authors books
+            using var context = CreateContext();
+
             var booksToDelete = context.Books
                 .Where(b => b.Authors.Any(a => a.AuthorId == authorId))
                 .ToList();
@@ -199,9 +212,9 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public  void SaveAuthor(Author author)
+        public void SaveAuthor(Author author)
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
 
             if (author.Nationality != null)
             {
@@ -242,27 +255,27 @@ namespace Knihovna.Models
             context.SaveChanges();
         }
 
-        public  List<Nationality> GetAllNationalities()
+        public List<Nationality> GetAllNationalities()
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             return context.Nationalities
                 .ToList()
                 .OrderBy(n => n.Name, StringComparer.Create(Culture, false))
                 .ToList();
         }
 
-        public  List<Publisher> GetAllPublishers()
+        public List<Publisher> GetAllPublishers()
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             return context.Publishers
                 .ToList()
                 .OrderBy(p => p.Name, StringComparer.Create(Culture, false))
                 .ToList();
         }
 
-        public  List<Language> GetAllLanguages()
+        public List<Language> GetAllLanguages()
         {
-            using var context = new AppDbContext();
+            using var context = CreateContext();
             return context.Languages
                 .ToList()
                 .OrderBy(l => l.Name, StringComparer.Create(Culture, false))

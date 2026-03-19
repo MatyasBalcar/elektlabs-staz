@@ -1,10 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System;
 
 namespace Knihovna.Models
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+        }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -13,19 +22,20 @@ namespace Knihovna.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string baseDir = AppContext.BaseDirectory;
-            //publish
-            string dbPath = Path.Combine(baseDir, "db", "KNIHOVNADB.FDB");
-
-            //vs 
-            if (!File.Exists(dbPath))
+            if (!optionsBuilder.IsConfigured)
             {
-                dbPath = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", "db", "KNIHOVNADB.FDB"));
+                string baseDir = AppContext.BaseDirectory;
+                string dbPath = Path.Combine(baseDir, "db", "KNIHOVNADB.FDB");
+
+                if (!File.Exists(dbPath))
+                {
+                    dbPath = Path.GetFullPath(Path.Combine(baseDir, "..", "..", "..", "db", "KNIHOVNADB.FDB"));
+                }
+
+                string newConnectionString = $"User=SYSDBA;Password=masterkey;Database=localhost:{dbPath};Charset=UTF8;";
+
+                optionsBuilder.UseFirebird(newConnectionString);
             }
-
-            string newConnectionString = $"User=SYSDBA;Password=masterkey;Database=localhost:{dbPath};Charset=UTF8;";
-
-            optionsBuilder.UseFirebird(newConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

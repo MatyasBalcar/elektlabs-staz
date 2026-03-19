@@ -6,7 +6,7 @@ namespace Knihovna.Tests.Models
     [TestClass]
     public class DatabaseManagerWriteAndDeleteTests
     {
-        private DbContextOptions<AppDbContext> _options;
+        private DbContextOptions<AppDbContext>? _options;
 
         [TestInitialize]
         public void Setup()

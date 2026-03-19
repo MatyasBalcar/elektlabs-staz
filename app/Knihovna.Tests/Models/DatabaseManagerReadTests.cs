@@ -6,7 +6,7 @@ namespace Knihovna.Tests.Models
     [TestClass]
     public class DatabaseManagerReadTests
     {
-        private DbContextOptions<AppDbContext> _options;
+        private DbContextOptions<AppDbContext>? _options;
 
         [TestInitialize]
         public void Setup()
@@ -58,7 +58,7 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options);
             var result = manager.GetBooks();
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
             Assert.AreEqual("R.U.R.", result[0].Name);
         }
 
@@ -67,7 +67,7 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options);
             var result = manager.GetBooks(name: "Válka");
-            Assert.AreEqual(1, result.Count);
+            Assert.HasCount(1, result);
             Assert.AreEqual("Válka s mloky", result[0].Name);
         }
 
@@ -76,7 +76,7 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options);
             var result = manager.GetAuthors();
-            Assert.AreEqual(1, result.Count);
+            Assert.HasCount(1, result);
             Assert.AreEqual("Karel Čapek", result[0].FullName);
         }
     }

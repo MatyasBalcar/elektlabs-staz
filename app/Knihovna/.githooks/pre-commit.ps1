@@ -1,5 +1,5 @@
 Write-Host "Running Tests"
-cd ..
+cd app/Knihovna/
 dotnet test --nologo --verbosity quiet
 
 if ($LASTEXITCODE -ne 0) {

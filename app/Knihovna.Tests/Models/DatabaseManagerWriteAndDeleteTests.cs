@@ -1,11 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
-using Knihovna.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
-namespace Knihovna.Tests
+namespace Knihovna.Tests.Models
 {
     [TestClass]
     public class DatabaseManagerWriteAndDeleteTests

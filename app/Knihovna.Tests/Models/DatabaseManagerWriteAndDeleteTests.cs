@@ -26,7 +26,7 @@ namespace Knihovna.Tests.Models
             manager.SaveBook(book);
 
             using var context = new AppDbContext(_options!);
-            Assert.AreEqual(1, context.Books.Count());
+            Assert.HasCount(1, context.Books);
             Assert.AreEqual("Test Book", context.Books.First().Name);
         }
 
@@ -87,8 +87,8 @@ namespace Knihovna.Tests.Models
 
             using (var context = new AppDbContext(_options!))
             {
-                Assert.AreEqual(0, context.Authors.Count());
-                Assert.AreEqual(0, context.Books.Count());
+                Assert.HasCount(0, context.Authors);
+                Assert.HasCount(0, context.Books);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Knihovna.Tests.Models
             var manager = new DatabaseManager(_options!);
             var result = manager.GetAllNationalities();
 
-            Assert.AreEqual(2, result.Count);
+            Assert.HasCount(2, result);
             Assert.AreEqual("Albania", result[0].Name);
         }
     }

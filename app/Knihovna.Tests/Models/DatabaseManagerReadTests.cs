@@ -29,6 +29,7 @@ namespace Knihovna.Tests.Models
             var pub1 = new Publisher { PublisherID = 1, Name = "Argo" };
             var pub2 = new Publisher { PublisherID = 2, Name = "Penguin Books" };
             var natCze = new Nationality { NationalityID = 1, Name = "Czech" };
+            var natPol = new Nationality { NationalityID = 2, Name = "Poland" };
             var author1 = new Author { AuthorId = 1, FirstName = "Karel", LastName = "Čapek", Nationality = natCze };
             var author2 = new Author { AuthorId = 2, FirstName = "Jaroslav", LastName = "Foglar", Nationality = natCze };
 
@@ -36,6 +37,7 @@ namespace Knihovna.Tests.Models
             context.Languages.AddRange(langCze, langEng);
             context.Publishers.AddRange(pub1, pub2);
             context.Nationalities.Add(natCze);
+            context.Nationalities.Add(natPol);
             context.Authors.Add(author1);
             context.Authors.Add(author2);
 
@@ -132,5 +134,36 @@ namespace Knihovna.Tests.Models
             Assert.AreEqual("Jaroslav Foglar", result[0].FullName);
             Assert.AreEqual("Karel Čapek", result[1].FullName);
         }
+        /*
+         * Filters 
+         */
+        [TestMethod]
+        public void GetAuthors_FilterByName_ReturnsMatch()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAuthors(searchTerm: "Karel");
+            Assert.HasCount(1, result);
+            Assert.AreEqual("Karel Čapek", result[0].FullName);
+        }
+
+        [TestMethod]
+        public void GetAuthors_FilterByNationality_ReturnsMatch()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAuthors(nationality: "Czech");
+            Assert.HasCount(2, result);
+            Assert.AreEqual("Jaroslav Foglar", result[0].FullName);
+            Assert.AreEqual("Karel Čapek", result[1].FullName);
+        }
+
+        [TestMethod]
+        public void GetAuthors_FilterByNationality_ReturnsNothing()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAuthors(nationality: "Poland");
+            Assert.HasCount(0, result);
+
+        }
+
     }
 }

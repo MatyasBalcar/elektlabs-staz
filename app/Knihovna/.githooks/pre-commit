@@ -1,4 +1,0 @@
-#!/bin/sh
-
-powershell -ExecutionPolicy Bypass -File "app/knihovna/.githooks/pre-commit.ps1"
-exit $? 

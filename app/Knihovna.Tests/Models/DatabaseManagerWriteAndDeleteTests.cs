@@ -33,6 +33,9 @@ namespace Knihovna.Tests.Models
                 Publisher = new Publisher { Name = "TestPub" }
             };
 
+            var validation = book.Validate();
+            Assert.IsTrue(string.IsNullOrWhiteSpace(validation), "Book should be valid before saving: " + validation);
+
             manager.SaveBook(book);
 
             using var context = new AppDbContext(_options!);
@@ -111,6 +114,9 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options!);
             var author = new Author { FirstName = "New", LastName = "Author", Nationality = new Nationality { Name = "Czech" } };
+
+            var validation = author.Validate();
+            Assert.IsTrue(string.IsNullOrWhiteSpace(validation), "Author should be valid before saving: " + validation);
 
             manager.SaveAuthor(author);
 

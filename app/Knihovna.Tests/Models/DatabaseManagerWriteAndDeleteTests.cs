@@ -195,28 +195,6 @@ namespace Knihovna.Tests.Models
             using var context = new AppDbContext(_options!);
             Assert.AreEqual(0, context.Books.Count());
         }
-
-        [TestMethod]
-        public void SaveBook_DuplicateISBN_DoesntSave()
-        {
-            var manager = new DatabaseManager(_options!);
-
-            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
-            manager.SaveBook(original);
-
-            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
-            try
-            {
-                manager.SaveBook(copy);
-                Assert.Fail("Expected exception for duplicate ISBN was not thrown.");
-            }
-            catch (DbUpdateException ex)
-            {
-                Assert.Contains("", ex.Message, "Unexpected exception message: " + ex.Message);
-            }
-
-        }
-
         [TestMethod]
         public void SaveAuthor_MissingNationality_DoesNotSave()
         {

@@ -22,23 +22,23 @@ namespace Knihovna.Tests.Models
 
         private void SeedDatabase(AppDbContext context)
         {
-            var langCze = new Language { LanguageID = 1, Name = "Čeština" };
-            var langEng = new Language { LanguageID = 2, Name = "English" };
+            var langCze = new Language {  Name = "Čeština" };
+            var langEng = new Language {  Name = "English" };
 
-            var pub1 = new Publisher { PublisherID = 1, Name = "Argo" };
-            var pub2 = new Publisher { PublisherID = 2, Name = "Penguin Books" };
+            var pubArgo = new Publisher {  Name = "Argo" };
+            var pubPenguin = new Publisher {  Name = "Penguin Books" };
 
-            var natCze = new Nationality { NationalityID = 1, Name = "Czech" };
-            var natPol = new Nationality { NationalityID = 2, Name = "Poland" };
+            var natCze = new Nationality {  Name = "Czech" };
+            var natPol = new Nationality {  Name = "Poland" };
 
-            var author1 = new Author { AuthorId = 1, FirstName = "Karel", LastName = "Čapek", Nationality = natCze };
-            var author2 = new Author { AuthorId = 2, FirstName = "Jaroslav", LastName = "Foglar", Nationality = natCze };
-            var author3 = new Author { AuthorId = 3, FirstName = "Neznámý", LastName = "Autor", Nationality = natPol };
+            var authorCapek = new Author {  FirstName = "Karel", LastName = "Čapek", Nationality = natCze };
+            var authorFoglar = new Author {  FirstName = "Jaroslav", LastName = "Foglar", Nationality = natCze };
+            var authorUnknown = new Author {  FirstName = "Neznámý", LastName = "Autor", Nationality = natPol };
 
             context.Languages.AddRange(langCze, langEng);
-            context.Publishers.AddRange(pub1, pub2);
+            context.Publishers.AddRange(pubArgo, pubPenguin);
             context.Nationalities.AddRange(natCze, natPol);
-            context.Authors.AddRange(author1, author2, author3);
+            context.Authors.AddRange(authorCapek, authorFoglar, authorUnknown);
 
             context.Books.AddRange(
                 new Book
@@ -46,32 +46,32 @@ namespace Knihovna.Tests.Models
                     BookId = 1,
                     Name = "R.U.R.",
                     Language = langCze,
-                    Publisher = pub1,
-                    Authors = new List<Author> { author1 }
+                    Publisher = pubArgo,
+                    Authors = new List<Author> { authorCapek }
                 },
                 new Book
                 {
                     BookId = 2,
                     Name = "Válka s mloky",
                     Language = langCze,
-                    Publisher = pub1,
-                    Authors = new List<Author> { author1 }
+                    Publisher = pubArgo,
+                    Authors = new List<Author> { authorCapek }
                 },
                 new Book
                 {
                     BookId = 3,
                     Name = "Rychlé šípy",
                     Language = langCze,
-                    Publisher = pub2,
-                    Authors = new List<Author> { author2 }
+                    Publisher = pubPenguin,
+                    Authors = new List<Author> { authorFoglar }
                 },
                 new Book
                 {
                     BookId = 4,
                     Name = "English Book",
                     Language = langEng,
-                    Publisher = pub2,
-                    Authors = new List<Author> { author3 }
+                    Publisher = pubPenguin,
+                    Authors = new List<Author> { authorUnknown }
                 }
             );
 

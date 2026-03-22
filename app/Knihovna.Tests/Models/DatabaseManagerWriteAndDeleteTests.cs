@@ -197,6 +197,27 @@ namespace Knihovna.Tests.Models
         }
 
         [TestMethod]
+        public void SaveBook_DuplicateISBN_DoesntSave()
+        {
+            var manager = new DatabaseManager(_options!);
+
+            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            manager.SaveBook(original);
+
+            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            try
+            {
+                manager.SaveBook(copy);
+                Assert.Fail("Expected exception for duplicate ISBN was not thrown.");
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex.Message.Contains(""), "Unexpected exception message: " + ex.Message);
+            }
+
+        }
+
+        [TestMethod]
         public void SaveAuthor_MissingNationality_DoesNotSave()
         {
             var author = new Author { FirstName = "NoNat", LastName = "Author", Nationality = null, NationalityId = null };
@@ -208,6 +229,5 @@ namespace Knihovna.Tests.Models
             Assert.AreEqual(0, context.Authors.Count());
         }
     }
-    // dupli isbn
     
 }

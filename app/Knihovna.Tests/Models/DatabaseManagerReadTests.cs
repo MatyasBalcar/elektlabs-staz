@@ -180,6 +180,26 @@ namespace Knihovna.Tests.Models
             Assert.HasCount(2, result2);
         }
 
+
+        [TestMethod]
+        public void GetAllPublishers_ReturnsSorted()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAllPublishers();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Argo", result[0].Name);
+        }
+
+        [TestMethod]
+        public void GetAllLanguages_ReturnsSorted()
+        {
+            var manager = new DatabaseManager(_options!);
+            var result = manager.GetAllLanguages();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Čeština", result[0].Name);
+        }
         // -------------------
         // AUTHORS
         // -------------------
@@ -255,22 +275,13 @@ namespace Knihovna.Tests.Models
         [TestMethod]
         public void GetAllNationalities_ReturnsSorted()
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
 
-            using (var context = new AppDbContext(options))
-            {
-                context.Nationalities.Add(new Nationality { Name = "USA" });
-                context.Nationalities.Add(new Nationality { Name = "Albania" });
-                context.SaveChanges();
-            }
 
-            var manager = new DatabaseManager(options);
+            var manager = new DatabaseManager(_options!);
             var result = manager.GetAllNationalities();
 
             Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("Albania", result[0].Name);
+            Assert.AreEqual("Czech", result[0].Name);
         }
 
         [TestMethod]
@@ -285,5 +296,6 @@ namespace Knihovna.Tests.Models
 
             Assert.AreEqual(0, result.Count);
         }
+
     }
 }

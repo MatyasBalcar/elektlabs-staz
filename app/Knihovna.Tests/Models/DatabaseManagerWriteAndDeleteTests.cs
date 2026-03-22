@@ -25,7 +25,13 @@ namespace Knihovna.Tests.Models
         public void SaveBook_NewBook_InsertsCorrectly()
         {
             var manager = new DatabaseManager(_options!);
-            var book = new Book { Name = "Test Book", Authors = new List<Author>() };
+            var book = new Book
+            {
+                Name = "Test Book",
+                Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } },
+                Language = new Language { Name = "Czech" },
+                Publisher = new Publisher { Name = "TestPub" }
+            };
 
             manager.SaveBook(book);
 
@@ -52,6 +58,8 @@ namespace Knihovna.Tests.Models
             }
         }
 
+
+
         [TestMethod]
         public void SaveAuthor_UpdatesExistingAuthor()
         {
@@ -62,7 +70,7 @@ namespace Knihovna.Tests.Models
             }
 
             var manager = new DatabaseManager(_options!);
-            var updated = new Author { AuthorId = 1, FirstName = "New", LastName = "Name" };
+            var updated = new Author { AuthorId = 1, FirstName = "New", LastName = "Name", Nationality = new Nationality { Name = "Czech" } };
 
             manager.SaveAuthor(updated);
 
@@ -102,7 +110,7 @@ namespace Knihovna.Tests.Models
         public void SaveAuthor_NewAuthor_Inserts()
         {
             var manager = new DatabaseManager(_options!);
-            var author = new Author { FirstName = "New", LastName = "Author" };
+            var author = new Author { FirstName = "New", LastName = "Author", Nationality = new Nationality { Name = "Czech" } };
 
             manager.SaveAuthor(author);
 
@@ -121,7 +129,7 @@ namespace Knihovna.Tests.Models
             }
 
             var manager = new DatabaseManager(_options!);
-            var book = new Book { Name = "Book With Author", Authors = new List<Author> { new Author { AuthorId = 42 } } };
+            var book = new Book { Name = "Book With Author", Authors = new List<Author> { new Author { AuthorId = 42 } }, Language = new Language { Name = "Czech" }, Publisher = new Publisher { Name = "Pub" } };
 
             manager.SaveBook(book);
 
@@ -132,6 +140,66 @@ namespace Knihovna.Tests.Models
                 Assert.AreEqual(1, dbBook.Authors.Count);
                 Assert.AreEqual(42, dbBook.Authors.First().AuthorId);
             }
+        }
+
+        [TestMethod]
+        public void SaveBook_NoAuthors_DoesNotSave()
+        {
+            var book = new Book { Name = "No Authors", Authors = new List<Author>() };
+
+            var validation = book.Validate();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(0, context.Books.Count());
+        }
+
+        [TestMethod]
+        public void SaveBook_NoLanguage_DoesNotSave()
+        {
+            var book = new Book { Name = "No Language", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } }, Language = null, LanguageId = null };
+
+            var validation = book.Validate();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(0, context.Books.Count());
+        }
+
+        [TestMethod]
+        public void SaveBook_NoPublisher_DoesNotSave()
+        {
+            var book = new Book { Name = "No Publisher", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } }, Publisher = null, PublisherId = null };
+
+            var validation = book.Validate();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(0, context.Books.Count());
+        }
+
+        [TestMethod]
+        public void SaveBook_InvalidISBN_DoesNotSave()
+        {
+            var book = new Book { Name = "Bad ISBN", ISBN = "abc123", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+
+            var validation = book.Validate();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(0, context.Books.Count());
+        }
+
+        [TestMethod]
+        public void SaveAuthor_MissingNationality_DoesNotSave()
+        {
+            var author = new Author { FirstName = "NoNat", LastName = "Author", Nationality = null, NationalityId = null };
+
+            var validation = author.Validate();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
+
+            using var context = new AppDbContext(_options!);
+            Assert.AreEqual(0, context.Authors.Count());
         }
     }
 }

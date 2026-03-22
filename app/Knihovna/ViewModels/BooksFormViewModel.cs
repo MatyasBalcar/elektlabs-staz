@@ -9,18 +9,17 @@ namespace Knihovna.ViewModels
     public partial class BookFormViewModel : ObservableObject
     {
         private readonly DatabaseManager _dbManager;
-
         private const int ShownResultsCount = 3;
-        
+
         [ObservableProperty]
         private Book _editingBook;
 
         [ObservableProperty]
         private ObservableCollection<Author> _allAuthors;
 
-
         [ObservableProperty]
         private ObservableCollection<Publisher> _allPublishers;
+
         [ObservableProperty]
         private ObservableCollection<Language> _allLanguages;
 
@@ -45,14 +44,11 @@ namespace Knihovna.ViewModels
         [ObservableProperty]
         private bool _isPubSuggestionsVisible;
 
-
-
         public BookFormViewModel(DatabaseManager dbManager, Book? book = null)
         {
             _dbManager = dbManager;
 
             AllAuthors = new ObservableCollection<Author>(_dbManager.GetAuthors());
-
             var languages = _dbManager.GetAllLanguages();
             var publishers = _dbManager.GetAllPublishers();
 
@@ -66,13 +62,10 @@ namespace Knihovna.ViewModels
             else
             {
                 EditingBook = book;
-
                 LanguageText = book.Language?.Name ?? string.Empty;
                 PublisherText = book.Publisher?.Name ?? string.Empty;
-
                 IsLangSuggestionsVisible = false;
-                IsPubSuggestionsVisible= false;
-
+                IsPubSuggestionsVisible = false;
                 SelectedAuthor = AllAuthors?.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId));
             }
         }
@@ -82,7 +75,6 @@ namespace Knihovna.ViewModels
             if (!string.IsNullOrWhiteSpace(LanguageText))
             {
                 string langName = LanguageText.Trim();
-
                 var existingLang = AllLanguages?.FirstOrDefault(l =>
                     l.Name.Equals(langName, StringComparison.OrdinalIgnoreCase));
 
@@ -106,7 +98,6 @@ namespace Knihovna.ViewModels
             if (!string.IsNullOrWhiteSpace(PublisherText))
             {
                 string pubName = PublisherText.Trim();
-
                 var existingPub = AllPublishers?.FirstOrDefault(p =>
                     p.Name.Equals(pubName, StringComparison.OrdinalIgnoreCase));
 
@@ -141,7 +132,6 @@ namespace Knihovna.ViewModels
                     "Chyba při ukládání",
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning);
-
                 return false;
             }
 
@@ -149,6 +139,15 @@ namespace Knihovna.ViewModels
             {
                 _dbManager.SaveBook(EditingBook);
                 return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                System.Windows.MessageBox.Show(
+                    ex.Message,
+                    "Duplicitní záznam ISBN",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Warning);
+                return false;
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
             {
@@ -169,6 +168,7 @@ namespace Knihovna.ViewModels
                 return false;
             }
         }
+
         partial void OnLanguageTextChanged(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -185,6 +185,7 @@ namespace Knihovna.ViewModels
             SuggestedLanguages = new ObservableCollection<Language>(filtered);
             IsLangSuggestionsVisible = SuggestedLanguages.Any();
         }
+
         partial void OnPublisherTextChanged(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -201,11 +202,12 @@ namespace Knihovna.ViewModels
             SuggestedPublishers = new ObservableCollection<Publisher>(filtered);
             IsPubSuggestionsVisible = SuggestedPublishers.Any();
         }
+
         [RelayCommand]
         private void SelectLanguage(Language? selected)
         {
             if (selected == null) return;
-            LanguageText = selected.Name; 
+            LanguageText = selected.Name;
 
             EditingBook.Language = selected;
             EditingBook.LanguageId = selected.LanguageID;
@@ -224,6 +226,7 @@ namespace Knihovna.ViewModels
 
             IsPubSuggestionsVisible = false;
         }
+
         [RelayCommand]
         public void AddAuthor()
         {
@@ -233,12 +236,8 @@ namespace Knihovna.ViewModels
                 DataContext = formVm
             };
 
-            //window.Owner = System.Windows.Application.Current.Windows.OfType<Views.BookWindow>().FirstOrDefault();
-
             if (window.ShowDialog() ?? false)
             {
-
-
                 var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
 
@@ -259,7 +258,5 @@ namespace Knihovna.ViewModels
                 OnPropertyChanged(nameof(EditingBook));
             }
         }
-
-
     }
 }

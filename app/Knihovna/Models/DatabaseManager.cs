@@ -106,6 +106,16 @@ namespace Knihovna.Models
         {
             using var context = CreateContext();
 
+            if (!string.IsNullOrWhiteSpace(book.ISBN))
+            {
+                bool isbnExists = context.Books.Any(b => b.ISBN == book.ISBN && b.BookId != book.BookId);
+
+                if (isbnExists)
+                {
+                    throw new InvalidOperationException($"Kniha s ISBN '{book.ISBN}' již existuje.");
+                }
+            }
+
             if (book.Language != null)
             {
                 var existingLang = context.Languages

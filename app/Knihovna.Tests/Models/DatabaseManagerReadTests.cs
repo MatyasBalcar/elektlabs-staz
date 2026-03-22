@@ -1,8 +1,6 @@
 ﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+
 
 namespace Knihovna.Tests.Models
 {

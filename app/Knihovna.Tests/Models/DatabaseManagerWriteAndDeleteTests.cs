@@ -1,10 +1,6 @@
 ﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
+using Microsoft.VisualStudio.TestTools.UnitTesting; // <-- This is the crucial missing line!
 
 namespace Knihovna.Tests.Models
 {
@@ -61,8 +57,6 @@ namespace Knihovna.Tests.Models
             }
         }
 
-
-
         [TestMethod]
         public void SaveAuthor_UpdatesExistingAuthor()
         {
@@ -106,8 +100,6 @@ namespace Knihovna.Tests.Models
                 Assert.AreEqual(0, context.Books.Count());
             }
         }
-
-
 
         [TestMethod]
         public void SaveAuthor_NewAuthor_Inserts()
@@ -195,6 +187,29 @@ namespace Knihovna.Tests.Models
             using var context = new AppDbContext(_options!);
             Assert.AreEqual(0, context.Books.Count());
         }
+
+        [TestMethod]
+        public void SaveBook_DuplicateISBN_DoesntSave()
+        {
+            var manager = new DatabaseManager(_options!);
+
+            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            manager.SaveBook(original);
+
+            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+
+            try
+            {
+                manager.SaveBook(copy);
+
+                Assert.Fail("Expected an InvalidOperationException, but the duplicate book saved successfully.");
+            }
+            catch (InvalidOperationException ex)
+            { 
+                Assert.IsTrue(ex.Message.Contains("ISBN"));
+            }
+        }
+
         [TestMethod]
         public void SaveAuthor_MissingNationality_DoesNotSave()
         {
@@ -207,5 +222,4 @@ namespace Knihovna.Tests.Models
             Assert.AreEqual(0, context.Authors.Count());
         }
     }
-    
 }

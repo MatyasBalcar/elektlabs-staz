@@ -22,5 +22,6 @@
   <ItemGroup>
     <None Include=".githooks\pre-commit" />
     <None Include=".githooks\pre-commit.ps1" />
+    <None Include=".github\workflows\dotnet-desktop.yml" />
   </ItemGroup>
 </Project>

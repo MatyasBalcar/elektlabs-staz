@@ -210,9 +210,9 @@ namespace Knihovna.Tests.Models
                 manager.SaveBook(copy);
                 Assert.Fail("Expected exception for duplicate ISBN was not thrown.");
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                Assert.IsTrue(ex.Message.Contains(""), "Unexpected exception message: " + ex.Message);
+                Assert.Contains("", ex.Message, "Unexpected exception message: " + ex.Message);
             }
 
         }

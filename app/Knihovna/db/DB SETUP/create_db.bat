@@ -13,8 +13,18 @@ popd
 set "DB_PATH=%PFolder%\%DB_NAME%"
 
 if exist "%DB_PATH%" (
-    echo DB ALREADY EXISTS
-    exit /b
+    echo Database "%DB_PATH%" already exists.
+    choice /M "Do you want to overwrite it?"
+    if errorlevel 2 (
+        echo Aborting - will not overwrite existing database.
+        exit /b
+    )
+    echo Deleting existing database file...
+    del /f /q "%DB_PATH%" 2>nul
+    if exist "%DB_PATH%" (
+        echo Error: Failed to delete existing database file.
+        exit /b 1
+    )
 )
 
 echo CREATING DB

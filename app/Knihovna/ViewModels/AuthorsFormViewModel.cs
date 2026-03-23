@@ -1,30 +1,41 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Knihovna.ViewModels
 {
-    partial class AuthorFormViewModel : ObservableObject
+    public partial class AuthorFormViewModel : ObservableValidator
     {
         private readonly DatabaseManager _dbManager;
-
         private const int ShownResultsCount = 3;
 
-        [ObservableProperty] private Author _currentAuthor;
+        [ObservableProperty]
+        private Author _currentAuthor;
 
-        [ObservableProperty] private ObservableCollection<Nationality> _allNationalities;
+        [ObservableProperty]
+        private ObservableCollection<Nationality> _allNationalities;
 
-        [ObservableProperty] private Nationality? _selectedNationality;
-        [ObservableProperty] private string _nationalityText = string.Empty;
+        [ObservableProperty]
+        private Nationality? _selectedNationality;
 
-        [ObservableProperty] private ObservableCollection<Nationality>? _suggestedNationalities;
-        [ObservableProperty] private bool _isSuggestionsVisible;
+        [ObservableProperty]
+        [NotifyDataErrorInfo]
+        [Required(ErrorMessage = "Národnost je povinná.")]
+        private string _nationalityText = string.Empty;
+
+        [ObservableProperty]
+        private ObservableCollection<Nationality>? _suggestedNationalities;
+
+        [ObservableProperty]
+        private bool _isSuggestionsVisible;
 
         public AuthorFormViewModel(DatabaseManager dbManager, Author? author = null)
         {
             _dbManager = dbManager;
-
             var nationalities = _dbManager.GetAllNationalities();
             AllNationalities = new ObservableCollection<Nationality>(nationalities);
 
@@ -40,15 +51,14 @@ namespace Knihovna.ViewModels
             }
         }
 
-
-
         public bool Save()
         {
+            ValidateAllProperties();
+
             if (!string.IsNullOrWhiteSpace(NationalityText))
             {
                 string natName = NationalityText.Trim();
-                var existingNat =
-                    AllNationalities?.FirstOrDefault(n => n.Name.Equals(natName, StringComparison.OrdinalIgnoreCase));
+                var existingNat = AllNationalities?.FirstOrDefault(n => n.Name.Equals(natName, StringComparison.OrdinalIgnoreCase));
 
                 if (existingNat != null)
                 {
@@ -68,10 +78,14 @@ namespace Knihovna.ViewModels
             }
 
             string validationError = CurrentAuthor.Validate();
-            if (!string.IsNullOrEmpty(validationError))
+
+            if (HasErrors || !string.IsNullOrEmpty(validationError))
             {
-                System.Windows.MessageBox.Show(validationError, "Chyba při ukládání",
-                    System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(
+                    "Doplňte povinné údaje zvýrazněné červeně.\n" + validationError,
+                    "Chyba validace",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Warning);
                 return false;
             }
 
@@ -85,15 +99,6 @@ namespace Knihovna.ViewModels
                 System.Windows.MessageBox.Show(
                     "Autora se nepodařilo uložit do databáze",
                     "Chyba databáze",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Došlo k neočekávané chybě:\n{ex.Message}",
-                    "Kritická chyba",
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 return false;
@@ -122,9 +127,7 @@ namespace Knihovna.ViewModels
         private void SelectNationality(Nationality? selected)
         {
             if (selected == null) return;
-
             NationalityText = selected.Name;
-
             SuggestedNationalities?.Clear();
             IsSuggestionsVisible = false;
         }

@@ -57,7 +57,7 @@
                     DisplayMemberPath="FullName"
                     FontWeight="Light"
                     ItemsSource="{Binding AllAuthors}"
-                    SelectedItem="{Binding SelectedAuthor}"
+                    SelectedItem="{Binding SelectedAuthor, ValidatesOnDataErrors=True}"
                     Style="{StaticResource {x:Type ComboBox}}"
                     TextSearch.TextPath="FullName" />
 
@@ -67,7 +67,7 @@
                         <TextBox
                             x:Name="LanguageTextBox"
                             Style="{StaticResource AutoCompleteTextBox}"
-                            Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding LanguageText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                         <Popup
                             AllowsTransparency="True"
@@ -92,7 +92,7 @@
                         <TextBox
                             x:Name="PublisherTextBox"
                             Style="{StaticResource AutoCompleteTextBox}"
-                            Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding PublisherText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                         <Popup
                             AllowsTransparency="True"

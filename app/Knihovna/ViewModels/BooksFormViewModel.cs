@@ -1,12 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Windows;
 
 namespace Knihovna.ViewModels
 {
-    public partial class BookFormViewModel : ObservableObject
+    public partial class BookFormViewModel : ObservableValidator
     {
         private readonly DatabaseManager _dbManager;
         private const int ShownResultsCount = 3;
@@ -24,12 +28,18 @@ namespace Knihovna.ViewModels
         private ObservableCollection<Language> _allLanguages;
 
         [ObservableProperty]
+        [NotifyDataErrorInfo]
+        [Required(ErrorMessage = "Autor je povinný.")]
         private Author? _selectedAuthor;
 
         [ObservableProperty]
+        [NotifyDataErrorInfo]
+        [Required(ErrorMessage = "Jazyk je povinný.")]
         private string _languageText = string.Empty;
 
         [ObservableProperty]
+        [NotifyDataErrorInfo]
+        [Required(ErrorMessage = "Vydavatel je povinný.")]
         private string _publisherText = string.Empty;
 
         [ObservableProperty]
@@ -47,13 +57,10 @@ namespace Knihovna.ViewModels
         public BookFormViewModel(DatabaseManager dbManager, Book? book = null)
         {
             _dbManager = dbManager;
-
             AllAuthors = new ObservableCollection<Author>(_dbManager.GetAuthors());
-            var languages = _dbManager.GetAllLanguages();
-            var publishers = _dbManager.GetAllPublishers();
 
-            AllPublishers = new ObservableCollection<Publisher>(publishers);
-            AllLanguages = new ObservableCollection<Language>(languages);
+            AllPublishers = new ObservableCollection<Publisher>(_dbManager.GetAllPublishers());
+            AllLanguages = new ObservableCollection<Language>(_dbManager.GetAllLanguages());
 
             if (book == null)
             {
@@ -72,6 +79,10 @@ namespace Knihovna.ViewModels
 
         public bool Save()
         {
+            // 1. Zvaliduje Jazyk a Vydavatele (rozsvítí jejich rámečky)
+            ValidateAllProperties();
+
+            // 2. Spárujeme rozpracované objekty, ať je model knihy kompletní
             if (!string.IsNullOrWhiteSpace(LanguageText))
             {
                 string langName = LanguageText.Trim();
@@ -125,10 +136,11 @@ namespace Knihovna.ViewModels
             }
 
             string validationError = EditingBook.Validate();
-            if (!string.IsNullOrEmpty(validationError))
+
+            if (HasErrors || !string.IsNullOrEmpty(validationError))
             {
                 System.Windows.MessageBox.Show(
-                    validationError,
+                    "Doplňte povinné údaje zvýrazněné červeně.\n" + validationError,
                     "Chyba při ukládání",
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning);
@@ -142,33 +154,15 @@ namespace Knihovna.ViewModels
             }
             catch (InvalidOperationException ex)
             {
-                System.Windows.MessageBox.Show(
-                    ex.Message,
-                    "Duplicitní záznam ISBN",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(ex.Message, "Duplicitní záznam ISBN", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                 return false;
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
             {
-                System.Windows.MessageBox.Show(
-                    "Knihu se nepodařilo uložit.",
-                    "Chyba databáze",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
-                return false;
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Došlo k neočekávané chybě aplikace:\n{ex.Message}",
-                    "Kritická chyba",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Knihu se nepodařilo uložit.", "Chyba databáze", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return false;
             }
         }
-
         partial void OnLanguageTextChanged(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -208,10 +202,8 @@ namespace Knihovna.ViewModels
         {
             if (selected == null) return;
             LanguageText = selected.Name;
-
             EditingBook.Language = selected;
             EditingBook.LanguageId = selected.LanguageID;
-
             IsLangSuggestionsVisible = false;
         }
 
@@ -220,10 +212,8 @@ namespace Knihovna.ViewModels
         {
             if (selected == null) return;
             PublisherText = selected.Name;
-
             EditingBook.Publisher = selected;
             EditingBook.PublisherId = selected.PublisherID;
-
             IsPubSuggestionsVisible = false;
         }
 
@@ -231,17 +221,14 @@ namespace Knihovna.ViewModels
         public void AddAuthor()
         {
             var formVm = new AuthorFormViewModel(_dbManager);
-            var window = new Views.AuthorWindow
-            {
-                DataContext = formVm
-            };
+            var window = new Views.AuthorWindow { DataContext = formVm };
 
             if (window.ShowDialog() ?? false)
             {
                 var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
-
                 SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);
+
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
                     mainWindow.ShowToast("Nový autor byl úspěšně přidán!");

@@ -1,18 +1,52 @@
-﻿namespace Knihovna.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace Knihovna.Models
 {
-    public class Author : ICloneable
+    public class Author : ObservableValidator, ICloneable
     {
         public int AuthorId { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+
+        private string? _firstName;
+
+        [Required(ErrorMessage = "Křestní jméno autora je povinné.")]
+        [MaxLength(100, ErrorMessage = "Křestní jméno autora má maximální délku 100 znaků.")]
+        public string? FirstName
+        {
+            get => _firstName;
+            set => SetProperty(ref _firstName, value, true);
+        }
+
+        private string? _lastName;
+
+        [Required(ErrorMessage = "Příjmení autora je povinné.")]
+        [MaxLength(100, ErrorMessage = "Příjmení autora má maximální délku 100 znaků.")]
+        public string? LastName
+        {
+            get => _lastName;
+            set => SetProperty(ref _lastName, value, true);
+        }
+
         public DateTime? DateOfBirth { get; set; }
 
+        private Nationality? _nationality;
+
+        [Required(ErrorMessage = "Národnost je povinná.")]
+        public virtual Nationality? Nationality
+        {
+            get => _nationality;
+            set => SetProperty(ref _nationality, value, true);
+        }
+
         public int? NationalityId { get; set; }
-        public virtual Nationality? Nationality { get; set; }
 
         public virtual ICollection<Book> Books { get; set; } = new List<Book>();
 
         public string FullName => $"{FirstName} {LastName}";
+
         public object Clone()
         {
             return new Author
@@ -29,13 +63,13 @@
 
         public string Validate()
         {
-            if (string.IsNullOrWhiteSpace(FirstName)) return "Křestní jméno autora je povinné.";
-            if (FirstName.Length > 100) return "Křestní jméno autora ma maximální delku 100 znaků.";
+            ValidateAllProperties();
 
-            if (string.IsNullOrWhiteSpace(LastName)) return "Příjmení autora je povinné.";
-            if (LastName.Length > 100) return "Příjmení autora ma maximální delku 100 znaků.";
-
-            if (Nationality == null && NationalityId == null) return "Národnost je povinná.";
+            if (HasErrors)
+            {
+                var firstError = GetErrors().FirstOrDefault();
+                if (firstError != null) return firstError.ErrorMessage ?? "Chyba validace.";
+            }
 
             return string.Empty;
         }

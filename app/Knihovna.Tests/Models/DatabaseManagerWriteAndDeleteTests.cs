@@ -1,5 +1,9 @@
 ﻿using Knihovna.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Knihovna.Tests.Models
 {
@@ -7,6 +11,7 @@ namespace Knihovna.Tests.Models
     public class DatabaseManagerWriteAndDeleteTests
     {
         private DbContextOptions<AppDbContext>? _options;
+        private Nationality TestNationality => new Nationality { Name = "Czech" };
 
         [TestInitialize]
         public void Setup()
@@ -23,7 +28,7 @@ namespace Knihovna.Tests.Models
             var book = new Book
             {
                 Name = "Test Book",
-                Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } },
+                Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } },
                 Language = new Language { Name = "Czech" },
                 Publisher = new Publisher { Name = "TestPub" }
             };
@@ -61,12 +66,12 @@ namespace Knihovna.Tests.Models
         {
             using (var context = new AppDbContext(_options!))
             {
-                context.Authors.Add(new Author { AuthorId = 1, FirstName = "Old", LastName = "Name" });
+                context.Authors.Add(new Author { AuthorId = 1, FirstName = "Old", LastName = "Name", Nationality = TestNationality });
                 context.SaveChanges();
             }
 
             var manager = new DatabaseManager(_options!);
-            var updated = new Author { AuthorId = 1, FirstName = "New", LastName = "Name", Nationality = new Nationality { Name = "Czech" } };
+            var updated = new Author { AuthorId = 1, FirstName = "New", LastName = "Name", Nationality = TestNationality };
 
             manager.SaveAuthor(updated);
 
@@ -83,7 +88,7 @@ namespace Knihovna.Tests.Models
         {
             using (var context = new AppDbContext(_options!))
             {
-                var author = new Author { AuthorId = 5, FirstName = "A", LastName = "B" };
+                var author = new Author { AuthorId = 5, FirstName = "A", LastName = "B", Nationality = TestNationality };
                 var book = new Book { BookId = 10, Name = "Book", Authors = new List<Author> { author } };
                 context.Authors.Add(author);
                 context.Books.Add(book);
@@ -104,7 +109,7 @@ namespace Knihovna.Tests.Models
         public void SaveAuthor_NewAuthor_Inserts()
         {
             var manager = new DatabaseManager(_options!);
-            var author = new Author { FirstName = "New", LastName = "Author", Nationality = new Nationality { Name = "Czech" } };
+            var author = new Author { FirstName = "New", LastName = "Author", Nationality = TestNationality };
 
             var validation = author.Validate();
             Assert.IsTrue(string.IsNullOrWhiteSpace(validation), "Author should be valid before saving: " + validation);
@@ -119,20 +124,36 @@ namespace Knihovna.Tests.Models
         [TestMethod]
         public void SaveBook_WithExistingAuthor_AssociatesAuthor()
         {
-            using (var context = new AppDbContext(_options!))
+            using (var dbcontext = new AppDbContext(_options!))
             {
-                context.Authors.Add(new Author { AuthorId = 42, FirstName = "Linked", LastName = "Author" });
-                context.SaveChanges();
+                dbcontext.Authors.Add(new Author
+                {
+                    AuthorId = 42,
+                    FirstName = "Linked",
+                    LastName = "Author",
+                    Nationality = TestNationality
+                });
+                dbcontext.SaveChanges();
             }
 
             var manager = new DatabaseManager(_options!);
-            var book = new Book { Name = "Book With Author", Authors = new List<Author> { new Author { AuthorId = 42 } }, Language = new Language { Name = "Czech" }, Publisher = new Publisher { Name = "Pub" } };
+
+            var book = new Book
+            {
+                Name = "Book With Author",
+                Authors = new List<Author> { new Author { AuthorId = 42, Nationality = TestNationality } },
+                Language = new Language { Name = "Czech" },
+                Publisher = new Publisher { Name = "Pub" }
+            };
 
             manager.SaveBook(book);
 
-            using (var context = new AppDbContext(_options!))
+            using (var dbcontext = new AppDbContext(_options!))
             {
-                var dbBook = context.Books.Include(b => b.Authors).FirstOrDefault(b => b.Name == "Book With Author");
+                var dbBook = dbcontext.Books
+                    .Include(b => b.Authors)
+                    .FirstOrDefault(b => b.Name == "Book With Author");
+
                 Assert.IsNotNull(dbBook);
                 Assert.AreEqual(1, dbBook.Authors.Count);
                 Assert.AreEqual(42, dbBook.Authors.First().AuthorId);
@@ -154,7 +175,7 @@ namespace Knihovna.Tests.Models
         [TestMethod]
         public void SaveBook_NoLanguage_DoesNotSave()
         {
-            var book = new Book { Name = "No Language", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } }, Language = null, LanguageId = null };
+            var book = new Book { Name = "No Language", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } }, Language = null, LanguageId = null };
 
             var validation = book.Validate();
             Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
@@ -166,7 +187,7 @@ namespace Knihovna.Tests.Models
         [TestMethod]
         public void SaveBook_NoPublisher_DoesNotSave()
         {
-            var book = new Book { Name = "No Publisher", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } }, Publisher = null, PublisherId = null };
+            var book = new Book { Name = "No Publisher", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } }, Publisher = null, PublisherId = null };
 
             var validation = book.Validate();
             Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
@@ -178,7 +199,7 @@ namespace Knihovna.Tests.Models
         [TestMethod]
         public void SaveBook_InvalidISBN_DoesNotSave()
         {
-            var book = new Book { Name = "Bad ISBN", ISBN = "abc123", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            var book = new Book { Name = "Bad ISBN", ISBN = "abc123", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
 
             var validation = book.Validate();
             Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
@@ -192,19 +213,18 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options!);
 
-            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
             manager.SaveBook(original);
 
-            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B" } } };
+            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
 
             try
             {
                 manager.SaveBook(copy);
-
                 Assert.Fail("Expected an InvalidOperationException, but the duplicate book saved successfully.");
             }
             catch (InvalidOperationException ex)
-            { 
+            {
                 Assert.IsTrue(ex.Message.Contains("ISBN"));
             }
         }

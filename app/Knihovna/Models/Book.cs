@@ -13,8 +13,8 @@ namespace Knihovna.Models
 
         private string? _name;
 
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "BookNameRequired")]
-        [MaxLength(255, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "BookNameTooLong")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.BookNameRequired))]
+        [MaxLength(255, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.BookNameTooLong))]
         public string? Name
         {
             get => _name;

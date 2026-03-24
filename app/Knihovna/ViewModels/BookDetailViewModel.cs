@@ -21,6 +21,5 @@ namespace Knihovna.ViewModels
             window?.Close();
         }
         
-        // Todo, edit a delete
     }
 }

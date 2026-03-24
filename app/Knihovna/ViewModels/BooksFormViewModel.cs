@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using Knihovna.Properties; 
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,17 +30,17 @@ namespace Knihovna.ViewModels
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Required(ErrorMessage = "Autor je povinný.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.AuthorRequired))]
         private Author? _selectedAuthor;
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Required(ErrorMessage = "Jazyk je povinný.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.LanguageRequired))]
         private string _languageText = string.Empty;
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Required(ErrorMessage = "Vydavatel je povinný.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.PublisherRequired))]
         private string _publisherText = string.Empty;
 
         [ObservableProperty]
@@ -79,10 +80,8 @@ namespace Knihovna.ViewModels
 
         public bool Save()
         {
-            // 1. Zvaliduje Jazyk a Vydavatele (rozsvítí jejich rámečky)
             ValidateAllProperties();
 
-            // 2. Spárujeme rozpracované objekty, ať je model knihy kompletní
             if (!string.IsNullOrWhiteSpace(LanguageText))
             {
                 string langName = LanguageText.Trim();
@@ -140,8 +139,8 @@ namespace Knihovna.ViewModels
             if (HasErrors || !string.IsNullOrEmpty(validationError))
             {
                 System.Windows.MessageBox.Show(
-                    "Doplňte povinné údaje zvýrazněné červeně.\n" + validationError,
-                    "Chyba při ukládání",
+                    Resources.FillRequiredData + validationError,
+                    Resources.ValidationError,
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning);
                 return false;
@@ -154,15 +153,16 @@ namespace Knihovna.ViewModels
             }
             catch (InvalidOperationException ex)
             {
-                System.Windows.MessageBox.Show(ex.Message, "Duplicitní záznam ISBN", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(ex.Message, Resources.ValidationError, System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
                 return false;
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
             {
-                System.Windows.MessageBox.Show("Knihu se nepodařilo uložit.", "Chyba databáze", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(Resources.UnexpectedErrorMessage, Resources.DBError, System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return false;
             }
         }
+
         partial void OnLanguageTextChanged(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -231,7 +231,7 @@ namespace Knihovna.ViewModels
 
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.ShowToast("Nový autor byl úspěšně přidán!");
+                    mainWindow.ShowToast(Resources.AuthorSavedToast);
                 }
             }
         }

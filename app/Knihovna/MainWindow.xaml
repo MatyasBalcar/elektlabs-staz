@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:DotNetKit.Windows.Controls;assembly=DotNetKit.Wpf.AutoCompleteComboBox"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:loc="clr-namespace:Knihovna.Localization"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:resx="clr-namespace:Knihovna.Properties"
     xmlns:vm="clr-namespace:Knihovna.ViewModels"
     SnapsToDevicePixels="True"
     Style="{StaticResource MainWindow}"
@@ -42,7 +42,7 @@
         <TabControl
             Background="Transparent"
             BorderThickness="0">
-            <TabItem DataContext="{Binding BooksListVm}" Header="{x:Static resx:Resources.BooksListTab}">
+            <TabItem DataContext="{Binding BooksListVm}" Header="{loc:Loc BooksListTab}">
                 <DockPanel>
                     <Separator
                         Height="1"
@@ -69,7 +69,7 @@
                         <TextBlock
                             Margin="0,10,0,0"
                             Style="{StaticResource FilterLabelTextBlockStyle}"
-                            Text="{x:Static resx:Resources.SearchLabel}" />
+                            Text="{loc:Loc SearchLabel}" />
 
                         <StackPanel
                             Grid.Row="1"
@@ -78,7 +78,7 @@
                             VerticalAlignment="Center">
                             <TextBox
                                 Style="{StaticResource SearchBox}"
-                                Tag="{x:Static resx:Resources.SearchBookPlaceholder}"
+                                Tag="{loc:Loc SearchBookPlaceholder}"
                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
@@ -89,7 +89,7 @@
                             Height="25"
                             VerticalAlignment="Center"
                             Command="{Binding OpenFormCommand}"
-                            Content="{x:Static resx:Resources.NewBookButton}"
+                            Content="{loc:Loc NewBookButton}"
                             Style="{StaticResource SuccessButtonStyle}" />
 
                         <StackPanel
@@ -101,7 +101,7 @@
                             Orientation="Horizontal">
 
                             <StackPanel Margin="0,0,5,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.AuthorLabel}" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{loc:Loc AuthorLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="FullName"
@@ -112,7 +112,7 @@
                             </StackPanel>
 
                             <StackPanel Margin="0,0,5,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.LanguageLabel}" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{loc:Loc LanguageLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="Name"
@@ -123,7 +123,7 @@
                             </StackPanel>
 
                             <StackPanel Margin="0,0,10,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.PublisherLabel}" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{loc:Loc PublisherLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="Name"
@@ -139,7 +139,7 @@
                                 Margin="0,5,0,0"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding ClearFiltersCommand}"
-                                Content="{x:Static resx:Resources.ClearFiltersButton}"
+                                Content="{loc:Loc ClearFiltersButton}"
                                 Style="{StaticResource FilterButtonStyle}" />
                         </StackPanel>
                     </Grid>
@@ -147,7 +147,7 @@
                     <Grid>
                         <DataGrid x:Name="BooksGrid" ItemsSource="{Binding Books}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="200" Header="{x:Static resx:Resources.TitleHeader}">
+                                <DataGridTemplateColumn Width="200" Header="{loc:Loc TitleHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
@@ -159,7 +159,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="{x:Static resx:Resources.AuthorsHeader}">
+                                <DataGridTemplateColumn Width="*" Header="{loc:Loc AuthorsHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
@@ -181,7 +181,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="80" Header="{x:Static resx:Resources.ReadHeader}">
+                                <DataGridTemplateColumn Width="80" Header="{loc:Loc ReadHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid
@@ -216,7 +216,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="{x:Static resx:Resources.RatingHeader}">
+                                <DataGridTemplateColumn Width="Auto" Header="{loc:Loc RatingHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel
@@ -233,7 +233,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="160" Header="{x:Static resx:Resources.ActionHeader}">
+                                <DataGridTemplateColumn Width="160" Header="{loc:Loc ActionHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <StaticResource ResourceKey="ActionColumnTemplate" />
                                     </DataGridTemplateColumn.CellTemplate>
@@ -255,7 +255,7 @@
                             FontStyle="Italic"
                             Foreground="#A0A0A0"
                             IsHitTestVisible="False"
-                            Text="{x:Static resx:Resources.NoBooksFound}">
+                            Text="{loc:Loc NoBooksFound}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -271,7 +271,7 @@
                 </DockPanel>
             </TabItem>
 
-            <TabItem DataContext="{Binding AuthorsListVm}" Header="{x:Static resx:Resources.AuthorsListTab}">
+            <TabItem DataContext="{Binding AuthorsListVm}" Header="{loc:Loc AuthorsListTab}">
                 <DockPanel>
                     <Separator
                         Height="1"
@@ -301,7 +301,7 @@
                             Margin="0,10,0,0"
                             VerticalAlignment="Center"
                             Style="{StaticResource FilterLabelTextBlockStyle}"
-                            Text="{x:Static resx:Resources.SearchLabel}" />
+                            Text="{loc:Loc SearchLabel}" />
 
                         <TextBox
                             Grid.Row="1"
@@ -310,7 +310,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Style="{StaticResource SearchBox}"
-                            Tag="{x:Static resx:Resources.SearchAuthorPlaceholder}"
+                            Tag="{loc:Loc SearchAuthorPlaceholder}"
                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
 
                         <Button
@@ -320,7 +320,7 @@
                             Height="25"
                             VerticalAlignment="Center"
                             Command="{Binding OpenFormCommand}"
-                            Content="{x:Static resx:Resources.NewAuthorButton}"
+                            Content="{loc:Loc NewAuthorButton}"
                             Style="{StaticResource SuccessButtonStyle}" />
 
                         <StackPanel
@@ -332,7 +332,7 @@
                             Orientation="Horizontal">
 
                             <StackPanel Margin="0,0,10,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.NationalityLabel}" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{loc:Loc NationalityLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="150"
                                     DisplayMemberPath="Name"
@@ -348,7 +348,7 @@
                                 Margin="0,5,0,0"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding ClearFiltersCommand}"
-                                Content="{x:Static resx:Resources.ClearFiltersButton}"
+                                Content="{loc:Loc ClearFiltersButton}"
                                 Style="{StaticResource FilterButtonStyle}" />
                         </StackPanel>
                     </Grid>
@@ -356,7 +356,7 @@
                     <Grid>
                         <DataGrid x:Name="AuthorsGrid" ItemsSource="{Binding Authors}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="150" Header="{x:Static resx:Resources.NameHeader}">
+                                <DataGridTemplateColumn Width="150" Header="{loc:Loc NameHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
@@ -368,7 +368,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="{x:Static resx:Resources.NationalityHeader}">
+                                <DataGridTemplateColumn Width="*" Header="{loc:Loc NationalityHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock
@@ -380,7 +380,7 @@
                                 </DataGridTemplateColumn>
 
 
-                                <DataGridTemplateColumn Width="160" Header="{x:Static resx:Resources.ActionHeader}">
+                                <DataGridTemplateColumn Width="160" Header="{loc:Loc ActionHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <StaticResource ResourceKey="ActionColumnTemplate" />
                                     </DataGridTemplateColumn.CellTemplate>
@@ -402,7 +402,7 @@
                             FontStyle="Italic"
                             Foreground="#A0A0A0"
                             IsHitTestVisible="False"
-                            Text="{x:Static resx:Resources.NoAuthorsFound}">
+                            Text="{loc:Loc NoAuthorsFound}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -434,7 +434,7 @@
                 FontSize="14"
                 FontWeight="SemiBold"
                 Foreground="White"
-                Text="{x:Static resx:Resources.SuccessToast}" />
+                Text="{loc:Loc SuccessToast}" />
         </Border>
     </Grid>
 </Window>

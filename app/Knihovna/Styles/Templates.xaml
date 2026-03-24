@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="clr-namespace:Knihovna.Localization"
     xmlns:resx="clr-namespace:Knihovna.Properties">
 
     <DataTemplate x:Key="ActionColumnTemplate">
@@ -15,7 +16,7 @@
                 Margin="4,2"
                 Command="{Binding DataContext.OpenFormCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
-                Content="{Binding DataContext.EditLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                Content="{loc:Loc Edit}"
                 Style="{StaticResource PrimaryButtonStyle}" />
             <Button
                 Width="70"
@@ -23,7 +24,7 @@
                 Margin="4,2"
                 Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
-                Content="{Binding DataContext.DeleteLabel, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                Content="{loc:Loc Delete}"
                 Style="{StaticResource DangerButtonStyle}" />
         </StackPanel>
     </DataTemplate>

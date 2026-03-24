@@ -1,7 +1,6 @@
 ﻿using Knihovna.ViewModels;
+using Knihovna.Localization;
 using System;
-using System.Globalization;
-using System.Threading;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -13,23 +12,19 @@ namespace Knihovna
         {
             InitializeComponent();
 
-            if (this.DataContext == null)
-            {
-                var vm = new MainViewModel();
-                this.DataContext = vm;
-                SubscribeToLanguageChanges(vm);
-            }
+            InitializeDataContext(new MainViewModel());
         }
 
-        public MainWindow(object dataContext)
+        private MainWindow(MainViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = dataContext ?? new MainViewModel();
+            InitializeDataContext(viewModel);
+        }
 
-            if (this.DataContext is MainViewModel vm)
-            {
-                SubscribeToLanguageChanges(vm);
-            }
+        private void InitializeDataContext(MainViewModel viewModel)
+        {
+            DataContext = viewModel;
+            SubscribeToLanguageChanges(viewModel);
         }
 
         private void SubscribeToLanguageChanges(MainViewModel vm)
@@ -40,26 +35,18 @@ namespace Knihovna
 
         private void OnLanguageChanged(string langCode)
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+            App.SetAppCulture(langCode);
+            LocalizationManager.Instance.NotifyLanguageChanged();
+        }
 
-            if (this.DataContext is MainViewModel vm)
+        protected override void OnClosed(EventArgs e)
+        {
+            if (DataContext is MainViewModel vm)
             {
                 vm.RequestLanguageChange -= OnLanguageChanged;
             }
 
-            var newWindow = new MainWindow(this.DataContext)
-            {
-                Left = this.Left,
-                Top = this.Top,
-                Width = this.Width,
-                Height = this.Height,
-                WindowState = this.WindowState
-            };
-
-            Application.Current.MainWindow = newWindow;
-            newWindow.Show();
-            this.Close();
+            base.OnClosed(e);
         }
 
         public void ShowToast(string message)

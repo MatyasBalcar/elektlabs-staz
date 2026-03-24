@@ -34,11 +34,32 @@ namespace Knihovna
 
             string lang = Knihovna.Properties.Settings.Default.AppLanguage;
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            SetAppCulture(lang);
 
 
             base.OnStartup(e);
+        }
+
+        public static void SetAppCulture(string langCode)
+        {
+            try
+            {
+                var culture = new CultureInfo(langCode);
+
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+                CultureInfo.DefaultThreadCurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
+            }
+            catch (CultureNotFoundException)
+            {
+                var fallbackCulture = CultureInfo.GetCultureInfo("en");
+
+                CultureInfo.DefaultThreadCurrentCulture = fallbackCulture;
+                CultureInfo.DefaultThreadCurrentUICulture = fallbackCulture;
+                Thread.CurrentThread.CurrentCulture = fallbackCulture;
+                Thread.CurrentThread.CurrentUICulture = fallbackCulture;
+            }
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

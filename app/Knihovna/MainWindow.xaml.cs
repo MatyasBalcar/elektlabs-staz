@@ -19,18 +19,31 @@ namespace Knihovna
                 this.DataContext = vm;
                 SubscribeToLanguageChanges(vm);
             }
+            //force reload
+            this.Loaded += OnWindowLoaded;
         }
 
         public MainWindow(object dataContext)
         {
             InitializeComponent();
-            this.DataContext = dataContext;
+            this.DataContext = dataContext ?? new MainViewModel();
 
             if (this.DataContext is MainViewModel vm)
             {
                 SubscribeToLanguageChanges(vm);
             }
+
+            this.Loaded += OnWindowLoaded;
         }
+
+        private void OnWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            this.Width += 10;
+
+
+            this.Width -= 10;
+        }
+
 
         private void SubscribeToLanguageChanges(MainViewModel vm)
         {
@@ -59,7 +72,6 @@ namespace Knihovna
 
             Application.Current.MainWindow = newWindow;
             newWindow.Show();
-
             this.Close();
         }
 

@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resx="clr-namespace:Knihovna.Properties"
     xmlns:vm="clr-namespace:Knihovna.ViewModels"
+    SnapsToDevicePixels="True"
     Style="{StaticResource MainWindow}"
+    UseLayoutRounding="True"
     mc:Ignorable="d">
 
     <Window.Resources>
@@ -229,10 +231,17 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn
-                                    Width="160"
-                                    CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="{x:Static resx:Resources.ActionHeader}" />
+                                <DataGridTemplateColumn Width="160" Header="{x:Static resx:Resources.ActionHeader}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <StaticResource ResourceKey="ActionColumnTemplate" />
+                                    </DataGridTemplateColumn.CellTemplate>
+
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style BasedOn="{StaticResource CustomHeaderStyle}" TargetType="DataGridColumnHeader">
+                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -367,10 +376,19 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn
-                                    Width="160"
-                                    CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="{x:Static resx:Resources.ActionHeader}" />
+
+
+                                <DataGridTemplateColumn Width="160" Header="{x:Static resx:Resources.ActionHeader}">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <StaticResource ResourceKey="ActionColumnTemplate" />
+                                    </DataGridTemplateColumn.CellTemplate>
+
+                                    <DataGridTemplateColumn.HeaderStyle>
+                                        <Style BasedOn="{StaticResource CustomHeaderStyle}" TargetType="DataGridColumnHeader">
+                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        </Style>
+                                    </DataGridTemplateColumn.HeaderStyle>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
 

@@ -652,16 +652,16 @@
     <Style TargetType="DataGrid">
         <Setter Property="RowHeight" Value="40" />
         <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#555555" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="2" />
         <Setter Property="GridLinesVisibility" Value="All" />
         <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0" />
         <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource BaseColumnHeaderStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGrid">
@@ -683,11 +683,15 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <DataGridColumnHeadersPresenter
-                                            x:Name="PART_ColumnHeadersPresenter"
+                                        <Border
                                             Grid.Row="0"
                                             Grid.Column="0"
-                                            Visibility="{Binding HeadersVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            Grid.ColumnSpan="2"
+                                            Background="#f0f0f0"
+                                            CornerRadius="7,7,0,0">
+
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Visibility="{Binding HeadersVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </Border>
                                         <ScrollContentPresenter
                                             x:Name="PART_ScrollContentPresenter"
                                             Grid.Row="1"
@@ -712,13 +716,13 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="#f0f0f0" />
+    <Style x:Key="CustomHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Padding" Value="10,5" />
-        <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="BorderBrush" Value="DarkGray" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="BorderBrush" Value="#555555" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="IsHitTestVisible" Value="False" />
@@ -730,7 +734,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="7,7,0,0"
+                        CornerRadius="0"
                         SnapsToDevicePixels="True">
                         <ContentPresenter
                             Margin="{TemplateBinding Padding}"
@@ -743,6 +747,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style BasedOn="{StaticResource CustomHeaderStyle}" TargetType="DataGridColumnHeader" />
     <Style TargetType="{x:Type DataGridCell}">
         <Setter Property="BorderThickness" Value="0,0,0,0" />
         <Setter Property="Padding" Value="0,0,0,0" />

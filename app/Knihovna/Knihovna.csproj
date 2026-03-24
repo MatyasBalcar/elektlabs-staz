@@ -21,6 +21,15 @@
 
   <ItemGroup>
     <None Include=".github\workflows\dotnet-desktop.yml" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Update="db\KNIHOVNADB.FDB">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -5,6 +5,7 @@
     xmlns:controls="clr-namespace:DotNetKit.Windows.Controls;assembly=DotNetKit.Wpf.AutoCompleteComboBox"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resx="clr-namespace:Knihovna.Properties"
     xmlns:vm="clr-namespace:Knihovna.ViewModels"
     Style="{StaticResource MainWindow}"
     mc:Ignorable="d">
@@ -28,11 +29,8 @@
     </Window.Resources>
 
     <Grid Margin="10">
-
         <TabControl Background="Transparent" BorderThickness="0">
-
-            <TabItem DataContext="{Binding BooksListVm}" Header="Seznam knih">
-
+            <TabItem DataContext="{Binding BooksListVm}" Header="{x:Static resx:Resources.BooksListTab}">
                 <DockPanel>
                     <Separator
                         Height="1"
@@ -43,7 +41,6 @@
                             <ScaleTransform ScaleY="1.5" />
                         </Separator.RenderTransform>
                     </Separator>
-
 
                     <Grid Margin="0,0,0,10" DockPanel.Dock="Top">
                         <Grid.RowDefinitions>
@@ -57,11 +54,10 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-
                         <TextBlock
                             Margin="0,10,0,0"
                             Style="{StaticResource FilterLabelTextBlockStyle}"
-                            Text="Hledat:" />
+                            Text="{x:Static resx:Resources.SearchLabel}" />
 
                         <StackPanel
                             Grid.Row="1"
@@ -70,7 +66,7 @@
                             VerticalAlignment="Center">
                             <TextBox
                                 Style="{StaticResource SearchBox}"
-                                Tag="Zadej jméno knihy..."
+                                Tag="{x:Static resx:Resources.SearchBookPlaceholder}"
                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
@@ -81,7 +77,7 @@
                             Height="25"
                             VerticalAlignment="Center"
                             Command="{Binding OpenFormCommand}"
-                            Content="Nová kniha"
+                            Content="{x:Static resx:Resources.NewBookButton}"
                             Style="{StaticResource SuccessButtonStyle}" />
 
                         <StackPanel
@@ -93,8 +89,7 @@
                             Orientation="Horizontal">
 
                             <StackPanel Margin="0,0,5,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Autor:" />
-
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.AuthorLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="FullName"
@@ -105,8 +100,7 @@
                             </StackPanel>
 
                             <StackPanel Margin="0,0,5,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Jazyk:" />
-
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.LanguageLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="Name"
@@ -117,7 +111,7 @@
                             </StackPanel>
 
                             <StackPanel Margin="0,0,10,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Vydavatel:" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.PublisherLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="200"
                                     DisplayMemberPath="Name"
@@ -133,17 +127,15 @@
                                 Margin="0,5,0,0"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding ClearFiltersCommand}"
-                                Content="Zrušit filtry"
+                                Content="{x:Static resx:Resources.ClearFiltersButton}"
                                 Style="{StaticResource FilterButtonStyle}" />
                         </StackPanel>
                     </Grid>
 
-
-
                     <Grid>
                         <DataGrid x:Name="BooksGrid" ItemsSource="{Binding Books}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="200" Header="Název">
+                                <DataGridTemplateColumn Width="200" Header="{x:Static resx:Resources.TitleHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
@@ -155,7 +147,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Autoři">
+                                <DataGridTemplateColumn Width="*" Header="{x:Static resx:Resources.AuthorsHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
@@ -177,7 +169,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="80" Header="Přečteno">
+                                <DataGridTemplateColumn Width="80" Header="{x:Static resx:Resources.ReadHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid
@@ -212,7 +204,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="Auto" Header="Hodnocení">
+                                <DataGridTemplateColumn Width="Auto" Header="{x:Static resx:Resources.RatingHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel
@@ -232,7 +224,7 @@
                                 <DataGridTemplateColumn
                                     Width="160"
                                     CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="Akce" />
+                                    Header="{x:Static resx:Resources.ActionHeader}" />
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -244,7 +236,7 @@
                             FontStyle="Italic"
                             Foreground="#A0A0A0"
                             IsHitTestVisible="False"
-                            Text="Nenalezeny žádné knihy. Zkuste upravit filtry nebo přidat novou.">
+                            Text="{x:Static resx:Resources.NoBooksFound}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -257,11 +249,10 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Grid>
-
                 </DockPanel>
             </TabItem>
 
-            <TabItem DataContext="{Binding AuthorsListVm}" Header="Seznam autorů">
+            <TabItem DataContext="{Binding AuthorsListVm}" Header="{x:Static resx:Resources.AuthorsListTab}">
                 <DockPanel>
                     <Separator
                         Height="1"
@@ -278,7 +269,6 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -292,7 +282,7 @@
                             Margin="0,10,0,0"
                             VerticalAlignment="Center"
                             Style="{StaticResource FilterLabelTextBlockStyle}"
-                            Text="Hledat:" />
+                            Text="{x:Static resx:Resources.SearchLabel}" />
 
                         <TextBox
                             Grid.Row="1"
@@ -301,7 +291,7 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Style="{StaticResource SearchBox}"
-                            Tag="Zadej jméno autora..."
+                            Tag="{x:Static resx:Resources.SearchAuthorPlaceholder}"
                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
 
                         <Button
@@ -311,7 +301,7 @@
                             Height="25"
                             VerticalAlignment="Center"
                             Command="{Binding OpenFormCommand}"
-                            Content="Nový autor"
+                            Content="{x:Static resx:Resources.NewAuthorButton}"
                             Style="{StaticResource SuccessButtonStyle}" />
 
                         <StackPanel
@@ -323,7 +313,7 @@
                             Orientation="Horizontal">
 
                             <StackPanel Margin="0,0,10,0">
-                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="Národnost:" />
+                                <TextBlock Style="{StaticResource FilterLabelTextBlockStyle}" Text="{x:Static resx:Resources.NationalityLabel}" />
                                 <controls:AutoCompleteComboBox
                                     Width="150"
                                     DisplayMemberPath="Name"
@@ -339,16 +329,15 @@
                                 Margin="0,5,0,0"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding ClearFiltersCommand}"
-                                Content="Zrušit filtry"
+                                Content="{x:Static resx:Resources.ClearFiltersButton}"
                                 Style="{StaticResource FilterButtonStyle}" />
                         </StackPanel>
                     </Grid>
 
-
                     <Grid>
                         <DataGrid x:Name="AuthorsGrid" ItemsSource="{Binding Authors}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="150" Header="Jméno">
+                                <DataGridTemplateColumn Width="150" Header="{x:Static resx:Resources.NameHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button
@@ -360,7 +349,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="*" Header="Národnost">
+                                <DataGridTemplateColumn Width="*" Header="{x:Static resx:Resources.NationalityHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock
@@ -373,7 +362,7 @@
                                 <DataGridTemplateColumn
                                     Width="160"
                                     CellTemplate="{StaticResource ActionColumnTemplate}"
-                                    Header="Akce" />
+                                    Header="{x:Static resx:Resources.ActionHeader}" />
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -385,7 +374,7 @@
                             FontStyle="Italic"
                             Foreground="#A0A0A0"
                             IsHitTestVisible="False"
-                            Text="Nenalezeni žádní autoři. Zkuste hledat jinak nebo přidejte nového.">
+                            Text="{x:Static resx:Resources.NoAuthorsFound}">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="Visibility" Value="Collapsed" />
@@ -398,7 +387,6 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </Grid>
-
                 </DockPanel>
             </TabItem>
         </TabControl>

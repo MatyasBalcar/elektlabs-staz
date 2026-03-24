@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:DotNetKit.Windows.Controls;assembly=DotNetKit.Wpf.AutoCompleteComboBox"
     xmlns:helpers="clr-namespace:Knihovna.Helpers"
+    xmlns:resx="clr-namespace:Knihovna.Properties"
     Style="{StaticResource BookWindow}"
     WindowStartupLocation="CenterOwner">
 
@@ -16,7 +17,7 @@
             <Button
                 Height="30"
                 Click="Save_Click"
-                Content="Uložit"
+                Content="{x:Static resx:Resources.SaveButton}"
                 IsDefault="True"
                 Style="{StaticResource SuccessButtonStyle}" />
 
@@ -29,12 +30,12 @@
                     Grid.Column="0"
                     Height="30"
                     Command="{Binding AddAuthorCommand}"
-                    Content="Nový autor"
+                    Content="{x:Static resx:Resources.NewAuthorButton}"
                     Style="{StaticResource SecondaryButtonStyle}" />
                 <Button
                     Grid.Column="1"
                     Height="30"
-                    Content="Zrušit"
+                    Content="{x:Static resx:Resources.CancelButton}"
                     IsCancel="True"
                     Style="{StaticResource DangerButtonOutlineStyle}" />
             </Grid>
@@ -42,16 +43,16 @@
 
         <ScrollViewer Padding="0,0,5,0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <Label Content="Název knihy:" Style="{StaticResource RequiredLabelStyle}" />
+                <Label Content="{x:Static resx:Resources.BookTitleLabel}" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <Label
-                    Content="ISBN:"
+                    Content="{x:Static resx:Resources.ISBNLabel}"
                     Style="{StaticResource InfoLabelStyle}"
-                    Tag="ISBN je číslo o délce od 10 do 13 číslic, pomlčky a mezery jsou povoleny" />
+                    Tag="{x:Static resx:Resources.ISBNTooltip}" />
                 <TextBox Text="{Binding EditingBook.ISBN, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
-                <Label Content="Autor:" Style="{StaticResource RequiredLabelStyle}" />
+                <Label Content="{x:Static resx:Resources.AuthorLabel}" Style="{StaticResource RequiredLabelStyle}" />
 
                 <controls:AutoCompleteComboBox
                     DisplayMemberPath="FullName"
@@ -62,7 +63,7 @@
                     TextSearch.TextPath="FullName" />
 
                 <StackPanel>
-                    <Label Content="Jazyk:" Style="{StaticResource RequiredLabelStyle}" />
+                    <Label Content="{x:Static resx:Resources.LanguageLabel}" Style="{StaticResource RequiredLabelStyle}" />
                     <Grid>
                         <TextBox
                             x:Name="LanguageTextBox"
@@ -87,7 +88,7 @@
                 </StackPanel>
 
                 <StackPanel>
-                    <Label Content="Vydavatel:" Style="{StaticResource RequiredLabelStyle}" />
+                    <Label Content="{x:Static resx:Resources.PublisherLabel}" Style="{StaticResource RequiredLabelStyle}" />
                     <Grid>
                         <TextBox
                             x:Name="PublisherTextBox"
@@ -111,13 +112,13 @@
                     </Grid>
                 </StackPanel>
 
-                <Label Content="Datum vydání:" FontWeight="SemiBold" />
+                <Label Content="{x:Static resx:Resources.PublishDateLabel}" FontWeight="SemiBold" />
                 <DatePicker
                     Foreground="Black"
                     SelectedDate="{Binding EditingBook.PublishDate}"
                     Style="{StaticResource RoundedDatePickerStyle}" />
 
-                <Label Content="Popis:" FontWeight="SemiBold" />
+                <Label Content="{x:Static resx:Resources.DescriptionLabel}" FontWeight="SemiBold" />
                 <TextBox
                     MinHeight="80"
                     VerticalContentAlignment="Top"
@@ -131,7 +132,7 @@
                     <Label
                         Margin="0,0,10,0"
                         VerticalAlignment="Center"
-                        Content="Přečteno:"
+                        Content="{x:Static resx:Resources.ReadLabel}"
                         FontWeight="SemiBold" />
 
                     <CheckBox
@@ -146,7 +147,7 @@
                     Orientation="Horizontal">
                     <Label
                         Margin="0,10,0,0"
-                        Content="Hodnocení:"
+                        Content="{x:Static resx:Resources.RatingLabel}"
                         FontWeight="SemiBold" />
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                         <Button

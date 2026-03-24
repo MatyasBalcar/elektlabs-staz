@@ -259,7 +259,7 @@
     <value>Confirm</value>
   </data>
   <data name="BookDeleteError" xml:space="preserve">
-    <value>Unable to delete book</value>
+    <value>Unable to delete book. \n Detail '{0}'</value>
   </data>
   <data name="BookSavedToast" xml:space="preserve">
     <value>Book was saved successfully</value>
@@ -271,7 +271,7 @@
     <value>Confirm delete</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Author and his books were unable to be deleted</value>
+    <value>Author and his books were unable to be deleted.\n Detail '{0}'</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">
     <value>Author saved successfully</value>

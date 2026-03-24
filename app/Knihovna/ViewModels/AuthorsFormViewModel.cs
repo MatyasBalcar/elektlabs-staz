@@ -119,7 +119,7 @@ namespace Knihovna.ViewModels
                 .Take(ShownResultsCount)
                 .ToList();
 
-            SuggestedNationalities = new ObservableCollection<Nationality>(filtered);
+            SuggestedNationalities = new ObservableCollection<Nationality>(filtered!);
             IsSuggestionsVisible = SuggestedNationalities.Count > 0;
         }
 

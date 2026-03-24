@@ -77,8 +77,8 @@ namespace Knihovna.ViewModels
 
         private void ChangeLanguage(string langCode)
         {
-            Knihovna.Properties.Settings.Default.AppLanguage = langCode;
-            Knihovna.Properties.Settings.Default.Save();
+            Settings.Default.AppLanguage = langCode;
+            Settings.Default.Save();
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);

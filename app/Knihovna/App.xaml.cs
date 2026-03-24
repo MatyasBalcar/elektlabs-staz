@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Knihovna.Models;
+using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Knihovna.Models;
 
 namespace Knihovna
 {
@@ -30,6 +31,12 @@ namespace Knihovna
 
                 Environment.Exit(1);
             }
+
+            string lang = Knihovna.Properties.Settings.Default.AppLanguage;
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
 
             base.OnStartup(e);
         }

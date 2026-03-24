@@ -133,7 +133,7 @@
     <value>Authors:</value>
   </data>
   <data name="AuthorsListTab" xml:space="preserve">
-    <value>Authors list</value>
+    <value>List of authors</value>
   </data>
   <data name="BirthDateLabel" xml:space="preserve">
     <value>Date of birth</value>

@@ -12,5 +12,6 @@
     "\\app\\Knihovna\\db\\DB SETUP",
     "\\app\\Knihovna\\ViewModels"
   ],
+  "SelectedNode": "\\.github\\workflows\\dotnet-desktop.yml",
   "PreviewInSolutionExplorer": false
 }

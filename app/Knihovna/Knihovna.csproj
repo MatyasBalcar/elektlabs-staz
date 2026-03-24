@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\cz.png" />
+    <None Remove="Images\gb.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="DotNetKit.Wpf.AutoCompleteComboBox" Version="2.0.2" />
     <PackageReference Include="FirebirdSql.EntityFrameworkCore.Firebird" Version="13.0.0" />
@@ -21,10 +26,17 @@
 
   <ItemGroup>
     <None Include=".github\workflows\dotnet-desktop.yml" />
+    <Resource Include="Images\cz.png" />
+    <Resource Include="Images\gb.png" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -32,6 +44,10 @@
     </EmbeddedResource>
     <None Update="db\KNIHOVNADB.FDB">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 </Project>

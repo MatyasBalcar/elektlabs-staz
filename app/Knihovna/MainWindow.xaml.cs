@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Globalization;
+using System.Threading;
+using System.Windows;
 using System.Windows.Media.Animation;
+using Knihovna.ViewModels;
 
 namespace Knihovna
 {
@@ -8,16 +12,62 @@ namespace Knihovna
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModels.MainViewModel();
-        }   
+
+            if (this.DataContext == null)
+            {
+                var vm = new MainViewModel();
+                this.DataContext = vm;
+                SubscribeToLanguageChanges(vm);
+            }
+        }
+
+        public MainWindow(object dataContext)
+        {
+            InitializeComponent();
+            this.DataContext = dataContext;
+
+            if (this.DataContext is MainViewModel vm)
+            {
+                SubscribeToLanguageChanges(vm);
+            }
+        }
+
+        private void SubscribeToLanguageChanges(MainViewModel vm)
+        {
+            vm.RequestLanguageChange -= OnLanguageChanged;
+            vm.RequestLanguageChange += OnLanguageChanged;
+        }
+
+        private void OnLanguageChanged(string langCode)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
+
+            if (this.DataContext is MainViewModel vm)
+            {
+                vm.RequestLanguageChange -= OnLanguageChanged;
+            }
+
+            var newWindow = new MainWindow(this.DataContext)
+            {
+                Left = this.Left,
+                Top = this.Top,
+                Width = this.Width,
+                Height = this.Height,
+                WindowState = this.WindowState
+            };
+
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+
+            this.Close();
+        }
+
         public void ShowToast(string message)
         {
             ToastText.Text = message;
-
             Storyboard sb = (Storyboard)FindResource("ToastAnimation");
             sb.Begin();
         }
-
-
     }
 }

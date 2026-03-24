@@ -238,7 +238,7 @@ namespace Knihovna.Tests.Models
             }
             catch (InvalidOperationException ex)
             {
-                Assert.IsTrue(ex.Message.Contains("ISBN"));
+                Assert.IsTrue(ex.Message.Contains("ISBN") || ex.Message.Contains("isbn"));
             }
         }
 

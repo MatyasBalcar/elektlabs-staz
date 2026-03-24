@@ -2,15 +2,12 @@
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
 using Knihovna.Properties;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Threading;
-using System.Windows;
+using System;
+using System.Collections.Generic;
 
 namespace Knihovna.ViewModels
 {
-    public partial class 
-        MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         private readonly DatabaseManager _dbManager;
 
@@ -20,13 +17,15 @@ namespace Knihovna.ViewModels
         public BooksListViewModel BooksListVm { get; }
         public AuthorsListViewModel AuthorsListVm { get; }
 
+        public event Action<string>? RequestLanguageChange;
 
         public Dictionary<string, string> AvailableLanguages { get; } = new Dictionary<string, string>
         {
             { "cs", "Čeština" },
             { "en", "English" }
         };
-        private string _selectedLanguage = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+
+        private string _selectedLanguage = Settings.Default.AppLanguage;
 
         public string SelectedLanguage
         {
@@ -35,12 +34,12 @@ namespace Knihovna.ViewModels
             {
                 if (SetProperty(ref _selectedLanguage, value))
                 {
-                    ChangeLanguage(value);
+                    Settings.Default.AppLanguage = value;
+                    Settings.Default.Save();
+                    RequestLanguageChange?.Invoke(value);
                 }
             }
         }
-
-
 
         public MainViewModel()
         {
@@ -55,39 +54,19 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void ShowBooks()
         {
-
-
             CurrentView = BooksListVm;
             BooksListVm.RefreshData();
             BooksListVm.LoadFilterData();
             BooksListVm.ClearFilters();
-
         }
 
         [RelayCommand]
         public void ShowAuthors()
         {
-
             CurrentView = AuthorsListVm;
             AuthorsListVm.RefreshData();
             AuthorsListVm.LoadFilterData();
             AuthorsListVm.ClearFilters();
-
         }
-
-        private void ChangeLanguage(string langCode)
-        {
-            Settings.Default.AppLanguage = langCode;
-            Settings.Default.Save();
-
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
-
-            MessageBox.Show(Resources.LanguageChangedMessage,
-                Resources.LanguageChangedTitle,
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
-        }
-
     }
 }

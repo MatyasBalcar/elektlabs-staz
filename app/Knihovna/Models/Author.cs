@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Knihovna.Properties;
 
 namespace Knihovna.Models
 {
@@ -12,8 +13,8 @@ namespace Knihovna.Models
 
         private string? _firstName;
 
-        [Required(ErrorMessage = "Křestní jméno autora je povinné.")]
-        [MaxLength(100, ErrorMessage = "Křestní jméno autora má maximální délku 100 znaků.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.FirstNameRequired))]
+        [MaxLength(100, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.FirstNameTooLong))]
         public string? FirstName
         {
             get => _firstName;
@@ -22,8 +23,8 @@ namespace Knihovna.Models
 
         private string? _lastName;
 
-        [Required(ErrorMessage = "Příjmení autora je povinné.")]
-        [MaxLength(100, ErrorMessage = "Příjmení autora má maximální délku 100 znaků.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.LastNameRequired))]
+        [MaxLength(100, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.LastNameTooLong))]
         public string? LastName
         {
             get => _lastName;
@@ -34,7 +35,7 @@ namespace Knihovna.Models
 
         private Nationality? _nationality;
 
-        [Required(ErrorMessage = "Národnost je povinná.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.NationalityRequired))]
         public virtual Nationality? Nationality
         {
             get => _nationality;
@@ -68,7 +69,7 @@ namespace Knihovna.Models
             if (HasErrors)
             {
                 var firstError = GetErrors().FirstOrDefault();
-                if (firstError != null) return firstError.ErrorMessage ?? "Chyba validace.";
+                if (firstError != null) return firstError.ErrorMessage ?? Resources.ValidationError;
             }
 
             return string.Empty;

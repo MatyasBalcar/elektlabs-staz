@@ -316,4 +316,28 @@
   <data name="Edit" xml:space="preserve">
     <value>Upravit</value>
   </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>Křestní jméno autora je povinné.</value>
+  </data>
+  <data name="FirstNameTooLong" xml:space="preserve">
+    <value>Křestní jméno může mít maximálně 100 znaků.</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Příjmení autora je povinné.</value>
+  </data>
+  <data name="LastNameTooLong" xml:space="preserve">
+    <value>Příjmení může mít maximálně 100 znaků.</value>
+  </data>
+  <data name="NationalityRequired" xml:space="preserve">
+    <value>Národnost je povinná.</value>
+  </data>
+  <data name="FillRequiredData" xml:space="preserve">
+    <value>Doplňte povinné údaje zvýrazněné červeně. \n</value>
+  </data>
+  <data name="AuthorSaveError" xml:space="preserve">
+    <value>Nepodařilo se uložit autora</value>
+  </data>
+  <data name="DBError" xml:space="preserve">
+    <value>Chyba databáze</value>
+  </data>
 </root>

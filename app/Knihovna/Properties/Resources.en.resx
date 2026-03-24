@@ -315,4 +315,28 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First name is required</value>
+  </data>
+  <data name="FirstNameTooLong" xml:space="preserve">
+    <value>First name is too long, maximum is 100 chars.</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last name is required.</value>
+  </data>
+  <data name="LastNameTooLong" xml:space="preserve">
+    <value>Last name is too long, maximum is 100 chars.</value>
+  </data>
+  <data name="NationalityRequired" xml:space="preserve">
+    <value>Nationality field is required.</value>
+  </data>
+  <data name="FillRequiredData" xml:space="preserve">
+    <value>Please fill the required fields</value>
+  </data>
+  <data name="AuthorSaveError" xml:space="preserve">
+    <value>Unable to save author</value>
+  </data>
+  <data name="DBError" xml:space="preserve">
+    <value>Database error</value>
+  </data>
 </root>

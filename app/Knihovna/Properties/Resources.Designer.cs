@@ -124,6 +124,15 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nepodařilo se uložit autora.
+        /// </summary>
+        public static string AuthorSaveError {
+            get {
+                return ResourceManager.GetString("AuthorSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Autoři:.
         /// </summary>
         public static string AuthorsHeader {
@@ -295,6 +304,15 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chyba databáze.
+        /// </summary>
+        public static string DBError {
+            get {
+                return ResourceManager.GetString("DBError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soubor s databází nebyl nalezen nebo k němu nelze přistoupit..
         /// </summary>
         public static string DbFileNotFound {
@@ -340,11 +358,38 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Doplňte povinné údaje zvýrazněné červeně. \n.
+        /// </summary>
+        public static string FillRequiredData {
+            get {
+                return ResourceManager.GetString("FillRequiredData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jméno:.
         /// </summary>
         public static string FirstNameLabel {
             get {
                 return ResourceManager.GetString("FirstNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Křestní jméno autora je povinné..
+        /// </summary>
+        public static string FirstNameRequired {
+            get {
+                return ResourceManager.GetString("FirstNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Křestní jméno může mít maximálně 100 znaků..
+        /// </summary>
+        public static string FirstNameTooLong {
+            get {
+                return ResourceManager.GetString("FirstNameTooLong", resourceCulture);
             }
         }
         
@@ -421,6 +466,24 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Příjmení autora je povinné..
+        /// </summary>
+        public static string LastNameRequired {
+            get {
+                return ResourceManager.GetString("LastNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Příjmení může mít maximálně 100 znaků..
+        /// </summary>
+        public static string LastNameTooLong {
+            get {
+                return ResourceManager.GetString("LastNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jméno:.
         /// </summary>
         public static string NameHeader {
@@ -444,6 +507,15 @@ namespace Knihovna.Properties {
         public static string NationalityLabel {
             get {
                 return ResourceManager.GetString("NationalityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Národnost je povinná..
+        /// </summary>
+        public static string NationalityRequired {
+            get {
+                return ResourceManager.GetString("NationalityRequired", resourceCulture);
             }
         }
         

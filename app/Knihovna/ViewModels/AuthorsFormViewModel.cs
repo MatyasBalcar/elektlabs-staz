@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using Knihovna.Properties;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -24,7 +25,7 @@ namespace Knihovna.ViewModels
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
-        [Required(ErrorMessage = "Národnost je povinná.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.NationalityRequired))]
         private string _nationalityText = string.Empty;
 
         [ObservableProperty]
@@ -82,8 +83,8 @@ namespace Knihovna.ViewModels
             if (HasErrors || !string.IsNullOrEmpty(validationError))
             {
                 System.Windows.MessageBox.Show(
-                    "Doplňte povinné údaje zvýrazněné červeně.\n" + validationError,
-                    "Chyba validace",
+                    Resources.FillRequiredData+ validationError,
+                    Resources.ValidationError,
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning);
                 return false;
@@ -97,8 +98,8 @@ namespace Knihovna.ViewModels
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)
             {
                 System.Windows.MessageBox.Show(
-                    "Autora se nepodařilo uložit do databáze",
-                    "Chyba databáze",
+                    Resources.AuthorSaveError,
+                    Resources.DBError,
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 return false;

@@ -690,7 +690,9 @@
                                             Grid.ColumnSpan="2"
                                             Background="#f0f0f0"
                                             CornerRadius="7,7,0,0">
-                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" />
+                                            <DataGridColumnHeadersPresenter
+                                                x:Name="PART_ColumnHeadersPresenter"
+                                                SnapsToDevicePixels="True" />
                                         </Border>
 
                                         <ScrollContentPresenter
@@ -708,6 +710,11 @@
                                             Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                             Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
                                     </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="ComputedVerticalScrollBarVisibility" Value="Hidden">
+                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Collapsed" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </ScrollViewer.Template>
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -726,6 +733,8 @@
         <Setter Property="BorderThickness" Value="0,0,1,1" />
         <Setter Property="BorderBrush" Value="DarkGray" />
         <Setter Property="Height" Value="30" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridColumnHeader">
@@ -741,6 +750,13 @@
                             VerticalAlignment="Center"
                             RecognizesAccessKey="True" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="Transparent" />
+                            <Setter TargetName="HeaderBorder" Property="BorderBrush" Value="Transparent" />
+                            <Setter TargetName="HeaderBorder" Property="BorderThickness" Value="0,0,0,1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

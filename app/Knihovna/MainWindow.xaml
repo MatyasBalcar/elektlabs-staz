@@ -41,8 +41,7 @@
 
         <TabControl
             Background="Transparent"
-            BorderThickness="0"
-            SelectionChanged="TabControl_SelectionChanged">
+            BorderThickness="0">
             <TabItem DataContext="{Binding BooksListVm}" Header="{x:Static resx:Resources.BooksListTab}">
                 <DockPanel>
                     <Separator

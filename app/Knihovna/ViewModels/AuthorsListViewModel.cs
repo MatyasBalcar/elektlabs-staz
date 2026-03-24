@@ -24,6 +24,8 @@ namespace Knihovna.ViewModels
         [NotifyPropertyChangedFor(nameof(HasActiveFilters))] 
         private Nationality? _selectedNationality;
 
+        public string EditLabel => Knihovna.Properties.Resources.Edit;
+        public string DeleteLabel => Knihovna.Properties.Resources.Delete;
         public AuthorsListViewModel(DatabaseManager dbManager)
         {
             _dbManager = dbManager;

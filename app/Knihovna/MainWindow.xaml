@@ -29,42 +29,13 @@
     </Window.Resources>
 
     <Grid Margin="10">
-        <ComboBox
-            Width="100"
-            Height="25"
+        <ContentControl
             Margin="0,0,5,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Panel.ZIndex="1"
-            ItemsSource="{Binding AvailableLanguages}"
-            SelectedValue="{Binding SelectedLanguage}"
-            SelectedValuePath="Key">
-
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                        <Image
-                            Width="16"
-                            Height="11"
-                            Margin="0,0,5,0">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Key}" Value="cs">
-                                            <Setter Property="Source" Value="pack://application:,,,/Knihovna;component/Images/cz.png" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="en">
-                                            <Setter Property="Source" Value="pack://application:,,,/Knihovna;component/Images/gb.png" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding Value}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            Content="{Binding}"
+            ContentTemplate="{StaticResource LanguageSelectTemplate}" />
 
         <TabControl Background="Transparent" BorderThickness="0">
             <TabItem DataContext="{Binding BooksListVm}" Header="{x:Static resx:Resources.BooksListTab}">

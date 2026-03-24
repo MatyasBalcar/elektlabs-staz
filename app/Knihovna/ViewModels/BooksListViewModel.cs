@@ -36,7 +36,8 @@ namespace Knihovna.ViewModels
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(HasActiveFilters))]
         private Publisher? _selectedPublisher;
-
+        public string EditLabel => Knihovna.Properties.Resources.Edit;
+        public string DeleteLabel => Knihovna.Properties.Resources.Delete;
         public BooksListViewModel(DatabaseManager dbManager)
         {
             _dbManager = dbManager;

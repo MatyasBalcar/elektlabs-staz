@@ -443,7 +443,7 @@
                 FontSize="14"
                 FontWeight="SemiBold"
                 Foreground="White"
-                Text="Akce byla úspěšná." />
+                Text="{x:Static resx:Resources.SuccessToast}" />
         </Border>
     </Grid>
 </Window>

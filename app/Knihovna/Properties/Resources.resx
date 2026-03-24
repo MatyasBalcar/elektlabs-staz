@@ -229,6 +229,9 @@
   <data name="SearchLabel" xml:space="preserve">
     <value>Hledat:</value>
   </data>
+  <data name="SuccessToast" xml:space="preserve">
+    <value>Akce byla úspěšná</value>
+  </data>
   <data name="TitleHeader" xml:space="preserve">
     <value>Název:</value>
   </data>

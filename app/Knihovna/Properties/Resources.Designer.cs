@@ -394,6 +394,15 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Akce byla úspěšná.
+        /// </summary>
+        public static string SuccessToast {
+            get {
+                return ResourceManager.GetString("SuccessToast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Název:.
         /// </summary>
         public static string TitleHeader {

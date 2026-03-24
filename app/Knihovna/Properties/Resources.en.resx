@@ -228,6 +228,9 @@
   <data name="SearchLabel" xml:space="preserve">
     <value>Search:</value>
   </data>
+  <data name="SuccessToast" xml:space="preserve">
+    <value>Action was successfull</value>
+  </data>
   <data name="TitleHeader" xml:space="preserve">
     <value>Name:</value>
   </data>

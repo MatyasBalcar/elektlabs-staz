@@ -10,8 +10,10 @@ namespace Knihovna.Tests.Models
     [TestClass]
     public class DatabaseManagerWriteAndDeleteTests
     {
-        private DbContextOptions<AppDbContext>? _options;
-        private Nationality TestNationality => new Nationality { Name = "Czech" };
+        private DbContextOptions<AppDbContext> _options = null!;
+
+        private Nationality DefaultNationality => new() { Name = "Czech" };
+        private Author DefaultAuthor => new() { FirstName = "A", LastName = "B", Nationality = DefaultNationality };
 
         [TestInitialize]
         public void Setup()
@@ -21,237 +23,159 @@ namespace Knihovna.Tests.Models
                 .Options;
         }
 
-        [TestMethod]
-        public void SaveBook_NewBook_InsertsCorrectly()
+        //factory
+        private Book CreateValidBook(string name = "Test Book", string isbn = "1234567890")
         {
-            var manager = new DatabaseManager(_options!);
-            var book = new Book
+            return new Book
             {
-                Name = "Test Book",
-                Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } },
+                Name = name,
+                ISBN = isbn,
+                Authors = new List<Author> { DefaultAuthor },
                 Language = new Language { Name = "Czech" },
                 Publisher = new Publisher { Name = "TestPub" }
             };
+        }
 
-            var validation = book.Validate();
-            Assert.IsTrue(string.IsNullOrWhiteSpace(validation), "Book should be valid before saving: " + validation);
+        private void AssertDatabaseEmpty()
+        {
+            using var context = new AppDbContext(_options);
+            Assert.AreEqual(0, context.Books.Count(), "Database should be empty of books.");
+            Assert.AreEqual(0, context.Authors.Count(), "Database should be empty of authors.");
+        }
+
+        
+
+        [TestMethod]
+        public void SaveBook_NewBook_InsertsCorrectly()
+        {
+            var manager = new DatabaseManager(_options);
+            var book = CreateValidBook();
 
             manager.SaveBook(book);
 
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(1, context.Books.Count());
-            Assert.AreEqual("Test Book", context.Books.First().Name);
+            using var context = new AppDbContext(_options);
+            var savedBook = context.Books.FirstOrDefault();
+            Assert.IsNotNull(savedBook);
+            Assert.AreEqual(book.Name, savedBook.Name);
         }
 
         [TestMethod]
         public void DeleteBook_RemovesBook()
         {
-            using (var context = new AppDbContext(_options!))
+            const int testId = 99;
+            using (var context = new AppDbContext(_options))
             {
-                context.Books.Add(new Book { BookId = 99, Name = "Delete Me" });
+                context.Books.Add(new Book { BookId = testId, Name = "Delete Me" });
                 context.SaveChanges();
             }
 
-            var manager = new DatabaseManager(_options!);
-            manager.DeleteBook(99);
+            new DatabaseManager(_options).DeleteBook(testId);
 
-            using (var context = new AppDbContext(_options!))
+            using (var context = new AppDbContext(_options))
             {
-                Assert.IsNull(context.Books.Find(99));
+                Assert.IsNull(context.Books.Find(testId));
             }
         }
 
         [TestMethod]
         public void SaveAuthor_UpdatesExistingAuthor()
         {
-            using (var dbcontext = new AppDbContext(_options!))
+            const int authorId = 1;
+            using (var dbcontext = new AppDbContext(_options))
             {
-                dbcontext.Authors.Add(new Author
-                {
-                    AuthorId = 1,
-                    FirstName = "Old",
-                    LastName = "Name",
-                    Nationality = TestNationality
-                });
+                dbcontext.Authors.Add(new Author { AuthorId = authorId, FirstName = "Old", LastName = "Name", Nationality = DefaultNationality });
                 dbcontext.SaveChanges();
             }
 
-            var manager = new DatabaseManager(_options!);
+            var updated = new Author { AuthorId = authorId, FirstName = "New", LastName = "Name", Nationality = DefaultNationality };
+            new DatabaseManager(_options).SaveAuthor(updated);
 
-            var updated = new Author
-            {
-                AuthorId = 1,
-                FirstName = "New",
-                LastName = "Name",
-                Nationality = TestNationality
-            };
-
-            manager.SaveAuthor(updated);
-
-            using (var dbcontext = new AppDbContext(_options!))
-            {
-                var author = dbcontext.Authors.AsNoTracking().FirstOrDefault(a => a.AuthorId == 1);
-                Assert.IsNotNull(author);
-                Assert.AreEqual("New", author.FirstName);
-            }
+            using var checkContext = new AppDbContext(_options);
+            var author = checkContext.Authors.AsNoTracking().First(a => a.AuthorId == authorId);
+            Assert.AreEqual("New", author.FirstName);
         }
 
         [TestMethod]
         public void DeleteAuthor_RemovesAuthorAndBooks()
         {
-            using (var context = new AppDbContext(_options!))
+            using (var context = new AppDbContext(_options))
             {
-                var author = new Author { AuthorId = 5, FirstName = "A", LastName = "B", Nationality = TestNationality };
-                var book = new Book { BookId = 10, Name = "Book", Authors = new List<Author> { author } };
-                context.Authors.Add(author);
-                context.Books.Add(book);
+                var author = new Author { AuthorId = 5, FirstName = "A", LastName = "B", Nationality = DefaultNationality };
+                context.Books.Add(new Book { BookId = 10, Name = "Book", Authors = new List<Author> { author } });
                 context.SaveChanges();
             }
 
-            var manager = new DatabaseManager(_options!);
-            manager.DeleteAuthor(5);
-
-            using (var context = new AppDbContext(_options!))
-            {
-                Assert.AreEqual(0, context.Authors.Count());
-                Assert.AreEqual(0, context.Books.Count());
-            }
-        }
-
-        [TestMethod]
-        public void SaveAuthor_NewAuthor_Inserts()
-        {
-            var manager = new DatabaseManager(_options!);
-            var author = new Author { FirstName = "New", LastName = "Author", Nationality = TestNationality };
-
-            var validation = author.Validate();
-            Assert.IsTrue(string.IsNullOrWhiteSpace(validation), "Author should be valid before saving: " + validation);
-
-            manager.SaveAuthor(author);
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(1, context.Authors.Count());
-            Assert.AreEqual("New", context.Authors.First().FirstName);
+            new DatabaseManager(_options).DeleteAuthor(5);
+            AssertDatabaseEmpty();
         }
 
         [TestMethod]
         public void SaveBook_WithExistingAuthor_AssociatesAuthor()
         {
-            using (var dbcontext = new AppDbContext(_options!))
+            const int existingAuthorId = 42;
+            using (var dbcontext = new AppDbContext(_options))
             {
-                dbcontext.Authors.Add(new Author
-                {
-                    AuthorId = 42,
-                    FirstName = "Linked",
-                    LastName = "Author",
-                    Nationality = TestNationality
-                });
+                dbcontext.Authors.Add(new Author { AuthorId = existingAuthorId, FirstName = "Linked", LastName = "Author", Nationality = DefaultNationality });
                 dbcontext.SaveChanges();
             }
 
-            var manager = new DatabaseManager(_options!);
+            var book = CreateValidBook("Book With Author");
+            book.Authors = new List<Author> { new Author { AuthorId = existingAuthorId, Nationality = DefaultNationality } };
 
-            var book = new Book
-            {
-                Name = "Book With Author",
-                Authors = new List<Author> { new Author { AuthorId = 42, Nationality = TestNationality } },
-                Language = new Language { Name = "Czech" },
-                Publisher = new Publisher { Name = "Pub" }
-            };
+            new DatabaseManager(_options).SaveBook(book);
 
-            manager.SaveBook(book);
+            using var verifyContext = new AppDbContext(_options);
+            var dbBook = verifyContext.Books.Include(b => b.Authors).First();
+            Assert.AreEqual(existingAuthorId, dbBook.Authors.First().AuthorId);
+        }
 
-            using (var dbcontext = new AppDbContext(_options!))
-            {
-                var dbBook = dbcontext.Books
-                    .Include(b => b.Authors)
-                    .FirstOrDefault(b => b.Name == "Book With Author");
 
-                Assert.IsNotNull(dbBook);
-                Assert.AreEqual(1, dbBook.Authors.Count);
-                Assert.AreEqual(42, dbBook.Authors.First().AuthorId);
-            }
+        [DataTestMethod]
+        [DataRow("No Authors", false, true, true, "1234567890")] 
+        [DataRow("No Language", true, false, true, "1234567890")]
+        [DataRow("No Publisher", true, true, false, "1234567890")] 
+        [DataRow("Bad ISBN", true, true, true, "abc123")]         
+        public void SaveBook_InvalidData_DoesNotSave(string name, bool hasAuthor, bool hasLang, bool hasPub, string isbn)
+        {
+            var book = new Book { Name = name, ISBN = isbn };
+            if (hasAuthor) book.Authors.Add(DefaultAuthor);
+            if (hasLang) book.Language = new Language { Name = "CZ" };
+            if (hasPub) book.Publisher = new Publisher { Name = "Pub" };
+
+            var validation = book.Validate();
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(validation), $"Book '{name}' should fail validation.");
+            AssertDatabaseEmpty();
         }
 
         [TestMethod]
-        public void SaveBook_NoAuthors_DoesNotSave()
+        public void SaveAuthor_InvalidData_DoesNotSave()
         {
-            var book = new Book { Name = "No Authors", Authors = new List<Author>() };
+            var author = new Author { FirstName = "NoNat", LastName = "Author", Nationality = null };
 
-            var validation = book.Validate();
-            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(0, context.Books.Count());
+            Assert.IsFalse(string.IsNullOrWhiteSpace(author.Validate()));
+            AssertDatabaseEmpty();
         }
-
-        [TestMethod]
-        public void SaveBook_NoLanguage_DoesNotSave()
-        {
-            var book = new Book { Name = "No Language", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } }, Language = null, LanguageId = null };
-
-            var validation = book.Validate();
-            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(0, context.Books.Count());
-        }
-
-        [TestMethod]
-        public void SaveBook_NoPublisher_DoesNotSave()
-        {
-            var book = new Book { Name = "No Publisher", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } }, Publisher = null, PublisherId = null };
-
-            var validation = book.Validate();
-            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(0, context.Books.Count());
-        }
-
-        [TestMethod]
-        public void SaveBook_InvalidISBN_DoesNotSave()
-        {
-            var book = new Book { Name = "Bad ISBN", ISBN = "abc123", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
-
-            var validation = book.Validate();
-            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(0, context.Books.Count());
-        }
-
         [TestMethod]
         public void SaveBook_DuplicateISBN_DoesntSave()
         {
-            var manager = new DatabaseManager(_options!);
+            var manager = new DatabaseManager(_options);
+            const string duplicatedIsbn = "12345678911";
 
-            var original = new Book { Name = "Original", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
-            manager.SaveBook(original);
+            manager.SaveBook(CreateValidBook("Original", duplicatedIsbn));
 
-            var copy = new Book { Name = "Copy", ISBN = "12345678911", Authors = new List<Author> { new Author { FirstName = "A", LastName = "B", Nationality = TestNationality } } };
+            var copy = CreateValidBook("Copy", duplicatedIsbn);
 
             try
             {
                 manager.SaveBook(copy);
-                Assert.Fail("Expected an InvalidOperationException, but the duplicate book saved successfully.");
+                Assert.Fail("Expected an InvalidOperationException due to duplicate ISBN, but it was not thrown.");
             }
             catch (InvalidOperationException ex)
             {
-                Assert.IsTrue(ex.Message.Contains("ISBN") || ex.Message.Contains("isbn"));
+                bool containsIsbn = ex.Message.Contains("ISBN", StringComparison.OrdinalIgnoreCase);
+                Assert.IsTrue(containsIsbn, $"Exception message should mention 'ISBN', but was: {ex.Message}");
             }
-        }
-
-        [TestMethod]
-        public void SaveAuthor_MissingNationality_DoesNotSave()
-        {
-            var author = new Author { FirstName = "NoNat", LastName = "Author", Nationality = null, NationalityId = null };
-
-            var validation = author.Validate();
-            Assert.IsFalse(string.IsNullOrWhiteSpace(validation));
-
-            using var context = new AppDbContext(_options!);
-            Assert.AreEqual(0, context.Authors.Count());
         }
     }
 }

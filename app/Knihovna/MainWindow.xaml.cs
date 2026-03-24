@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Knihovna.ViewModels;
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Knihovna.ViewModels;
 
 namespace Knihovna
 {
@@ -19,7 +20,6 @@ namespace Knihovna
                 this.DataContext = vm;
                 SubscribeToLanguageChanges(vm);
             }
-            //force reload
             this.Loaded += OnWindowLoaded;
         }
 
@@ -38,12 +38,14 @@ namespace Knihovna
 
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            this.Width += 10;
-
-
-            this.Width -= 10;
+            //when i make window larger, there is an artifact, also on load, this fixes it
+            this.Width += 5;
+            this.Width -= 5;
         }
-
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OnWindowLoaded(sender, e);
+        }
 
         private void SubscribeToLanguageChanges(MainViewModel vm)
         {

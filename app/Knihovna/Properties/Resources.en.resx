@@ -277,7 +277,7 @@
     <value>Author saved successfully</value>
   </data>
   <data name="BookExistsISBN" xml:space="preserve">
-    <value>Book with isbn '{0}' already exists</value>
+    <value>Book with ISBN '{0}' already exists</value>
   </data>
   <data name="DeleteErrorTitle" xml:space="preserve">
     <value>Error when deleting a book</value>

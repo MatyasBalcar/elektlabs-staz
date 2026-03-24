@@ -61,40 +61,40 @@ namespace Knihovna.Tests.Models
             }
         }
 
-        //[TestMethod]
-        //public void SaveAuthor_UpdatesExistingAuthor()
-        //{
-        //    using (var dbcontext = new AppDbContext(_options!))
-        //    {
-        //        dbcontext.Authors.Add(new Author
-        //        {
-        //            AuthorId = 1,
-        //            FirstName = "Old",
-        //            LastName = "Name",
-        //            Nationality = TestNationality
-        //        });
-        //        dbcontext.SaveChanges();
-        //    }
+        [TestMethod]
+        public void SaveAuthor_UpdatesExistingAuthor()
+        {
+            using (var dbcontext = new AppDbContext(_options!))
+            {
+                dbcontext.Authors.Add(new Author
+                {
+                    AuthorId = 1,
+                    FirstName = "Old",
+                    LastName = "Name",
+                    Nationality = TestNationality
+                });
+                dbcontext.SaveChanges();
+            }
 
-        //    var manager = new DatabaseManager(_options!);
+            var manager = new DatabaseManager(_options!);
 
-        //    var updated = new Author
-        //    {
-        //        AuthorId = 1,
-        //        FirstName = "New",
-        //        LastName = "Name",
-        //        Nationality = TestNationality
-        //    };
+            var updated = new Author
+            {
+                AuthorId = 1,
+                FirstName = "New",
+                LastName = "Name",
+                Nationality = TestNationality
+            };
 
-        //    manager.SaveAuthor(updated);
+            manager.SaveAuthor(updated);
 
-        //    using (var dbcontext = new AppDbContext(_options!))
-        //    {
-        //        var author = dbcontext.Authors.AsNoTracking().FirstOrDefault(a => a.AuthorId == 1);
-        //        Assert.IsNotNull(author);
-        //        Assert.AreEqual("New", author.FirstName);
-        //    }
-        //}
+            using (var dbcontext = new AppDbContext(_options!))
+            {
+                var author = dbcontext.Authors.AsNoTracking().FirstOrDefault(a => a.AuthorId == 1);
+                Assert.IsNotNull(author);
+                Assert.AreEqual("New", author.FirstName);
+            }
+        }
 
         [TestMethod]
         public void DeleteAuthor_RemovesAuthorAndBooks()

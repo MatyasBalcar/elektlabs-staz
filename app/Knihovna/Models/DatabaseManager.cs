@@ -227,29 +227,29 @@ namespace Knihovna.Models
         {
             using var context = CreateContext();
 
-            if (author.Nationality != null)
-            {
-                var existingNationality = context.Nationalities
-                    .FirstOrDefault(n => n.NationalityID == author.Nationality.NationalityID);
-
-                if (existingNationality != null)
-                {
-                    author.Nationality = existingNationality;
-                    author.NationalityId = existingNationality.NationalityID;
-                    context.Entry(existingNationality).State = EntityState.Unchanged;
-                }
-                else if (author.Nationality.NationalityID == 0)
-                {
-                    context.Nationalities.Add(author.Nationality);
-                }
-            }
-            else
-            {
-                author.NationalityId = null;
-            }
-
             if (author.AuthorId == 0)
             {
+                if (author.Nationality != null)
+                {
+                    var existingNationality = context.Nationalities
+                        .FirstOrDefault(n => n.NationalityID == author.Nationality.NationalityID || (n.Name == author.Nationality.Name && author.Nationality.NationalityID == 0));
+
+                    if (existingNationality != null)
+                    {
+                        author.Nationality = existingNationality;
+                        author.NationalityId = existingNationality.NationalityID;
+                        context.Entry(existingNationality).State = EntityState.Unchanged;
+                    }
+                    else if (author.Nationality.NationalityID == 0)
+                    {
+                        context.Nationalities.Add(author.Nationality);
+                    }
+                }
+                else
+                {
+                    author.NationalityId = null;
+                }
+
                 context.Authors.Add(author);
             }
             else
@@ -257,9 +257,30 @@ namespace Knihovna.Models
                 var dbAuthor = context.Authors.FirstOrDefault(a => a.AuthorId == author.AuthorId);
                 if (dbAuthor != null)
                 {
-                    dbAuthor.NationalityId = author.NationalityId;
-                    dbAuthor.Nationality = author.Nationality;
                     context.Entry(dbAuthor).CurrentValues.SetValues(author);
+
+                    if (author.Nationality != null)
+                    {
+                        var existingNationality = context.Nationalities
+                            .FirstOrDefault(n => n.NationalityID == author.Nationality.NationalityID || (n.Name == author.Nationality.Name && author.Nationality.NationalityID == 0));
+
+                        if (existingNationality != null)
+                        {
+                            dbAuthor.Nationality = existingNationality;
+                            dbAuthor.NationalityId = existingNationality.NationalityID;
+                            context.Entry(existingNationality).State = EntityState.Unchanged;
+                        }
+                        else if (author.Nationality.NationalityID == 0)
+                        {
+                            context.Nationalities.Add(author.Nationality);
+                            dbAuthor.Nationality = author.Nationality;
+                        }
+                    }
+                    else
+                    {
+                        dbAuthor.NationalityId = null;
+                        dbAuthor.Nationality = null;
+                    }
                 }
             }
 

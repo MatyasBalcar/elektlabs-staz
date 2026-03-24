@@ -20,8 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include=".githooks\pre-commit" />
-    <None Include=".githooks\pre-commit.ps1" />
     <None Include=".github\workflows\dotnet-desktop.yml" />
+    <None Update="db\KNIHOVNADB.FDB">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

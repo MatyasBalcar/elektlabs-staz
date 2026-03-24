@@ -130,7 +130,7 @@ namespace Knihovna.Tests.Models
         }
 
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("No Authors", false, true, true, "1234567890")] 
         [DataRow("No Language", true, false, true, "1234567890")]
         [DataRow("No Publisher", true, true, false, "1234567890")] 

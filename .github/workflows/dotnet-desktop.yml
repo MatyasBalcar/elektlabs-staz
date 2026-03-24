@@ -29,7 +29,7 @@ jobs:
       run: dotnet test ./app/Knihovna --configuration Release --no-build
 
     - name: Publish
-      run: dotnet publish ./app/Knihovna --configuration Release --no-build -o ./artifacts/publish
+      run: dotnet publish ./app/Knihovna --configuration Release --no-build 
 
     - name: Upload publish artifact
       uses: actions/upload-artifact@v4

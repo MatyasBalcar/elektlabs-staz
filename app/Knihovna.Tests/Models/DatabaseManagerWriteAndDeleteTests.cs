@@ -60,6 +60,57 @@ namespace Knihovna.Tests.Models
         }
 
         [TestMethod]
+        public void SaveBook_UpdatesExistingBook_ReplacesAuthors()
+        {
+            int authorToKeepId;
+            using (var context = new AppDbContext(_options))
+            {
+                var authorToKeep = new Author { FirstName = "Keep", LastName = "Author", Nationality = DefaultNationality };
+                context.Authors.Add(authorToKeep);
+                context.SaveChanges();
+                authorToKeepId = authorToKeep.AuthorId;
+            }
+
+            var manager = new DatabaseManager(_options);
+            var original = CreateValidBook("Original", "1111111111");
+            manager.SaveBook(original);
+
+            int bookId;
+            using (var context = new AppDbContext(_options))
+            {
+                bookId = context.Books.AsNoTracking().Select(b => b.BookId).First();
+            }
+
+            var updated = new Book
+            {
+                BookId = bookId,
+                Name = "Updated",
+                ISBN = "1111111111",
+                Authors = new List<Author>
+                {
+                    new Author { AuthorId = authorToKeepId, Nationality = DefaultNationality }
+                },
+                Language = new Language { Name = "UpdatedLang" },
+                Publisher = new Publisher { Name = "UpdatedPub" }
+            };
+
+            manager.SaveBook(updated);
+
+            using var verifyContext = new AppDbContext(_options);
+            var saved = verifyContext.Books
+                .Include(b => b.Authors)
+                .Include(b => b.Language)
+                .Include(b => b.Publisher)
+                .First(b => b.BookId == bookId);
+
+            Assert.AreEqual("Updated", saved.Name);
+            Assert.AreEqual("UpdatedLang", saved.Language?.Name);
+            Assert.AreEqual("UpdatedPub", saved.Publisher?.Name);
+            Assert.AreEqual(1, saved.Authors.Count);
+            Assert.AreEqual(authorToKeepId, saved.Authors.First().AuthorId);
+        }
+
+        [TestMethod]
         public void DeleteBook_RemovesBook()
         {
             const int testId = 99;
@@ -75,6 +126,15 @@ namespace Knihovna.Tests.Models
             {
                 Assert.IsNull(context.Books.Find(testId));
             }
+        }
+
+        [TestMethod]
+        public void DeleteBook_NonExisting_DoesNotThrow()
+        {
+            new DatabaseManager(_options).DeleteBook(999);
+
+            using var context = new AppDbContext(_options);
+            Assert.AreEqual(0, context.Books.Count());
         }
 
         [TestMethod]
@@ -96,6 +156,33 @@ namespace Knihovna.Tests.Models
         }
 
         [TestMethod]
+        public void SaveAuthor_NewAuthor_ReusesExistingNationality()
+        {
+            int nationalityId;
+            using (var context = new AppDbContext(_options))
+            {
+                var nationality = new Nationality { Name = "Czech" };
+                context.Nationalities.Add(nationality);
+                context.SaveChanges();
+                nationalityId = nationality.NationalityID;
+            }
+
+            var author = new Author
+            {
+                FirstName = "Reuse",
+                LastName = "Nationality",
+                Nationality = new Nationality { NationalityID = nationalityId, Name = "Czech" }
+            };
+
+            new DatabaseManager(_options).SaveAuthor(author);
+
+            using var verifyContext = new AppDbContext(_options);
+            Assert.AreEqual(1, verifyContext.Nationalities.Count());
+            var saved = verifyContext.Authors.Include(a => a.Nationality).First();
+            Assert.AreEqual(nationalityId, saved.NationalityId);
+        }
+
+        [TestMethod]
         public void DeleteAuthor_RemovesAuthorAndBooks()
         {
             using (var context = new AppDbContext(_options))
@@ -107,6 +194,30 @@ namespace Knihovna.Tests.Models
 
             new DatabaseManager(_options).DeleteAuthor(5);
             AssertDatabaseEmpty();
+        }
+
+        [TestMethod]
+        public void DeleteAuthor_NoBooks_RemovesAuthorOnly()
+        {
+            int authorToDeleteId;
+            int bookId;
+            using (var context = new AppDbContext(_options))
+            {
+                var authorToDelete = new Author { FirstName = "Delete", LastName = "Me", Nationality = DefaultNationality };
+                var authorToKeep = new Author { FirstName = "Keep", LastName = "Author", Nationality = DefaultNationality };
+                var book = new Book { Name = "Keep Book", Authors = new List<Author> { authorToKeep } };
+                context.Authors.AddRange(authorToDelete, authorToKeep);
+                context.Books.Add(book);
+                context.SaveChanges();
+                authorToDeleteId = authorToDelete.AuthorId;
+                bookId = book.BookId;
+            }
+
+            new DatabaseManager(_options).DeleteAuthor(authorToDeleteId);
+
+            using var verifyContext = new AppDbContext(_options);
+            Assert.IsNull(verifyContext.Authors.Find(authorToDeleteId));
+            Assert.IsNotNull(verifyContext.Books.Find(bookId));
         }
 
         [TestMethod]
@@ -127,6 +238,67 @@ namespace Knihovna.Tests.Models
             using var verifyContext = new AppDbContext(_options);
             var dbBook = verifyContext.Books.Include(b => b.Authors).First();
             Assert.AreEqual(existingAuthorId, dbBook.Authors.First().AuthorId);
+        }
+
+        [TestMethod]
+        public void SaveBook_UsesExistingLanguageAndPublisher()
+        {
+            int languageId;
+            int publisherId;
+            int authorId;
+            using (var context = new AppDbContext(_options))
+            {
+                var language = new Language { Name = "Czech" };
+                var publisher = new Publisher { Name = "TestPub" };
+                var author = new Author { FirstName = "Lang", LastName = "Author", Nationality = DefaultNationality };
+                context.Languages.Add(language);
+                context.Publishers.Add(publisher);
+                context.Authors.Add(author);
+                context.SaveChanges();
+                languageId = language.LanguageID;
+                publisherId = publisher.PublisherID;
+                authorId = author.AuthorId;
+            }
+
+            var book = new Book
+            {
+                Name = "Reuse",
+                ISBN = "2222222222",
+                Authors = new List<Author> { new Author { AuthorId = authorId, Nationality = DefaultNationality } },
+                Language = new Language { LanguageID = languageId, Name = "Czech" },
+                Publisher = new Publisher { PublisherID = publisherId, Name = "TestPub" }
+            };
+
+            new DatabaseManager(_options).SaveBook(book);
+
+            using var verifyContext = new AppDbContext(_options);
+            Assert.AreEqual(1, verifyContext.Languages.Count());
+            Assert.AreEqual(1, verifyContext.Publishers.Count());
+            var saved = verifyContext.Books.AsNoTracking().First();
+            Assert.AreEqual(languageId, saved.LanguageId);
+            Assert.AreEqual(publisherId, saved.PublisherId);
+        }
+
+        [TestMethod]
+        public void SaveBook_NullLanguageAndPublisher_SetsNullIds()
+        {
+            var book = new Book
+            {
+                Name = "No Lang Pub",
+                ISBN = "3333333333",
+                Authors = new List<Author> { DefaultAuthor },
+                Language = null,
+                Publisher = null
+            };
+
+            new DatabaseManager(_options).SaveBook(book);
+
+            using var verifyContext = new AppDbContext(_options);
+            var saved = verifyContext.Books.AsNoTracking().First();
+            Assert.IsNull(saved.LanguageId);
+            Assert.IsNull(saved.PublisherId);
+            Assert.AreEqual(0, verifyContext.Languages.Count());
+            Assert.AreEqual(0, verifyContext.Publishers.Count());
         }
 
 

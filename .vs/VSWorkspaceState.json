@@ -1,10 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\.github",
+    "\\.github\\workflows",
     "\\app",
     "\\app\\Knihovna",
-    "\\app\\Knihovna\\Models"
+    "\\app\\Knihovna.Tests",
+    "\\app\\Knihovna.Tests\\Models",
+    "\\app\\Knihovna\\Converters",
+    "\\app\\Knihovna\\db",
+    "\\app\\Knihovna\\db\\DB SETUP",
+    "\\app\\Knihovna\\ViewModels"
   ],
-  "SelectedNode": "\\app\\Knihovna\\Models\\DatabaseManager.cs",
   "PreviewInSolutionExplorer": false
 }

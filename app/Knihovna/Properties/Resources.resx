@@ -136,7 +136,7 @@
     <value>&#x8;Seznam autorů</value>
   </data>
   <data name="BirthDateLabel" xml:space="preserve">
-    <value>Datum Narození</value>
+    <value>Datum Narození:</value>
   </data>
   <data name="BooksListTab" xml:space="preserve">
     <value>Seznam knih</value>
@@ -160,7 +160,7 @@
     <value>Jméno:</value>
   </data>
   <data name="ISBNLabel" xml:space="preserve">
-    <value>ISBN</value>
+    <value>ISBN:</value>
   </data>
   <data name="ISBNTooltip" xml:space="preserve">
     <value>&#x8;ISBN je císlo o délce od 10 do 13 císlic pomlcky a mezery jsou povoleny</value>
@@ -200,7 +200,7 @@
     <value>Hodnota (Value)</value>
   </data>
   <data name="PublishDateLabel" xml:space="preserve">
-    <value>Datum Vydání</value>
+    <value>Datum Vydání:</value>
   </data>
   <data name="PublisherLabel" xml:space="preserve">
     <value>Vydatavatel:</value>
@@ -232,10 +232,88 @@
   <data name="SuccessToast" xml:space="preserve">
     <value>Akce byla úspěšná</value>
   </data>
+  <data name="LanguageChangedMessage" xml:space="preserve">
+    <value>Jazyk byl změněn. Aby se projevily všechny změny, restartujte prosím aplikaci.</value>
+  </data>
+  <data name="LanguageChangedTitle" xml:space="preserve">
+    <value>Změna jazyka</value>
+  </data>
+  <data name="DatabaseCriticalErrorTitle" xml:space="preserve">
+    <value>Kritická chyba databáze</value>
+  </data>
+  <data name="DbFileNotFound" xml:space="preserve">
+    <value>Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.</value>
+  </data>
+  <data name="DbConnectionError" xml:space="preserve">
+    <value>Chyba při ověřování spojení s databází:\nDetail: {0}</value>
+  </data>
+  <data name="UnexpectedErrorMessage" xml:space="preserve">
+    <value>Jejda, v aplikaci došlo k neočekávané chybě. Omlouváme se za komplikace.</value>
+  </data>
+  <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Neočekávaná chyba</value>
+  </data>
+  <data name="ConfirmDeleteBook" xml:space="preserve">
+    <value>Smazat '{0}'?</value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value>Potvrzení</value>
+  </data>
+  <data name="BookDeleteError" xml:space="preserve">
+    <value>Knihu se nepodařilo smazat.\nDetail: {0}</value>
+  </data>
+  <data name="BookSavedToast" xml:space="preserve">
+    <value>Kniha byla úspěšně uložena!</value>
+  </data>
+  <data name="ConfirmDeleteAuthor" xml:space="preserve">
+    <value>Opravdu chcete smazat autora '{0}'? \n\nVAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!</value>
+  </data>
+  <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
+    <value>Potvrzení smazání</value>
+  </data>
+  <data name="AuthorDeleteError" xml:space="preserve">
+    <value>Autora a jeho knihy se nepodařilo smazat.\nDetail: {0}</value>
+  </data>
+  <data name="AuthorSavedToast" xml:space="preserve">
+    <value>Autor byl úspěšně uložen!</value>
+  </data>
+  <data name="BookExistsISBN" xml:space="preserve">
+    <value>Kniha s ISBN '{0}' již existuje.</value>
+  </data>
+  <data name="DeleteErrorTitle" xml:space="preserve">
+    <value>Chyba při mazání</value>
+  </data>
+  <data name="BookNameRequired" xml:space="preserve">
+    <value>Název knihy je povinný.</value>
+  </data>
+  <data name="BookNameTooLong" xml:space="preserve">
+    <value>Název knihy je příliš dlouhý, maximální délka je 255 znaků.</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Chyba validace.</value>
+  </data>
+  <data name="ISBNError" xml:space="preserve">
+    <value>ISBN musí obsahovat od 10 do 13 číslic (pomlčky jsou povoleny, ale text ne).</value>
+  </data>
+  <data name="AuthorRequired" xml:space="preserve">
+    <value>Autor je povinný.</value>
+  </data>
+  <data name="LanguageRequired" xml:space="preserve">
+    <value>Jazyk je povinný.</value>
+  </data>
+  <data name="PublisherRequired" xml:space="preserve">
+    <value>Vydavatel je povinný.</value>
+  </data>
   <data name="TitleHeader" xml:space="preserve">
     <value>Název:</value>
   </data>
   <data name="WrittenBooksLabel" xml:space="preserve">
     <value>Napsané Knihy</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Upravit</value>
   </data>
 </root>

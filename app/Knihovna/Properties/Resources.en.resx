@@ -136,7 +136,7 @@
     <value>List of authors</value>
   </data>
   <data name="BirthDateLabel" xml:space="preserve">
-    <value>Date of birth</value>
+    <value>Date of birth:</value>
   </data>
   <data name="BooksListTab" xml:space="preserve">
     <value>List of books</value>
@@ -160,7 +160,7 @@
     <value>First name</value>
   </data>
   <data name="ISBNLabel" xml:space="preserve">
-    <value>ISBN</value>
+    <value>ISBN:</value>
   </data>
   <data name="ISBNTooltip" xml:space="preserve">
     <value>ISBN is a number of length 10 to 13, it could include spaces and -, which dont count towards the length</value>
@@ -199,7 +199,7 @@
     <value>Value</value>
   </data>
   <data name="PublishDateLabel" xml:space="preserve">
-    <value>Publish date</value>
+    <value>Publish date:</value>
   </data>
   <data name="PublisherLabel" xml:space="preserve">
     <value>Publisher:</value>
@@ -231,10 +231,88 @@
   <data name="SuccessToast" xml:space="preserve">
     <value>Action was successfull</value>
   </data>
+  <data name="LanguageChangedMessage" xml:space="preserve">
+    <value>Language was changed, restart the app to see the changes.</value>
+  </data>
+  <data name="LanguageChangedTitle" xml:space="preserve">
+    <value>Language changed.</value>
+  </data>
+  <data name="DatabaseCriticalErrorTitle" xml:space="preserve">
+    <value>&#x8;Crtitcal database error</value>
+  </data>
+  <data name="DbFileNotFound" xml:space="preserve">
+    <value>DBfile not found</value>
+  </data>
+  <data name="DbConnectionError" xml:space="preserve">
+    <value>Connection with database failed: \n Detail '{0}'</value>
+  </data>
+  <data name="UnexpectedErrorMessage" xml:space="preserve">
+    <value>Oops, unexpected error occured, please contact support.</value>
+  </data>
+  <data name="UnexpectedErrorTitle" xml:space="preserve">
+    <value>Unexpected error</value>
+  </data>
+  <data name="ConfirmDeleteBook" xml:space="preserve">
+    <value>Delete '{0}'? </value>
+  </data>
+  <data name="ConfirmDeleteTitle" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="BookDeleteError" xml:space="preserve">
+    <value>Unable to delete book</value>
+  </data>
+  <data name="BookSavedToast" xml:space="preserve">
+    <value>Book was saved successfully</value>
+  </data>
+  <data name="ConfirmDeleteAuthor" xml:space="preserve">
+    <value>Are you sure you want to delete authopr '{0}' \n\n WARNING:This will delete all their books</value>
+  </data>
+  <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
+    <value>Confirm delete</value>
+  </data>
+  <data name="AuthorDeleteError" xml:space="preserve">
+    <value>Author and his books were unable to be deleted</value>
+  </data>
+  <data name="AuthorSavedToast" xml:space="preserve">
+    <value>Author saved successfully</value>
+  </data>
+  <data name="BookExistsISBN" xml:space="preserve">
+    <value>Book with isbn '{0}' already exists</value>
+  </data>
+  <data name="DeleteErrorTitle" xml:space="preserve">
+    <value>Error when deleting a book</value>
+  </data>
+  <data name="BookNameRequired" xml:space="preserve">
+    <value>Book name field is required</value>
+  </data>
+  <data name="BookNameTooLong" xml:space="preserve">
+    <value>Book name is too long, maximum length is 255 chars</value>
+  </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Validation Error</value>
+  </data>
+  <data name="ISBNError" xml:space="preserve">
+    <value>ISBN must be a number of length from 10 to 13, spaces and - are allowed.</value>
+  </data>
+  <data name="AuthorRequired" xml:space="preserve">
+    <value>Author field is required</value>
+  </data>
+  <data name="LanguageRequired" xml:space="preserve">
+    <value>Language field is required.</value>
+  </data>
+  <data name="PublisherRequired" xml:space="preserve">
+    <value>Publisher field is required.</value>
+  </data>
   <data name="TitleHeader" xml:space="preserve">
     <value>Name:</value>
   </data>
   <data name="WrittenBooksLabel" xml:space="preserve">
     <value>Books:</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
 </root>

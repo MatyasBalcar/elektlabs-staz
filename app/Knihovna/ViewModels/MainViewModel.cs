@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using Knihovna.Properties;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading;
@@ -82,8 +83,8 @@ namespace Knihovna.ViewModels
             Thread.CurrentThread.CurrentCulture = new CultureInfo(langCode);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(langCode);
 
-            MessageBox.Show("Jazyk byl změněn. Aby se projevily všechny změny, restartujte prosím aplikaci.",
-                "Změna jazyka",
+            MessageBox.Show(Resources.LanguageChangedMessage,
+                Resources.LanguageChangedTitle,
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }

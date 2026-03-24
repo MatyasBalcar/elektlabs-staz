@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Knihovna.Properties;
 
 namespace Knihovna.Models
 {
@@ -32,14 +33,14 @@ namespace Knihovna.Models
                 using var context = new AppDbContext();
                 if (!context.Database.CanConnect())
                 {
-                    errorMessage = "Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.";
+                    errorMessage = Resources.DbFileNotFound;
                     return false;
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                errorMessage = $"Chyba při ověřování spojení s databází:\nDetail: {ex.Message}";
+                errorMessage = string.Format(Resources.DbConnectionError, ex.Message);
                 return false;
             }
         }
@@ -112,7 +113,7 @@ namespace Knihovna.Models
 
                 if (isbnExists)
                 {
-                    throw new InvalidOperationException($"Kniha s ISBN '{book.ISBN}' již existuje.");
+                    throw new InvalidOperationException(string.Format(Resources.BookExistsISBN, book.ISBN));
                 }
             }
 

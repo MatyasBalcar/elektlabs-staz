@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Knihovna.Properties;
 
 namespace Knihovna.Models
 {
@@ -12,8 +13,8 @@ namespace Knihovna.Models
 
         private string? _name;
 
-        [Required(ErrorMessage = "Název knihy je povinný.")]
-        [MaxLength(255, ErrorMessage = "Název knihy je příliš dlouhý, maximální delka je 255 znaků.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "BookNameRequired")]
+        [MaxLength(255, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "BookNameTooLong")]
         public string? Name
         {
             get => _name;
@@ -68,7 +69,7 @@ namespace Knihovna.Models
             if (HasErrors)
             {
                 var firstError = GetErrors().FirstOrDefault();
-                if (firstError != null) return firstError.ErrorMessage ?? "Chyba validace.";
+                if (firstError != null) return firstError.ErrorMessage ?? Resources.ValidationError;
             }
 
             if (!string.IsNullOrWhiteSpace(ISBN))
@@ -76,14 +77,14 @@ namespace Knihovna.Models
                 string cleanIsbn = ISBN.Replace("-", "").Replace(" ", "").Trim();
 
                 if (cleanIsbn.Length > 13 || cleanIsbn.Length < 10 || !cleanIsbn.All(char.IsDigit))
-                    return "ISBN musí obsahovat od 10 do 13 číslic (pomlčky jsou povoleny, ale text ne).";
+                    return Resources.ISBNError;
 
                 _isbn = cleanIsbn;
             }
 
-            if (Authors == null || Authors.Count == 0) return "Autor je povinný.";
-            if (Language == null && LanguageId == null) return "Jazyk je povinný.";
-            if (Publisher == null && PublisherId == null) return "Vydavatel je povinný.";
+            if (Authors == null || Authors.Count == 0) return Resources.AuthorRequired;
+            if (Language == null && LanguageId == null) return Resources.LanguageRequired;
+            if (Publisher == null && PublisherId == null) return Resources.PublisherRequired;
 
             return string.Empty;
         }

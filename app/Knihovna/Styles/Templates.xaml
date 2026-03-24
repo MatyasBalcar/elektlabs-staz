@@ -1,4 +1,7 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:resx="clr-namespace:Knihovna.Properties">
     <DataTemplate x:Key="ActionColumnTemplate">
         <StackPanel
             Margin="0"
@@ -11,7 +14,7 @@
                 Margin="4,2"
                 Command="{Binding DataContext.OpenFormCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
-                Content="Upravit"
+                Content="{x:Static resx:Resources.Edit}"
                 Style="{StaticResource PrimaryButtonStyle}" />
             <Button
                 Width="70"
@@ -19,7 +22,7 @@
                 Margin="4,2"
                 Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                 CommandParameter="{Binding}"
-                Content="Smazat"
+                Content="{x:Static resx:Resources.Delete}"
                 Style="{StaticResource DangerButtonStyle}" />
         </StackPanel>
     </DataTemplate>

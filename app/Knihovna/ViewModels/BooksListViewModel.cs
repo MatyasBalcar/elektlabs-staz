@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using Knihovna.Properties;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -77,7 +78,9 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void Delete(Book book)
         {
-            var result = System.Windows.MessageBox.Show($"Smazat '{book.Name}'?", "Potvrzení",
+            var result = System.Windows.MessageBox.Show(
+                string.Format(Resources.ConfirmDeleteBook, book.Name),
+                Resources.ConfirmDeleteTitle,
                 System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Warning);
 
             if (result == System.Windows.MessageBoxResult.Yes)
@@ -90,8 +93,8 @@ namespace Knihovna.ViewModels
                 catch (Exception ex)
                 {
                     System.Windows.MessageBox.Show(
-                        $"Knihu se nepodařilo smazat.\nDetail: {ex.Message}",
-                        "Chyba při mazání",
+                        string.Format(Resources.BookDeleteError, ex.Message),
+                        Resources.DeleteErrorTitle,
                         System.Windows.MessageBoxButton.OK,
                         System.Windows.MessageBoxImage.Error);
                 }
@@ -116,13 +119,13 @@ namespace Knihovna.ViewModels
             var window = new Views.BookWindow();
             window.DataContext = formVm;
 
-            if (window.ShowDialog() ?? false)
+                if (window.ShowDialog() ?? false)
             {
                 RefreshData();
                 LoadFilterData();
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.ShowToast("Kniha byla úspěšně uložena!");
+                    mainWindow.ShowToast(Resources.BookSavedToast);
                 }
             }
         }

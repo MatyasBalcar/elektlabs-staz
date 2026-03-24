@@ -79,6 +79,15 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Autora a jeho knihy se nepodařilo smazat.\nDetail: {0}.
+        /// </summary>
+        public static string AuthorDeleteError {
+            get {
+                return ResourceManager.GetString("AuthorDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Detail Autora.
         /// </summary>
         public static string AuthorDetailTitle {
@@ -93,6 +102,24 @@ namespace Knihovna.Properties {
         public static string AuthorLabel {
             get {
                 return ResourceManager.GetString("AuthorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autor je povinný..
+        /// </summary>
+        public static string AuthorRequired {
+            get {
+                return ResourceManager.GetString("AuthorRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autor byl úspěšně uložen!.
+        /// </summary>
+        public static string AuthorSavedToast {
+            get {
+                return ResourceManager.GetString("AuthorSavedToast", resourceCulture);
             }
         }
         
@@ -115,11 +142,56 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datum Narození.
+        ///   Looks up a localized string similar to Datum Narození:.
         /// </summary>
         public static string BirthDateLabel {
             get {
                 return ResourceManager.GetString("BirthDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knihu se nepodařilo smazat.\nDetail: {0}.
+        /// </summary>
+        public static string BookDeleteError {
+            get {
+                return ResourceManager.GetString("BookDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kniha s ISBN &apos;{0}&apos; již existuje..
+        /// </summary>
+        public static string BookExistsISBN {
+            get {
+                return ResourceManager.GetString("BookExistsISBN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Název knihy je povinný..
+        /// </summary>
+        public static string BookNameRequired {
+            get {
+                return ResourceManager.GetString("BookNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Název knihy je příliš dlouhý, maximální délka je 255 znaků..
+        /// </summary>
+        public static string BookNameTooLong {
+            get {
+                return ResourceManager.GetString("BookNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kniha byla úspěšně uložena!.
+        /// </summary>
+        public static string BookSavedToast {
+            get {
+                return ResourceManager.GetString("BookSavedToast", resourceCulture);
             }
         }
         
@@ -169,11 +241,101 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potvrzení smazání.
+        /// </summary>
+        public static string ConfirmAuthorDeleteTitle {
+            get {
+                return ResourceManager.GetString("ConfirmAuthorDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opravdu chcete smazat autora &apos;{0}&apos;? \n\nVAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!.
+        /// </summary>
+        public static string ConfirmDeleteAuthor {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smazat &apos;{0}&apos;?.
+        /// </summary>
+        public static string ConfirmDeleteBook {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potvrzení.
+        /// </summary>
+        public static string ConfirmDeleteTitle {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kritická chyba databáze.
+        /// </summary>
+        public static string DatabaseCriticalErrorTitle {
+            get {
+                return ResourceManager.GetString("DatabaseCriticalErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chyba při ověřování spojení s databází:\nDetail: {0}.
+        /// </summary>
+        public static string DbConnectionError {
+            get {
+                return ResourceManager.GetString("DbConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soubor s databází nebyl nalezen nebo k němu nelze přistoupit..
+        /// </summary>
+        public static string DbFileNotFound {
+            get {
+                return ResourceManager.GetString("DbFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smazat.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chyba při mazání.
+        /// </summary>
+        public static string DeleteErrorTitle {
+            get {
+                return ResourceManager.GetString("DeleteErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Popis:.
         /// </summary>
         public static string DescriptionLabel {
             get {
                 return ResourceManager.GetString("DescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upravit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -187,7 +349,16 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ISBN.
+        ///   Looks up a localized string similar to ISBN musí obsahovat od 10 do 13 číslic (pomlčky jsou povoleny, ale text ne)..
+        /// </summary>
+        public static string ISBNError {
+            get {
+                return ResourceManager.GetString("ISBNError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ISBN:.
         /// </summary>
         public static string ISBNLabel {
             get {
@@ -205,11 +376,38 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jazyk byl změněn. Aby se projevily všechny změny, restartujte prosím aplikaci..
+        /// </summary>
+        public static string LanguageChangedMessage {
+            get {
+                return ResourceManager.GetString("LanguageChangedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změna jazyka.
+        /// </summary>
+        public static string LanguageChangedTitle {
+            get {
+                return ResourceManager.GetString("LanguageChangedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jazyk:.
         /// </summary>
         public static string LanguageLabel {
             get {
                 return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jazyk je povinný..
+        /// </summary>
+        public static string LanguageRequired {
+            get {
+                return ResourceManager.GetString("LanguageRequired", resourceCulture);
             }
         }
         
@@ -304,7 +502,7 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datum Vydání.
+        ///   Looks up a localized string similar to Datum Vydání:.
         /// </summary>
         public static string PublishDateLabel {
             get {
@@ -318,6 +516,15 @@ namespace Knihovna.Properties {
         public static string PublisherLabel {
             get {
                 return ResourceManager.GetString("PublisherLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vydavatel je povinný..
+        /// </summary>
+        public static string PublisherRequired {
+            get {
+                return ResourceManager.GetString("PublisherRequired", resourceCulture);
             }
         }
         
@@ -408,6 +615,33 @@ namespace Knihovna.Properties {
         public static string TitleHeader {
             get {
                 return ResourceManager.GetString("TitleHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jejda, v aplikaci došlo k neočekávané chybě. Omlouváme se za komplikace..
+        /// </summary>
+        public static string UnexpectedErrorMessage {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neočekávaná chyba.
+        /// </summary>
+        public static string UnexpectedErrorTitle {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chyba validace..
+        /// </summary>
+        public static string ValidationError {
+            get {
+                return ResourceManager.GetString("ValidationError", resourceCulture);
             }
         }
         

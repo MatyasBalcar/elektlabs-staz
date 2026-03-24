@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
+using Knihovna.Properties;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -56,9 +57,8 @@ namespace Knihovna.ViewModels
         {
 
             var result = System.Windows.MessageBox.Show(
-                $"Opravdu chcete smazat autora '{author.FullName}'? \n\n" +
-                "VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!",
-                "Potvrzení smazání",
+                string.Format(Resources.ConfirmDeleteAuthor, author.FullName),
+                Resources.ConfirmAuthorDeleteTitle,
                 System.Windows.MessageBoxButton.YesNo,
                 System.Windows.MessageBoxImage.Warning);
 
@@ -72,8 +72,8 @@ namespace Knihovna.ViewModels
                 catch (Exception ex)
                 {
                     System.Windows.MessageBox.Show(
-                        $"Autora a jeho knihy se nepodařilo smazat.\nDetail: {ex.Message}",
-                        "Chyba při mazání",
+                        string.Format(Resources.AuthorDeleteError, ex.Message),
+                        Resources.DeleteErrorTitle,
                         System.Windows.MessageBoxButton.OK,
                         System.Windows.MessageBoxImage.Error);
                 }
@@ -98,13 +98,13 @@ namespace Knihovna.ViewModels
             var window = new Views.AuthorWindow();
             window.DataContext = formVm;
 
-            if (window.ShowDialog() ?? false)
+                if (window.ShowDialog() ?? false)
             {
                 RefreshData();
                 LoadFilterData();
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
-                    mainWindow.ShowToast("Autor byl úspěšně uložen!");
+                    mainWindow.ShowToast(Resources.AuthorSavedToast);
                 }
             }
         }

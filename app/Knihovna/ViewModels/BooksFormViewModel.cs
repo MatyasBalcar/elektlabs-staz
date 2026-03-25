@@ -40,9 +40,15 @@ namespace Knihovna.ViewModels
                 if (SetProperty(ref _selectedAuthors, value))
                 {
                     OnPropertyChanged(nameof(AvailableAuthors));
+                    RefreshAuthorsValidation();
                 }
             }
         }
+
+        [ObservableProperty]
+        private bool _isAuthorsInvalid;
+
+        private bool _showAuthorsValidation;
 
         private Author? _selectedAuthorToAdd;
         public Author? SelectedAuthorToAdd
@@ -103,6 +109,8 @@ namespace Knihovna.ViewModels
 
         public bool Save()
         {
+            _showAuthorsValidation = true;
+            RefreshAuthorsValidation();
             ValidateAllProperties();
 
             if (!string.IsNullOrWhiteSpace(LanguageText))
@@ -279,6 +287,7 @@ namespace Knihovna.ViewModels
             }
 
             SelectedAuthorToAdd = null;
+            RefreshAuthorsValidation();
         }
 
         [RelayCommand]
@@ -293,6 +302,8 @@ namespace Knihovna.ViewModels
             {
                 OnPropertyChanged(nameof(AvailableAuthors));
             }
+
+            RefreshAuthorsValidation();
         }
 
         partial void OnAllAuthorsChanged(ObservableCollection<Author> value)
@@ -308,6 +319,11 @@ namespace Knihovna.ViewModels
                 EditingBook.Rating = (short)newRating;
                 OnPropertyChanged(nameof(EditingBook));
             }
+        }
+
+        private void RefreshAuthorsValidation()
+        {
+            IsAuthorsInvalid = _showAuthorsValidation && SelectedAuthors.Count == 0;
         }
     }
 }

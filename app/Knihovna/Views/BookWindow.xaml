@@ -74,8 +74,19 @@
                         ItemsSource="{Binding AvailableAuthors}"
                         SelectedItem="{Binding SelectedAuthorToAdd}"
                         SelectionChanged="Author_SelectionChanged"
-                        Style="{StaticResource {x:Type ComboBox}}"
-                        TextSearch.TextPath="FullName" />
+                        TextSearch.TextPath="FullName">
+                        <controls:AutoCompleteComboBox.Style>
+                            <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="controls:AutoCompleteComboBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsAuthorsInvalid}" Value="True">
+                                        <Setter Property="Background" Value="#f2d0d0" />
+                                        <Setter Property="BorderBrush" Value="Red" />
+                                        <Setter Property="BorderThickness" Value="2" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:AutoCompleteComboBox.Style>
+                    </controls:AutoCompleteComboBox>
 
                     <TextBlock
                         Margin="12,0,30,0"

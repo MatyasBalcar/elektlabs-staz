@@ -315,7 +315,7 @@
                                         x:Name="templateRoot"
                                         Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ComboBox}}"
                                         BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=ComboBox}}"
-                                        BorderThickness="1"
+                                         BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=ComboBox}}"
                                         CornerRadius="5">
                                         <Grid>
                                             <Grid.ColumnDefinitions>

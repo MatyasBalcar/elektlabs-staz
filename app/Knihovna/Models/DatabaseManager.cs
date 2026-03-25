@@ -211,9 +211,26 @@ namespace Knihovna.Models
         {
             using var context = CreateContext();
 
-            var booksToDelete = context.Books
+            var booksWithAuthor = context.Books
+                .Include(b => b.Authors)
                 .Where(b => b.Authors.Any(a => a.AuthorId == authorId))
                 .ToList();
+
+            var booksToDelete = new List<Book>();
+
+            foreach (var book in booksWithAuthor)
+            {
+                var authorLink = book.Authors.FirstOrDefault(a => a.AuthorId == authorId);
+                if (authorLink != null)
+                {
+                    book.Authors.Remove(authorLink);
+                }
+
+                if (book.Authors.Count == 0)
+                {
+                    booksToDelete.Add(book);
+                }
+            }
 
             context.Books.RemoveRange(booksToDelete);
 

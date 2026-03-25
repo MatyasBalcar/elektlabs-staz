@@ -10,6 +10,15 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Storyboard x:Key="AuthorChipFadeIn">
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
     </Window.Resources>
 
     <DockPanel Margin="10">
@@ -41,7 +50,10 @@
             </Grid>
         </StackPanel>
 
-        <ScrollViewer Padding="0,0,5,0" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer
+            Margin="0,0,-10,0"
+            Padding="0,0,10,0"
+            VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Label Content="{x:Static resx:Resources.BookTitleLabel}" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -54,13 +66,102 @@
 
                 <Label Content="{x:Static resx:Resources.AuthorLabel}" Style="{StaticResource RequiredLabelStyle}" />
 
-                <controls:AutoCompleteComboBox
-                    DisplayMemberPath="FullName"
-                    FontWeight="Light"
-                    ItemsSource="{Binding AllAuthors}"
-                    SelectedItem="{Binding SelectedAuthor, ValidatesOnDataErrors=True}"
-                    Style="{StaticResource {x:Type ComboBox}}"
-                    TextSearch.TextPath="FullName" />
+                <Grid>
+                    <controls:AutoCompleteComboBox
+                        x:Name="AuthorComboBox"
+                        DisplayMemberPath="FullName"
+                        FontWeight="Light"
+                        ItemsSource="{Binding AvailableAuthors}"
+                        SelectedItem="{Binding SelectedAuthorToAdd}"
+                        SelectionChanged="Author_SelectionChanged"
+                        Style="{StaticResource {x:Type ComboBox}}"
+                        TextSearch.TextPath="FullName" />
+
+                    <TextBlock
+                        Margin="12,0,30,0"
+                        VerticalAlignment="Center"
+                        FontStyle="Italic"
+                        Foreground="Gray"
+                        IsHitTestVisible="False"
+                        Text="{x:Static resx:Resources.SearchAuthorPlaceholder}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding SelectedAuthorToAdd}" Value="{x:Null}" />
+                                            <Condition Binding="{Binding Text, ElementName=AuthorComboBox}" Value="" />
+                                            <Condition Binding="{Binding IsKeyboardFocusWithin, ElementName=AuthorComboBox}" Value="False" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <ItemsControl Margin="0,8,0,0" ItemsSource="{Binding SelectedAuthors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Height="35"
+                                Margin="0,0,8,8"
+                                Padding="8,4"
+                                Background="White"
+                                BorderBrush="#D1D5DB"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Opacity="0">
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource AuthorChipFadeIn}" />
+                                    </EventTrigger>
+                                </Border.Triggers>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,6,0"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding FullName}" />
+                                    <Button
+                                        Grid.Column="1"
+                                        Width="20"
+                                        Height="20"
+                                        Padding="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Click="RemoveAuthor_Click"
+                                        Foreground="#2563EB">
+                                        <Border
+                                            Width="10"
+                                            Height="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Background="#2563EB"
+                                            CornerRadius="1" />
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <StackPanel>
                     <Label Content="{x:Static resx:Resources.LanguageLabel}" Style="{StaticResource RequiredLabelStyle}" />

@@ -160,21 +160,10 @@
                                 <DataGridTemplateColumn Width="*" Header="{loc:Loc AuthorsHeader}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ItemsControl FontWeight="Bold" ItemsSource="{Binding Authors}">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <TextBlock Margin="10">
-                                                            <Run Text="{Binding FirstName}" />
-                                                            <Run Text="{Binding LastName}" />
-                                                        </TextBlock>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
+                                            <TextBlock
+                                                Margin="10"
+                                                FontWeight="Bold"
+                                                Text="{Binding AuthorNames}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

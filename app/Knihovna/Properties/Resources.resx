@@ -136,7 +136,7 @@
     <value>Tento údaj je povinný</value>
   </data>
   <data name="AuthorLabel" xml:space="preserve">
-    <value>Autor:</value>
+    <value>Autoři:</value>
   </data>
   <data name="AuthorsHeader" xml:space="preserve">
     <value>Autoři:</value>
@@ -277,15 +277,15 @@ Detail: {0}</value>
     <value>Kniha byla úspěšně uložena!</value>
   </data>
   <data name="ConfirmDeleteAuthor" xml:space="preserve">
-    <value>Opravdu chcete smazat autora '{0}'? 
+    <value>Opravdu chcete smazat autora '{0}'?
 
-VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!</value>
+VAROVÁNÍ: Knihy bez dalších autorů budou také odstraněny.</value>
   </data>
   <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
     <value>Potvrzení smazání</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Autora a jeho knihy se nepodařilo smazat.
+    <value>Autora se nepodařilo smazat.
 Detail: {0}</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">
@@ -310,7 +310,7 @@ Detail: {0}</value>
     <value>ISBN musí obsahovat od 10 do 13 číslic (pomlčky jsou povoleny, ale text ne).</value>
   </data>
   <data name="AuthorRequired" xml:space="preserve">
-    <value>Autor je povinný.</value>
+    <value>Alespoň jeden autor je povinný.</value>
   </data>
   <data name="LanguageRequired" xml:space="preserve">
     <value>Jazyk je povinný.</value>

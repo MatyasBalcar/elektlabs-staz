@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
     <None Include=".github\workflows\dotnet-desktop.yml" />
     <Resource Include="Images\cz.png" />
     <Resource Include="Images\gb.png" />

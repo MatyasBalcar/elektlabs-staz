@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Knihovna.Properties;
@@ -46,7 +47,24 @@ namespace Knihovna.Models
 
         public virtual ICollection<Book> Books { get; set; } = new List<Book>();
 
-        public string FullName => $"{FirstName} {LastName}";
+        [NotMapped]
+        public string FullName
+        {
+            get => $"{FirstName} {LastName}".Trim();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    FirstName = string.Empty;
+                    LastName = string.Empty;
+                    return;
+                }
+
+                var parts = value.Trim().Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+                FirstName = parts[0];
+                LastName = parts.Length > 1 ? parts[1] : string.Empty;
+            }
+        }
 
         public object Clone()
         {

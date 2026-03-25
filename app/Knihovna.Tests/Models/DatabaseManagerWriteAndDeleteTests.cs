@@ -285,6 +285,43 @@ namespace Knihovna.Tests.Models
         }
 
         [TestMethod]
+        public void DeleteAuthor_FromCoauthoredBook_KeepsBookWithRemainingAuthor()
+        {
+            int removedAuthorId;
+            int remainingAuthorId;
+            int bookId;
+
+            using (var context = new AppDbContext(_options))
+            {
+                var removedAuthor = new Author { FirstName = "Remove", LastName = "Me", Nationality = DefaultNationality };
+                var remainingAuthor = new Author { FirstName = "Keep", LastName = "Me", Nationality = DefaultNationality };
+
+                var book = new Book
+                {
+                    Name = "Coauthored Book",
+                    Authors = new List<Author> { removedAuthor, remainingAuthor }
+                };
+
+                context.Books.Add(book);
+                context.SaveChanges();
+
+                removedAuthorId = removedAuthor.AuthorId;
+                remainingAuthorId = remainingAuthor.AuthorId;
+                bookId = book.BookId;
+            }
+
+            new DatabaseManager(_options).DeleteAuthor(removedAuthorId);
+
+            using var verifyContext = new AppDbContext(_options);
+            var savedBook = verifyContext.Books.Include(b => b.Authors).FirstOrDefault(b => b.BookId == bookId);
+
+            Assert.IsNull(verifyContext.Authors.Find(removedAuthorId));
+            Assert.IsNotNull(savedBook);
+            Assert.AreEqual(1, savedBook.Authors.Count);
+            Assert.AreEqual(remainingAuthorId, savedBook.Authors.First().AuthorId);
+        }
+
+        [TestMethod]
         public void SaveBook_WithExistingAuthor_AssociatesAuthor()
         {
             const int existingAuthorId = 42;
@@ -302,6 +339,37 @@ namespace Knihovna.Tests.Models
             using var verifyContext = new AppDbContext(_options);
             var dbBook = verifyContext.Books.Include(b => b.Authors).First();
             Assert.AreEqual(existingAuthorId, dbBook.Authors.First().AuthorId);
+        }
+
+        [TestMethod]
+        public void SaveBook_WithMultipleExistingAuthors_AssociatesAllAuthors()
+        {
+            const int firstAuthorId = 100;
+            const int secondAuthorId = 101;
+
+            using (var dbcontext = new AppDbContext(_options))
+            {
+                dbcontext.Authors.AddRange(
+                    new Author { AuthorId = firstAuthorId, FirstName = "First", LastName = "Author", Nationality = DefaultNationality },
+                    new Author { AuthorId = secondAuthorId, FirstName = "Second", LastName = "Author", Nationality = DefaultNationality });
+                dbcontext.SaveChanges();
+            }
+
+            var book = CreateValidBook("Book With Multiple Authors", "8888888888");
+            book.Authors = new List<Author>
+            {
+                new Author { AuthorId = firstAuthorId, Nationality = DefaultNationality },
+                new Author { AuthorId = secondAuthorId, Nationality = DefaultNationality }
+            };
+
+            new DatabaseManager(_options).SaveBook(book);
+
+            using var verifyContext = new AppDbContext(_options);
+            var dbBook = verifyContext.Books.Include(b => b.Authors).First();
+            Assert.AreEqual(2, dbBook.Authors.Count);
+            CollectionAssert.AreEquivalent(
+                new[] { firstAuthorId, secondAuthorId },
+                dbBook.Authors.Select(a => a.AuthorId).ToArray());
         }
 
         [TestMethod]

@@ -298,6 +298,8 @@ namespace Knihovna.ViewModels
                 return;
             }
 
+            _showAuthorsValidation = true;
+
             if (SelectedAuthors.Remove(author))
             {
                 OnPropertyChanged(nameof(AvailableAuthors));

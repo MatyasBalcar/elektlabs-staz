@@ -46,22 +46,11 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+    - name: Download publish artifact
+      uses: actions/download-artifact@v4
       with:
-        dotnet-version: 10.0.x
-
-    - name: Restore dependencies
-      run: dotnet restore ./app/Knihovna
-
-    - name: Build
-      run: dotnet build ./app/Knihovna --configuration Release --no-restore
-
-    - name: Publish
-      run: dotnet publish ./app/Knihovna --configuration Release --no-build -o ./artifacts/release-publish
+        name: Knihovna
+        path: ./artifacts/release-publish
 
     - name: Create release archive
       shell: pwsh

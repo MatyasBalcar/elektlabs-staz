@@ -50,8 +50,8 @@ namespace Knihovna.ViewModels
         [RelayCommand]
         public void RefreshData()
         {
-            var seznamZDb = _dbManager.GetAuthors(SearchText, SelectedNationality?.Name);
-            Authors = new ObservableCollection<Author>(seznamZDb);
+            var authorsFromDatabase = _dbManager.GetAuthors(SearchText, SelectedNationality?.Name);
+            Authors = new ObservableCollection<Author>(authorsFromDatabase);
         }
 
         [RelayCommand]

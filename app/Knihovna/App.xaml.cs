@@ -32,9 +32,9 @@ namespace Knihovna
                 Environment.Exit(1);
             }
 
-            string lang = Knihovna.Properties.Settings.Default.AppLanguage;
+            string languageCode = Knihovna.Properties.Settings.Default.AppLanguage;
 
-            SetAppCulture(lang);
+            SetAppCulture(languageCode);
 
 
             base.OnStartup(e);

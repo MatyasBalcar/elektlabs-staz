@@ -41,11 +41,13 @@
 
         <TabControl
             Background="Transparent"
+            Padding="0"
             BorderThickness="0">
             <TabItem DataContext="{Binding BooksListVm}" Header="{loc:Loc BooksListTab}">
                 <DockPanel>
                     <Separator
                         Height="1"
+                        Margin="0"
                         Background="Black"
                         DockPanel.Dock="Top"
                         SnapsToDevicePixels="True" />
@@ -271,6 +273,7 @@
                 <DockPanel>
                     <Separator
                         Height="1"
+                        Margin="0"
                         Background="Black"
                         DockPanel.Dock="Top"
                         SnapsToDevicePixels="True" />

@@ -28,11 +28,20 @@ namespace Knihovna.ViewModels
         [ObservableProperty]
         private ObservableCollection<Language> _allLanguages;
 
+        public IEnumerable<Author> AvailableAuthors =>
+            AllAuthors.Where(a => !SelectedAuthors.Any(s => s.AuthorId == a.AuthorId));
+
         private ObservableCollection<Author> _selectedAuthors = new();
         public ObservableCollection<Author> SelectedAuthors
         {
             get => _selectedAuthors;
-            set => SetProperty(ref _selectedAuthors, value);
+            set
+            {
+                if (SetProperty(ref _selectedAuthors, value))
+                {
+                    OnPropertyChanged(nameof(AvailableAuthors));
+                }
+            }
         }
 
         private Author? _selectedAuthorToAdd;
@@ -266,6 +275,7 @@ namespace Knihovna.ViewModels
             if (!SelectedAuthors.Any(a => a.AuthorId == author.AuthorId))
             {
                 SelectedAuthors.Add(author);
+                OnPropertyChanged(nameof(AvailableAuthors));
             }
 
             SelectedAuthorToAdd = null;
@@ -279,7 +289,15 @@ namespace Knihovna.ViewModels
                 return;
             }
 
-            SelectedAuthors.Remove(author);
+            if (SelectedAuthors.Remove(author))
+            {
+                OnPropertyChanged(nameof(AvailableAuthors));
+            }
+        }
+
+        partial void OnAllAuthorsChanged(ObservableCollection<Author> value)
+        {
+            OnPropertyChanged(nameof(AvailableAuthors));
         }
 
         [RelayCommand]

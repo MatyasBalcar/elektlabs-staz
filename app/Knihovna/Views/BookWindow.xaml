@@ -75,7 +75,7 @@
                         x:Name="AuthorComboBox"
                         DisplayMemberPath="FullName"
                         FontWeight="Light"
-                        ItemsSource="{Binding AllAuthors}"
+                        ItemsSource="{Binding AvailableAuthors}"
                         SelectedItem="{Binding SelectedAuthorToAdd}"
                         SelectionChanged="Author_SelectionChanged"
                         Style="{StaticResource {x:Type ComboBox}}"

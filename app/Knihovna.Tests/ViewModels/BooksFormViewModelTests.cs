@@ -28,6 +28,27 @@ namespace Knihovna.Tests.ViewModels
             return (firstAuthor.AuthorId, secondAuthor.AuthorId);
         }
 
+        private static void SeedLanguagesAndPublishers(DbContextOptions<AppDbContext> options)
+        {
+            using var context = new AppDbContext(options);
+
+            context.Languages.AddRange(
+                new Language { Name = "English" },
+                new Language { Name = "Esperanto" },
+                new Language { Name = "Estonian" },
+                new Language { Name = "Ewe" },
+                new Language { Name = "Czech" });
+
+            context.Publishers.AddRange(
+                new Publisher { Name = "Pearson" },
+                new Publisher { Name = "Penguin" },
+                new Publisher { Name = "Planeta" },
+                new Publisher { Name = "Pragocon" },
+                new Publisher { Name = "Albatros" });
+
+            context.SaveChanges();
+        }
+
         [TestMethod]
         public void AvailableAuthors_WhenEditingBook_ExcludesAlreadySelectedAuthor()
         {
@@ -65,6 +86,52 @@ namespace Knihovna.Tests.ViewModels
 
             vm.RemoveSelectedAuthorCommand.Execute(authorToToggle);
             Assert.IsTrue(vm.AvailableAuthors.Any(a => a.AuthorId == authorToToggle.AuthorId));
+        }
+
+        [TestMethod]
+        public void AddSelectedAuthor_WhenExecutedTwice_DoesNotDuplicateAuthor()
+        {
+            var options = CreateOptions();
+            SeedAuthors(options);
+
+            var vm = new BookFormViewModel(new DatabaseManager(options));
+            var authorToAdd = vm.AllAuthors.First();
+
+            vm.AddSelectedAuthorCommand.Execute(authorToAdd);
+            vm.AddSelectedAuthorCommand.Execute(authorToAdd);
+
+            Assert.AreEqual(1, vm.SelectedAuthors.Count(a => a.AuthorId == authorToAdd.AuthorId));
+        }
+
+        [TestMethod]
+        public void LanguageSuggestions_WhenTypingPrefix_ReturnsTopThreeSortedAndVisible()
+        {
+            var options = CreateOptions();
+            SeedLanguagesAndPublishers(options);
+
+            var vm = new BookFormViewModel(new DatabaseManager(options));
+            vm.LanguageText = "e";
+
+            var languageNames = vm.SuggestedLanguages.Select(l => l.Name).ToList();
+
+            CollectionAssert.AreEqual(new List<string> { "English", "Esperanto", "Estonian" }, languageNames);
+            Assert.IsTrue(vm.IsLangSuggestionsVisible);
+        }
+
+        [TestMethod]
+        public void LanguageSuggestions_WhenTextCleared_HidesAndClearsSuggestions()
+        {
+            var options = CreateOptions();
+            SeedLanguagesAndPublishers(options);
+
+            var vm = new BookFormViewModel(new DatabaseManager(options));
+            vm.LanguageText = "En";
+            Assert.IsTrue(vm.SuggestedLanguages.Count > 0);
+
+            vm.LanguageText = " ";
+
+            Assert.AreEqual(0, vm.SuggestedLanguages.Count);
+            Assert.IsFalse(vm.IsLangSuggestionsVisible);
         }
     }
 }

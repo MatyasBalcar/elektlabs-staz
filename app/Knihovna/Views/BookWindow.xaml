@@ -70,14 +70,41 @@
 
                 <Label Content="{x:Static resx:Resources.AuthorLabel}" Style="{StaticResource RequiredLabelStyle}" />
 
-                <controls:AutoCompleteComboBox
-                    DisplayMemberPath="FullName"
-                    FontWeight="Light"
-                    ItemsSource="{Binding AllAuthors}"
-                    SelectedItem="{Binding SelectedAuthorToAdd}"
-                    SelectionChanged="Author_SelectionChanged"
-                    Style="{StaticResource {x:Type ComboBox}}"
-                    TextSearch.TextPath="FullName" />
+                <Grid>
+                    <controls:AutoCompleteComboBox
+                        x:Name="AuthorComboBox"
+                        DisplayMemberPath="FullName"
+                        FontWeight="Light"
+                        ItemsSource="{Binding AllAuthors}"
+                        SelectedItem="{Binding SelectedAuthorToAdd}"
+                        SelectionChanged="Author_SelectionChanged"
+                        Style="{StaticResource {x:Type ComboBox}}"
+                        TextSearch.TextPath="FullName" />
+
+                    <TextBlock
+                        Margin="12,0,30,0"
+                        VerticalAlignment="Center"
+                        FontStyle="Italic"
+                        Foreground="Gray"
+                        IsHitTestVisible="False"
+                        Text="{x:Static resx:Resources.SearchAuthorPlaceholder}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding SelectedAuthorToAdd}" Value="{x:Null}" />
+                                            <Condition Binding="{Binding Text, ElementName=AuthorComboBox}" Value="" />
+                                            <Condition Binding="{Binding IsKeyboardFocusWithin, ElementName=AuthorComboBox}" Value="False" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
 
                 <ItemsControl Margin="0,8,0,0" ItemsSource="{Binding SelectedAuthors}">
                     <ItemsControl.ItemsPanel>
@@ -90,11 +117,11 @@
                             <Border
                                 Margin="0,0,8,8"
                                 Padding="8,4"
-                                Opacity="0"
                                 Background="White"
                                 BorderBrush="#D1D5DB"
                                 BorderThickness="1"
-                                CornerRadius="4">
+                                CornerRadius="4"
+                                Opacity="0">
                                 <Border.Triggers>
                                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                         <BeginStoryboard Storyboard="{StaticResource AuthorChipFadeIn}" />
@@ -116,18 +143,19 @@
                                         Grid.Column="1"
                                         Width="20"
                                         Height="20"
-                                        Background="Transparent"
-                                        BorderThickness="0"
                                         Padding="0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
+                                        Background="Transparent"
+                                        BorderThickness="0"
                                         Click="RemoveAuthor_Click"
                                         Foreground="#2563EB">
                                         <TextBlock
+                                            Margin="0,0,0,5"
                                             VerticalAlignment="Center"
-                                            FontSize="16"
+                                            FontSize="24"
                                             FontWeight="Bold"
                                             Text="-"
                                             TextAlignment="Center" />

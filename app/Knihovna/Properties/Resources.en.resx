@@ -127,7 +127,7 @@
     <value>Author Detail</value>
   </data>
   <data name="AuthorLabel" xml:space="preserve">
-    <value>Author:</value>
+    <value>Authors:</value>
   </data>
   <data name="AuthorsHeader" xml:space="preserve">
     <value>Authors:</value>
@@ -300,7 +300,7 @@
     <value>ISBN must be a number of length from 10 to 13, spaces and - are allowed.</value>
   </data>
   <data name="AuthorRequired" xml:space="preserve">
-    <value>Author field is required</value>
+    <value>At least one author is required.</value>
   </data>
   <data name="LanguageRequired" xml:space="preserve">
     <value>Language field is required.</value>

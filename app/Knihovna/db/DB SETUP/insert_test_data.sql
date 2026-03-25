@@ -33,6 +33,8 @@ INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('G
 INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('Ernest', 'Hemingway', '1899-07-21', 4);
 INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('Andrzej', 'Sapkowski', '1948-06-21', 6);
 INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('Victor', 'Hugo', '1802-02-26', 5); 
+INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('Terry', 'Pratchett', '1948-04-28', 3);
+INSERT INTO Authors (FirstName, LastName, DateOfBirth, NationalityID) VALUES ('Neil', 'Gaiman', '1960-11-10', 3);
 
 INSERT INTO Books (Name, PublishDate, PublisherID, LanguageID, Description, HaveRead, Rating, ISBN) 
 VALUES ('Děti z Bullerbynu', '1947-01-01', 1, 1, 'Klasické vyprávění o šesti dětech z malé švédské vesnice.', TRUE, 5, '9788000075143');
@@ -58,6 +60,12 @@ VALUES ('Zaklínač I: Poslední přání', '1993-01-01', 3, 5, 'Soubor povídek
 INSERT INTO Books (Name, PublishDate, PublisherID, LanguageID, Description, HaveRead, Rating, ISBN) 
 VALUES ('Bídníci', '1862-01-01', 4, 4, 'Monumentální román o nespravedlnosti a vykoupení.', FALSE, 5, '9782253096337');
 
+INSERT INTO Books (Name, PublishDate, PublisherID, LanguageID, Description, HaveRead, Rating, ISBN)
+VALUES ('Dobrá znamení', '1990-05-01', 6, 3, 'Humorný fantasy román o blížícím se konci světa.', TRUE, 5, '9780060853983');
+
+INSERT INTO Books (Name, PublishDate, PublisherID, LanguageID, Description, HaveRead, Rating, ISBN)
+VALUES ('Antologie dystopických vizí', '2024-01-01', 3, 1, 'Testovací kniha se dvěma autory pro ověření více autorů v UI.', FALSE, 4, '9788000000003');
+
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (1, 2); 
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (2, 1); 
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (3, 3); 
@@ -66,5 +74,9 @@ INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (5, 5);
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (6, 6);
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (7, 7); 
 INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (8, 8); 
+INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (9, 9);
+INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (9, 10);
+INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (10, 1);
+INSERT INTO BooksAuthors (BookID, AuthorID) VALUES (10, 5);
 
 COMMIT;

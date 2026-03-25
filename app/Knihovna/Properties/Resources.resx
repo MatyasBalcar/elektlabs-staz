@@ -126,6 +126,15 @@
   <data name="AuthorDetailTitle" xml:space="preserve">
     <value>Detail Autora</value>
   </data>
+  <data name="BookDetailTitle" xml:space="preserve">
+    <value>Detail Knihy</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Knihovna Elektlabs</value>
+  </data>
+  <data name="RequiredFieldTooltip" xml:space="preserve">
+    <value>Tento údaj je povinný</value>
+  </data>
   <data name="AuthorLabel" xml:space="preserve">
     <value>Autor:</value>
   </data>
@@ -245,7 +254,8 @@
     <value>Soubor s databází nebyl nalezen nebo k němu nelze přistoupit.</value>
   </data>
   <data name="DbConnectionError" xml:space="preserve">
-    <value>Chyba při ověřování spojení s databází:\nDetail: {0}</value>
+    <value>Chyba při ověřování spojení s databází:
+Detail: {0}</value>
   </data>
   <data name="UnexpectedErrorMessage" xml:space="preserve">
     <value>Jejda, v aplikaci došlo k neočekávané chybě. Omlouváme se za komplikace.</value>
@@ -260,19 +270,23 @@
     <value>Potvrzení</value>
   </data>
   <data name="BookDeleteError" xml:space="preserve">
-    <value>Knihu se nepodařilo smazat.\nDetail: {0}</value>
+    <value>Knihu se nepodařilo smazat.
+Detail: {0}</value>
   </data>
   <data name="BookSavedToast" xml:space="preserve">
     <value>Kniha byla úspěšně uložena!</value>
   </data>
   <data name="ConfirmDeleteAuthor" xml:space="preserve">
-    <value>Opravdu chcete smazat autora '{0}'? \n\nVAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!</value>
+    <value>Opravdu chcete smazat autora '{0}'? 
+
+VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!</value>
   </data>
   <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
     <value>Potvrzení smazání</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Autora a jeho knihy se nepodařilo smazat.\nDetail: {0}</value>
+    <value>Autora a jeho knihy se nepodařilo smazat.
+Detail: {0}</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">
     <value>Autor byl úspěšně uložen!</value>
@@ -332,7 +346,8 @@
     <value>Národnost je povinná.</value>
   </data>
   <data name="FillRequiredData" xml:space="preserve">
-    <value>Doplňte povinné údaje zvýrazněné červeně. \n</value>
+    <value>Doplňte povinné údaje zvýrazněné červeně. 
+</value>
   </data>
   <data name="AuthorSaveError" xml:space="preserve">
     <value>Nepodařilo se uložit autora</value>

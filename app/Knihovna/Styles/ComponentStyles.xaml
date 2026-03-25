@@ -1,7 +1,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:helpers="clr-namespace:Knihovna.Helpers">
+    xmlns:helpers="clr-namespace:Knihovna.Helpers"
+    xmlns:loc="clr-namespace:Knihovna.Localization">
 
     <ControlTemplate x:Key="RoundedErrorTemplate">
         <Grid>
@@ -848,8 +849,18 @@
                             FontWeight="Bold"
                             Foreground="Red"
                             Text="*"
-                            ToolTip="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue='Tento údaj je poviný'}"
-                            ToolTipService.InitialShowDelay="0" />
+                            ToolTipService.InitialShowDelay="0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="ToolTip" Value="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="{x:Null}">
+                                            <Setter Property="ToolTip" Value="{loc:Loc RequiredFieldTooltip}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

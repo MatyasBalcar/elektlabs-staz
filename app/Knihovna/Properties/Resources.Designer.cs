@@ -79,7 +79,8 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Autora a jeho knihy se nepodařilo smazat.\nDetail: {0}.
+        ///   Looks up a localized string similar to Autora a jeho knihy se nepodařilo smazat.
+        ///Detail: {0}.
         /// </summary>
         public static string AuthorDeleteError {
             get {
@@ -160,11 +161,21 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Knihu se nepodařilo smazat.\nDetail: {0}.
+        ///   Looks up a localized string similar to Knihu se nepodařilo smazat.
+        ///Detail: {0}.
         /// </summary>
         public static string BookDeleteError {
             get {
                 return ResourceManager.GetString("BookDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail Knihy.
+        /// </summary>
+        public static string BookDetailTitle {
+            get {
+                return ResourceManager.GetString("BookDetailTitle", resourceCulture);
             }
         }
         
@@ -259,7 +270,9 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opravdu chcete smazat autora &apos;{0}&apos;? \n\nVAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!.
+        ///   Looks up a localized string similar to Opravdu chcete smazat autora &apos;{0}&apos;? 
+        ///
+        ///VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!.
         /// </summary>
         public static string ConfirmDeleteAuthor {
             get {
@@ -295,7 +308,8 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chyba při ověřování spojení s databází:\nDetail: {0}.
+        ///   Looks up a localized string similar to Chyba při ověřování spojení s databází:
+        ///Detail: {0}.
         /// </summary>
         public static string DbConnectionError {
             get {
@@ -358,7 +372,8 @@ namespace Knihovna.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doplňte povinné údaje zvýrazněné červeně. \n.
+        ///   Looks up a localized string similar to Doplňte povinné údaje zvýrazněné červeně. 
+        ///.
         /// </summary>
         public static string FillRequiredData {
             get {
@@ -480,6 +495,15 @@ namespace Knihovna.Properties {
         public static string LastNameTooLong {
             get {
                 return ResourceManager.GetString("LastNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knihovna Elektlabs.
+        /// </summary>
+        public static string MainWindowTitle {
+            get {
+                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
             }
         }
         
@@ -633,6 +657,15 @@ namespace Knihovna.Properties {
         public static string ReadLabel {
             get {
                 return ResourceManager.GetString("ReadLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tento údaj je povinný.
+        /// </summary>
+        public static string RequiredFieldTooltip {
+            get {
+                return ResourceManager.GetString("RequiredFieldTooltip", resourceCulture);
             }
         }
         

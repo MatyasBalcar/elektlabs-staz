@@ -244,7 +244,8 @@
     <value>DBfile not found</value>
   </data>
   <data name="DbConnectionError" xml:space="preserve">
-    <value>Connection with database failed: \n Detail '{0}'</value>
+    <value>Connection with database failed: 
+ Detail '{0}'</value>
   </data>
   <data name="UnexpectedErrorMessage" xml:space="preserve">
     <value>Oops, unexpected error occured, please contact support.</value>
@@ -259,19 +260,23 @@
     <value>Confirm</value>
   </data>
   <data name="BookDeleteError" xml:space="preserve">
-    <value>Unable to delete book. \n Detail '{0}'</value>
+    <value>Unable to delete book. 
+ Detail '{0}'</value>
   </data>
   <data name="BookSavedToast" xml:space="preserve">
     <value>Book was saved successfully</value>
   </data>
   <data name="ConfirmDeleteAuthor" xml:space="preserve">
-    <value>Are you sure you want to delete authopr '{0}' \n\n WARNING:This will delete all their books</value>
+    <value>Are you sure you want to delete authopr '{0}' 
+
+ WARNING:This will delete all their books</value>
   </data>
   <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
     <value>Confirm delete</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Author and his books were unable to be deleted.\n Detail '{0}'</value>
+    <value>Author and his books were unable to be deleted.
+ Detail '{0}'</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">
     <value>Author saved successfully</value>
@@ -331,12 +336,22 @@
     <value>Nationality field is required.</value>
   </data>
   <data name="FillRequiredData" xml:space="preserve">
-    <value>Please fill the required fields</value>
+    <value>Fill in the fields that are required. 
+</value>
   </data>
   <data name="AuthorSaveError" xml:space="preserve">
     <value>Unable to save author</value>
   </data>
   <data name="DBError" xml:space="preserve">
     <value>Database error</value>
+  </data>
+  <data name="BookDetailTitle" xml:space="preserve">
+    <value>Book Detail</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>Elektlabs Library</value>
+  </data>
+  <data name="RequiredFieldTooltip" xml:space="preserve">
+    <value>This field is required</value>
   </data>
 </root>

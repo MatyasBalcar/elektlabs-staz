@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Knihovna.Properties;
 
 namespace Knihovna
 {
@@ -25,7 +26,7 @@ namespace Knihovna
             {
                 MessageBox.Show(
                     errorMessage,
-                    "Kritická chyba databáze",
+                    Knihovna.Properties.Resources.DatabaseCriticalErrorTitle,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
@@ -103,8 +104,8 @@ namespace Knihovna
         private void ShowFriendlyMessage()
         {
             MessageBox.Show(
-                "Jejda, v aplikaci došlo k neočekávané chybě. Omlouváme se za komplikace..",
-                "Neočekávaná chyba",
+                Knihovna.Properties.Resources.UnexpectedErrorMessage,
+                Knihovna.Properties.Resources.UnexpectedErrorTitle,
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning);
         }

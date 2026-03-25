@@ -710,16 +710,14 @@
                                             x:Name="PART_VerticalScrollBar"
                                             Grid.Row="1"
                                             Grid.Column="1"
+                                            Width="16"
                                             Maximum="{TemplateBinding ScrollableHeight}"
                                             Orientation="Vertical"
                                             ViewportSize="{TemplateBinding ViewportHeight}"
-                                            Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                            Visibility="Visible"
                                             Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
                                     </Grid>
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="ComputedVerticalScrollBarVisibility" Value="Hidden">
-                                            <Setter TargetName="PART_VerticalScrollBar" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </ScrollViewer.Template>

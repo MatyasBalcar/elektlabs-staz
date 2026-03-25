@@ -115,6 +115,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border
+                                Height="35"
                                 Margin="0,0,8,8"
                                 Padding="8,4"
                                 Background="White"
@@ -152,13 +153,13 @@
                                         BorderThickness="0"
                                         Click="RemoveAuthor_Click"
                                         Foreground="#2563EB">
-                                        <TextBlock
-                                            Margin="0,0,0,5"
+                                        <Border
+                                            Width="10"
+                                            Height="2"
+                                            HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            FontSize="24"
-                                            FontWeight="Bold"
-                                            Text="-"
-                                            TextAlignment="Center" />
+                                            Background="#2563EB"
+                                            CornerRadius="1" />
                                     </Button>
                                 </Grid>
                             </Border>

@@ -44,6 +44,14 @@ namespace Knihovna.Helpers
 
             if (sender is AutoCompleteComboBox comboBox)
             {
+                if (string.IsNullOrWhiteSpace(comboBox.Text) && comboBox.SelectedItem == null)
+                {
+                    e.Handled = true;
+                    comboBox.IsDropDownOpen = false;
+                    comboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                    return;
+                }
+
                 var itemToSelect = comboBox.Items.CurrentItem;
                 if (itemToSelect == null && comboBox.HasItems) itemToSelect = comboBox.Items[0];
 
@@ -82,8 +90,12 @@ namespace Knihovna.Helpers
 
                     if (listBox != null)
                     {
-                        var itemToSelect = listBox.Items.CurrentItem;
-                        if (itemToSelect == null && listBox.HasItems) itemToSelect = listBox.Items[0];
+                        object? itemToSelect = null;
+                        if (!string.IsNullOrWhiteSpace(textBox.Text))
+                        {
+                            itemToSelect = listBox.Items.CurrentItem;
+                            if (itemToSelect == null && listBox.HasItems) itemToSelect = listBox.Items[0];
+                        }
 
                         if (itemToSelect != null)
                         {

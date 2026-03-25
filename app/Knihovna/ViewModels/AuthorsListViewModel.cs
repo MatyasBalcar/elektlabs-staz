@@ -70,6 +70,7 @@ namespace Knihovna.ViewModels
                 {
                     _dbManager.DeleteAuthor(author.AuthorId);
                     RefreshData();
+                    RefreshBooksList();
                 }
                 catch (Exception ex)
                 {
@@ -108,6 +109,8 @@ namespace Knihovna.ViewModels
                 {
                     mainWindow.ShowToast(Resources.AuthorSavedToast);
                 }
+
+                RefreshBooksList();
             }
         }
 
@@ -125,5 +128,14 @@ namespace Knihovna.ViewModels
 
         public bool HasActiveFilters =>
             SelectedNationality != null;
+
+        private static void RefreshBooksList()
+        {
+            if (Application.Current.MainWindow?.DataContext is MainViewModel mainVm)
+            {
+                mainVm.BooksListVm.RefreshData();
+                mainVm.BooksListVm.LoadFilterData();
+            }
+        }
     }
 }

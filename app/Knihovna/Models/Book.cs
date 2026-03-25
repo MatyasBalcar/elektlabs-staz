@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Knihovna.Properties;
@@ -42,6 +43,9 @@ namespace Knihovna.Models
         public virtual Publisher? Publisher { get; set; }
 
         public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
+
+        [NotMapped]
+        public string AuthorNames => string.Join(", ", Authors.Select(a => a.FullName).Where(n => !string.IsNullOrWhiteSpace(n)));
 
         public object Clone()
         {

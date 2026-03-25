@@ -10,6 +10,22 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Storyboard x:Key="AuthorChipFadeIn">
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Key="AuthorChipFadeOut">
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="1"
+                To="0"
+                Duration="0:0:0.15" />
+        </Storyboard>
     </Window.Resources>
 
     <DockPanel Margin="10">
@@ -58,9 +74,69 @@
                     DisplayMemberPath="FullName"
                     FontWeight="Light"
                     ItemsSource="{Binding AllAuthors}"
-                    SelectedItem="{Binding SelectedAuthor, ValidatesOnDataErrors=True}"
+                    SelectedItem="{Binding SelectedAuthorToAdd}"
+                    SelectionChanged="Author_SelectionChanged"
                     Style="{StaticResource {x:Type ComboBox}}"
                     TextSearch.TextPath="FullName" />
+
+                <ItemsControl Margin="0,8,0,0" ItemsSource="{Binding SelectedAuthors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Margin="0,0,8,8"
+                                Padding="8,4"
+                                Opacity="0"
+                                Background="White"
+                                BorderBrush="#D1D5DB"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource AuthorChipFadeIn}" />
+                                    </EventTrigger>
+                                </Border.Triggers>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,6,0"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding FullName}" />
+                                    <Button
+                                        Grid.Column="1"
+                                        Width="20"
+                                        Height="20"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        Click="RemoveAuthor_Click"
+                                        Foreground="#2563EB">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Text="-"
+                                            TextAlignment="Center" />
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <StackPanel>
                     <Label Content="{x:Static resx:Resources.LanguageLabel}" Style="{StaticResource RequiredLabelStyle}" />

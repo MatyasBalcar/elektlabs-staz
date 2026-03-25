@@ -28,10 +28,19 @@ namespace Knihovna.ViewModels
         [ObservableProperty]
         private ObservableCollection<Language> _allLanguages;
 
-        [ObservableProperty]
-        [NotifyDataErrorInfo]
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = nameof(Resources.AuthorRequired))]
-        private Author? _selectedAuthor;
+        private ObservableCollection<Author> _selectedAuthors = new();
+        public ObservableCollection<Author> SelectedAuthors
+        {
+            get => _selectedAuthors;
+            set => SetProperty(ref _selectedAuthors, value);
+        }
+
+        private Author? _selectedAuthorToAdd;
+        public Author? SelectedAuthorToAdd
+        {
+            get => _selectedAuthorToAdd;
+            set => SetProperty(ref _selectedAuthorToAdd, value);
+        }
 
         [ObservableProperty]
         [NotifyDataErrorInfo]
@@ -74,7 +83,12 @@ namespace Knihovna.ViewModels
                 PublisherText = book.Publisher?.Name ?? string.Empty;
                 IsLangSuggestionsVisible = false;
                 IsPubSuggestionsVisible = false;
-                SelectedAuthor = AllAuthors?.FirstOrDefault(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId));
+
+                var selected = AllAuthors
+                    .Where(a => book.Authors.Any(ba => ba.AuthorId == a.AuthorId))
+                    .ToList();
+
+                SelectedAuthors = new ObservableCollection<Author>(selected);
             }
         }
 
@@ -128,10 +142,10 @@ namespace Knihovna.ViewModels
                 EditingBook.PublisherId = null;
             }
 
-            if (SelectedAuthor != null)
+            EditingBook.Authors.Clear();
+            foreach (var author in SelectedAuthors)
             {
-                EditingBook.Authors.Clear();
-                EditingBook.Authors.Add(SelectedAuthor);
+                EditingBook.Authors.Add(author);
             }
 
             string validationError = EditingBook.Validate();
@@ -227,13 +241,45 @@ namespace Knihovna.ViewModels
             {
                 var newAuthors = _dbManager.GetAuthors();
                 AllAuthors = new ObservableCollection<Author>(newAuthors);
-                SelectedAuthor = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);
+                SelectedAuthorToAdd = AllAuthors.FirstOrDefault(a => a.AuthorId == formVm.CurrentAuthor.AuthorId);
+
+                if (SelectedAuthorToAdd != null)
+                {
+                    AddSelectedAuthor(SelectedAuthorToAdd);
+                }
 
                 if (Application.Current.MainWindow is MainWindow mainWindow)
                 {
                     mainWindow.ShowToast(Resources.AuthorSavedToast);
                 }
             }
+        }
+
+        [RelayCommand]
+        private void AddSelectedAuthor(Author? author)
+        {
+            if (author == null)
+            {
+                return;
+            }
+
+            if (!SelectedAuthors.Any(a => a.AuthorId == author.AuthorId))
+            {
+                SelectedAuthors.Add(author);
+            }
+
+            SelectedAuthorToAdd = null;
+        }
+
+        [RelayCommand]
+        private void RemoveSelectedAuthor(Author? author)
+        {
+            if (author == null)
+            {
+                return;
+            }
+
+            SelectedAuthors.Remove(author);
         }
 
         [RelayCommand]

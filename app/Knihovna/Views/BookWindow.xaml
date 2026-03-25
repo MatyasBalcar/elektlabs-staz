@@ -19,13 +19,6 @@
                 Duration="0:0:0.2" />
         </Storyboard>
 
-        <Storyboard x:Key="AuthorChipFadeOut">
-            <DoubleAnimation
-                Storyboard.TargetProperty="Opacity"
-                From="1"
-                To="0"
-                Duration="0:0:0.15" />
-        </Storyboard>
     </Window.Resources>
 
     <DockPanel Margin="10">
@@ -57,7 +50,10 @@
             </Grid>
         </StackPanel>
 
-        <ScrollViewer Padding="0,0,5,0" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer
+            Margin="0,0,-10,0"
+            Padding="0,0,10,0"
+            VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Label Content="{x:Static resx:Resources.BookTitleLabel}" Style="{StaticResource RequiredLabelStyle}" />
                 <TextBox Text="{Binding EditingBook.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />

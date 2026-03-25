@@ -267,15 +267,15 @@
     <value>Book was saved successfully</value>
   </data>
   <data name="ConfirmDeleteAuthor" xml:space="preserve">
-    <value>Are you sure you want to delete authopr '{0}' 
+    <value>Are you sure you want to delete author '{0}'?
 
- WARNING:This will delete all their books</value>
+WARNING: Books without other authors will also be deleted.</value>
   </data>
   <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
     <value>Confirm delete</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Author and his books were unable to be deleted.
+    <value>Unable to delete author.
  Detail '{0}'</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">

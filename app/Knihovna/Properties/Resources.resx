@@ -277,15 +277,15 @@ Detail: {0}</value>
     <value>Kniha byla úspěšně uložena!</value>
   </data>
   <data name="ConfirmDeleteAuthor" xml:space="preserve">
-    <value>Opravdu chcete smazat autora '{0}'? 
+    <value>Opravdu chcete smazat autora '{0}'?
 
-VAROVÁNÍ: Tato akce odstraní autora a všechny jeho knihy!</value>
+VAROVÁNÍ: Knihy bez dalších autorů budou také odstraněny.</value>
   </data>
   <data name="ConfirmAuthorDeleteTitle" xml:space="preserve">
     <value>Potvrzení smazání</value>
   </data>
   <data name="AuthorDeleteError" xml:space="preserve">
-    <value>Autora a jeho knihy se nepodařilo smazat.
+    <value>Autora se nepodařilo smazat.
 Detail: {0}</value>
   </data>
   <data name="AuthorSavedToast" xml:space="preserve">

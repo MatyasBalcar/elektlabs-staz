@@ -695,6 +695,12 @@
                                                 SnapsToDevicePixels="True" />
                                         </Border>
 
+                                        <Border
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            BorderBrush="DarkGray"
+                                            BorderThickness="0,0,0,1" />
+
                                         <ScrollContentPresenter
                                             x:Name="PART_ScrollContentPresenter"
                                             Grid.Row="1"

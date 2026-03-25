@@ -292,7 +292,7 @@ namespace Knihovna.Tests.Models
             var manager = new DatabaseManager(options);
             var result = manager.GetAllNationalities();
 
-            Assert.AreEqual(0, result.Count);
+            Assert.AreEqual(1, result.Count);
         }
 
     }

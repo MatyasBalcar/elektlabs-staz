@@ -85,6 +85,7 @@
         <Setter Property="Width" Value="611" />
         <Setter Property="Height" Value="28" />
         <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="5,0,0,0" />
     </Style>
 
     <Style
@@ -691,9 +692,7 @@
                                             Grid.ColumnSpan="2"
                                             Background="#f0f0f0"
                                             CornerRadius="7,7,0,0">
-                                            <DataGridColumnHeadersPresenter
-                                                x:Name="PART_ColumnHeadersPresenter"
-                                                SnapsToDevicePixels="True" />
+                                            <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" SnapsToDevicePixels="True" />
                                         </Border>
 
                                         <Border
@@ -718,8 +717,7 @@
                                             Visibility="Visible"
                                             Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
                                     </Grid>
-                                    <ControlTemplate.Triggers>
-                                    </ControlTemplate.Triggers>
+                                    <ControlTemplate.Triggers />
                                 </ControlTemplate>
                             </ScrollViewer.Template>
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />

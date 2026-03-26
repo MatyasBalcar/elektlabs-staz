@@ -20,7 +20,7 @@ namespace Knihovna.Tests.ViewModels
 
             var nationality = new Nationality { Name = "Test" };
             var firstAuthor = new Author { FirstName = "George", LastName = "Orwell", Nationality = nationality };
-            var secondAuthor = new Author { FirstName = "Karel", LastName = "Capek", Nationality = nationality };
+            var secondAuthor = new Author { FirstName = "Karel", LastName = "Čapek", Nationality = nationality };
 
             context.Authors.AddRange(firstAuthor, secondAuthor);
             context.SaveChanges();

@@ -22,18 +22,18 @@ namespace Knihovna.Tests.Models
 
         private void SeedDatabase(AppDbContext context)
         {
-            var langCze = new Language {  Name = "Čeština" };
-            var langEng = new Language {  Name = "English" };
+            var langCze = new Language { Name = "Čeština" };
+            var langEng = new Language { Name = "English" };
 
-            var pubArgo = new Publisher {  Name = "Argo" };
-            var pubPenguin = new Publisher {  Name = "Penguin Books" };
+            var pubArgo = new Publisher { Name = "Argo" };
+            var pubPenguin = new Publisher { Name = "Penguin Books" };
 
-            var natCze = new Nationality {  Name = "Czech" };
-            var natPol = new Nationality {  Name = "Poland" };
+            var natCze = new Nationality { Name = "Czech" };
+            var natPol = new Nationality { Name = "Poland" };
 
-            var authorCapek = new Author {  FirstName = "Karel", LastName = "Čapek", Nationality = natCze };
-            var authorFoglar = new Author {  FirstName = "Jaroslav", LastName = "Foglar", Nationality = natCze };
-            var authorUnknown = new Author {  FirstName = "Neznámý", LastName = "Autor", Nationality = natPol };
+            var authorCapek = new Author { FirstName = "Karel", LastName = "Čapek", Nationality = natCze };
+            var authorFoglar = new Author { FirstName = "Jaroslav", LastName = "Foglar", Nationality = natCze };
+            var authorUnknown = new Author { FirstName = "Neznámý", LastName = "Autor", Nationality = natPol };
 
             context.Languages.AddRange(langCze, langEng);
             context.Publishers.AddRange(pubArgo, pubPenguin);
@@ -251,7 +251,7 @@ namespace Knihovna.Tests.Models
         {
             var manager = new DatabaseManager(_options!);
             var result = manager.GetBooks(author: null, language: null, publisher: null);
-            Assert.HasCount(4, result); 
+            Assert.HasCount(4, result);
             Assert.AreEqual("English Book", result[0].Name);
             Assert.AreEqual("R.U.R.", result[1].Name);
             Assert.AreEqual("Rychlé šípy", result[2].Name);

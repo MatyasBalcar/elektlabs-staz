@@ -43,7 +43,7 @@ namespace Knihovna.Tests.Models
             Assert.AreEqual(0, context.Authors.Count(), "Database should be empty of authors.");
         }
 
-        
+
 
         [TestMethod]
         public void SaveBook_NewBook_InsertsCorrectly()
@@ -483,10 +483,10 @@ namespace Knihovna.Tests.Models
 
 
         [TestMethod]
-        [DataRow("No Authors", false, true, true, "1234567890")] 
+        [DataRow("No Authors", false, true, true, "1234567890")]
         [DataRow("No Language", true, false, true, "1234567890")]
-        [DataRow("No Publisher", true, true, false, "1234567890")] 
-        [DataRow("Bad ISBN", true, true, true, "abc123")]         
+        [DataRow("No Publisher", true, true, false, "1234567890")]
+        [DataRow("Bad ISBN", true, true, true, "abc123")]
         public void SaveBook_InvalidData_DoesNotSave(string name, bool hasAuthor, bool hasLang, bool hasPub, string isbn)
         {
             var book = new Book { Name = name, ISBN = isbn };

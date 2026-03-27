@@ -19,14 +19,14 @@ namespace Knihovna.Views
         {
             if (DataContext is BookFormViewModel vm)
             {
-                if(vm.Save())
+                if (vm.Save())
                 {
                     this.DialogResult = true;
                 }
 
             }
         }
-        
+
         //Auto-complete logic
         private void Lang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

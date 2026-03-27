@@ -120,7 +120,7 @@ namespace Knihovna.ViewModels
             var window = new Views.BookWindow();
             window.DataContext = formVm;
 
-                if (window.ShowDialog() ?? false)
+            if (window.ShowDialog() ?? false)
             {
                 RefreshData();
                 LoadFilterData();

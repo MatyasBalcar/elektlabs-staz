@@ -84,7 +84,7 @@ namespace Knihovna
         {
             LogError(e.Exception);
             ShowFriendlyMessage();
-            e.SetObserved(); 
+            e.SetObserved();
         }
 
         private void LogError(Exception ex)

@@ -21,7 +21,7 @@ namespace Knihovna.ViewModels
         private ObservableCollection<Nationality>? _allNationalities;
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(HasActiveFilters))] 
+        [NotifyPropertyChangedFor(nameof(HasActiveFilters))]
         private Nationality? _selectedNationality;
 
         public string EditLabel => Knihovna.Properties.Resources.Edit;
@@ -101,7 +101,7 @@ namespace Knihovna.ViewModels
             var window = new Views.AuthorWindow();
             window.DataContext = formVm;
 
-                if (window.ShowDialog() ?? false)
+            if (window.ShowDialog() ?? false)
             {
                 RefreshData();
                 LoadFilterData();

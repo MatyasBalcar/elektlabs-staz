@@ -20,6 +20,6 @@ namespace Knihovna.ViewModels
         {
             window?.Close();
         }
-        
+
     }
 }

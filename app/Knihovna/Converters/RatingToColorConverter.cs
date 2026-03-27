@@ -14,9 +14,9 @@ namespace Knihovna.Converters
             {
                 if (int.TryParse(parameter?.ToString(), out int starLevel))
                 {
-                  /*
-                     This returns correct color, based on if the star should be selected
-                    */
+                    /*
+                       This returns correct color, based on if the star should be selected
+                      */
                     return rating >= starLevel ? _selectedColor : _notSelectedColor;
                 }
             }

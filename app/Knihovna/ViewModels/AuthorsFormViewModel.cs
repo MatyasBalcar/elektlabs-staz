@@ -83,7 +83,7 @@ namespace Knihovna.ViewModels
             if (HasErrors || !string.IsNullOrEmpty(validationError))
             {
                 System.Windows.MessageBox.Show(
-                    Resources.FillRequiredData+ validationError,
+                    Resources.FillRequiredData + validationError,
                     Resources.ValidationError,
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Warning);

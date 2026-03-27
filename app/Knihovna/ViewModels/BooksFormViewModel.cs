@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Knihovna.Models;
-using Knihovna.Properties; 
+using Knihovna.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

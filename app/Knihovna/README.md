@@ -6,6 +6,7 @@ This is a readme for my library project, it also acts as a startup guide.
 ## Requirements
 
  - .NET 8 or newer
+ - Firebird 5 or newer
 
 ## Setup
 
